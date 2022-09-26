@@ -4,15 +4,18 @@ import {
   View,
   StyleSheet,
   Text,
+  Image,
   Dimensions,
   Platform,
   FlatList,
   ScrollView,
   useWindowDimensions,
 } from "react-native";
-
-import { Header } from "../NotificationScreen/components/Header";
+import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
+import PlayerItem from "../../components/ViewPlayers/PlayerItem";
+import ViewTeamPlayer from "../../components/MyTeam/ViewTeamPlayer";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 export const ViewMayTeamScreen = ({ navigation }) => {
@@ -21,21 +24,50 @@ export const ViewMayTeamScreen = ({ navigation }) => {
       <Header navigation={navigation} />
       <View style={styles.fullPage}>
         <View style={styles.container}>
-          <Text>Hello My Team</Text>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Batsman</Text>
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+          </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Allrounder</Text>
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+          </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Wicket keeper</Text>
+            <ViewTeamPlayer />
+          </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Wicket keeper</Text>
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+            <ViewTeamPlayer />
+          </View>
+
+          <View style={{ flexDirection: "row", alignItems:"center",marginTop:10, justifyContent:"center" }}>
+          <View style={{flex:1, }}>
+              <TouchableOpacity
+                style={{ backgroundColor: colors.yellow, width: "90%",padding:7,borderRadius:2}}
+                activeOpacity={0.6}
+              >
+                <Text style={{fontSize:18,fontWeight:"bold", textAlign:"center", }}>Edit Team</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{flex:1}}>
+              <TouchableOpacity
+                style={{ backgroundColor: colors.red, width: "90%",padding:7,borderRadius:2}}
+                activeOpacity={0.6}
+              >
+                <Text style={{fontSize:18,fontWeight:"bold", textAlign:"center", }}>Total Point : 1110</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
-      {/* <View
-        style={{
-          backgroundColor: colors.primary,
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 10,
-        }}
-      >
-        <Text style={{ color: colors.red, fontWeight: "bold", fontSize: 16 }}>
-        ViewPlayersScreen
-        </Text>
-      </View> */}
     </Provider>
   );
 };

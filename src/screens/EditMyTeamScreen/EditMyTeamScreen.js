@@ -4,15 +4,20 @@ import {
   View,
   StyleSheet,
   Text,
+  Image,
   Dimensions,
   Platform,
   FlatList,
   ScrollView,
   useWindowDimensions,
 } from "react-native";
-import { Header } from "../NotificationScreen/components/Header";
-
+import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
+import ViewTeamPlayer from "../../components/MyTeam/ViewTeamPlayer";
+import EditPlayerView from "../../components/EditMyTeam/EditPlayerView";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AddNewPlayer from "../../components/EditMyTeam/AddNewPlayer";
+
 
 export const EditMyTeamScreen = ({ navigation }) => {
   return (
@@ -20,21 +25,42 @@ export const EditMyTeamScreen = ({ navigation }) => {
       <Header navigation={navigation} />
       <View style={styles.fullPage}>
         <View style={styles.container}>
-          <Text>Hello Players</Text>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Batsman</Text>
+            <EditPlayerView />
+            <EditPlayerView />
+            <EditPlayerView />
+            <AddNewPlayer />
+          </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Allrounder</Text>
+            <EditPlayerView />
+            <EditPlayerView />
+          </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Wicket keeper</Text>
+            <EditPlayerView />
+          </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ color: colors.red }}>Wicket keeper</Text>
+            <EditPlayerView />
+            <EditPlayerView />
+            <EditPlayerView />
+            <EditPlayerView />
+          </View>
+
+          <View style={{ alignItems:"center",marginTop:20 }}>
+          <View style={{width:"90%"}}>
+              <TouchableOpacity
+                style={{ backgroundColor: colors.yellow, width: "100%",padding:7,borderRadius:2}}
+                activeOpacity={0.6}
+              >
+                <Text style={{fontSize:18,fontWeight:"bold", textAlign:"center", }}>Save</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
-      {/* <View
-        style={{
-          backgroundColor: colors.primary,
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 10,
-        }}
-      >
-        <Text style={{ color: colors.red, fontWeight: "bold", fontSize: 16 }}>
-        ViewPlayersScreen
-        </Text>
-      </View> */}
     </Provider>
   );
 };
