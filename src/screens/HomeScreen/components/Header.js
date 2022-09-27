@@ -10,7 +10,10 @@ export const Header = ({navigation}) => {
 
     return (
         <View style={styles.topBar}>
-            <TouchableOpacity
+            <View>
+
+            </View>
+            {/* <TouchableOpacity
                 onPress={() => navigation.toggleDrawer()}
             >
                 <Ionicons
@@ -18,7 +21,7 @@ export const Header = ({navigation}) => {
                     size={30}
                     color={Colors.white}
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View>
                 <Image
                     source={require('../../../../assets/t20_logo.png')}

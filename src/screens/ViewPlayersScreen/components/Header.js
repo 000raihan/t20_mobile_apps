@@ -7,9 +7,10 @@ import colors from "../../../../constants/colors";
 
 const { height } = Dimensions.get("window");
 const HEADER_MIN_HEIGHT = Platform.OS === "android" ? 70 : height > 667 ? 80 : 70;
-export const Header = ({navigation}) => {
+export const Header = (props) => {
 
-
+    const {navigation, title} = props
+  
     return (
         <View style={styles.topBar}>
             <TouchableOpacity
@@ -22,8 +23,8 @@ export const Header = ({navigation}) => {
                     color={Colors.white}
                 />
             </TouchableOpacity>
-            <View style={{flex:2,flexDirection:"row", alignItems:"center", overflow:"hidden"}}>
-                <Image
+            <View style={{flex:1,flexDirection:"row", alignItems:"center",justifyContent:"center", overflow:"hidden"}}>
+                {/* <Image
                     source={require('../../../../assets/bd-flag.png')}
                     resizeMode="contain"
                     style={{
@@ -32,8 +33,8 @@ export const Header = ({navigation}) => {
                         resizeMode: 'contain',
                         height: 30,
                     }}
-                />
-                <Text style={{flex:1, color:"white"}}>Bangladesh</Text>
+                /> */}
+                <Text style={{fontSize:15, color:"white"}}>{title ? title : "Country Name"}</Text>
             </View>
            <View style={{flex:1}}>
            

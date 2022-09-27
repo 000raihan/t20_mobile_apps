@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Font from 'expo-font';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import store from './src/store/store';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -11,10 +12,10 @@ import * as SplashScreen from 'expo-splash-screen';
 //Reducer
 //import {} from './src/reducers';
 
-const rootReducer = combineReducers({
+// const rootReducer = combineReducers({
   
-});
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
+// });
+// const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
 
 SplashScreen.preventAutoHideAsync();
 

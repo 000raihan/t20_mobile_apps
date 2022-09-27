@@ -49,16 +49,58 @@ export const HomeStackScreen = () => (
       //animationEnabled: false , nằm trong option
     />
     <HomeStack.Screen
-      name="NotificationScreen"
-      component={NotificationScreen}
+      name="TeamScreen"
+      component={TeamStackScreen}
+      //animationEnabled: false , nằm trong option
     />
+    
+    {/* <HomeStack.Screen
+      name="ViewPlayers"
+      component={ViewPlayersScreen}
+    /> */}
   </HomeStack.Navigator>
+);
+
+// ------------------------
+
+const CreateTeamStack = createStackNavigator();
+export const TeamStackScreen = () => (
+  <CreateTeamStack.Navigator
+    screenOptions={{
+      headerShown: false,
+      cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+    }}
+  >
+    <CreateTeamStack.Screen
+      name="CrateTeam"
+      component={CreateTeamScreen}
+      //animationEnabled: false , nằm trong option
+    />
+    <CreateTeamStack.Screen
+      name="ViewAllTeam"
+      component={AllTeamsScreen}
+      //animationEnabled: false , nằm trong option
+    />
+    <CreateTeamStack.Screen
+      name="ViewPlayers"
+      component={ViewPlayersScreen}
+    />
+    <CreateTeamStack.Screen
+      name="MyTeam"
+      component={ViewMayTeamScreen}
+    />
+    <CreateTeamStack.Screen
+      name="EditMyTeam"
+      component={EditMyTeamScreen}
+    />
+  </CreateTeamStack.Navigator>
 );
 
 const Tab = createBottomTabNavigator();
 
 export const BottomTabScreen = () => {
   return (
+    
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
@@ -82,7 +124,7 @@ export const BottomTabScreen = () => {
           ),
         }}
         name="Home"
-        component={HomeScreen}
+        component={HomeStackScreen}
       />
       <Tab.Screen
         options={{
@@ -137,13 +179,6 @@ export const DrawerNavigator = () => {
       name: "BottomTab",
       screen: BottomTabScreen,
     },
-
-    {
-      name: "Home",
-      screen: HomeStackScreen,
-      label: "Home",
-      icon: icons.ic_home,
-    },
     {
       name: "Notification",
       screen: NotificationScreen,
@@ -155,40 +190,11 @@ export const DrawerNavigator = () => {
       screen: LoginScreen,
       label: "Login",
       icon: icons.ic_notification,
-    },
-    {
-      name: "CreateTeam",
-      screen: CreateTeamScreen,
-      label: "CreateTeam",
-      icon: icons.ic_notification,
-    },
-    {
-      name: "AllTeams",
-      screen: AllTeamsScreen,
-      label: "All Teams",
-      icon: icons.ic_notification,
-    },
-    {
-      name: "ViewPlayers",
-      screen: ViewPlayersScreen,
-      label: "View Players",
-      icon: icons.ic_notification,
-    },
-    {
-      name: "MyTeam",
-      screen: ViewMayTeamScreen,
-      label: "My Team",
-      icon: icons.ic_notification,
-    },
-    {
-      name: "EditTeam",
-      screen: EditMyTeamScreen,
-      label: "Edit Team",
-      icon: icons.ic_notification,
-    },
+    }
     
   ];
   return (
+    
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,

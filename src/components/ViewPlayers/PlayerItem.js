@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Checkbox from "expo-checkbox";
 import colors from "../../../constants/colors";
 
 const PlayerItem = (props) => {
   const [check, setCheck] = useState(false);
+  const { name, code, role, selectedPlayres, setSeletedPlayres, user_id } = props;
+
+  useEffect(()=>{
+
+    if(check){
+      setSeletedPlayres(...selectedPlayres, {team_name:name,user_id:user_id, player_code:code })
+    }else{
+      const newarr = selectedPlayres.filter(player => player.code !== code)
+      setSeletedPlayres(newarr)
+    }
+
+  },[check])
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 1, height: "100%", width: "100%" }}>
@@ -16,9 +29,9 @@ const PlayerItem = (props) => {
       </View>
       <View style={{ flex: 4 }}>
         <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-          Sakib Al Hasan
+          {name && name}
         </Text>
-        <Text style={{ color: "white" }}>Batsman</Text>
+        <Text style={{ color: "white" }}>{role && role}</Text>
       </View>
       <View style={{ flex: 1 }}>
         <Checkbox
@@ -40,7 +53,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:"space-between"
+    justifyContent: "space-between",
   },
 });
 

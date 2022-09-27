@@ -21,8 +21,19 @@ import { WebView } from "react-native-webview";
 import MainButton from "../../components/MainButton";
 import LiveSection from "../../components/Home/LiveSection";
 import MatchButtons from "../../components/Home/MatchButtons";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export const HomeScreen = ({ navigation }) => {
+
+  const user = useSelector(state=> state.user.user);
+
+  console.log("User Pofile", user)
+
+  const onPress = ()=>{
+    navigation.navigate("TeamScreen")
+  }
+
   return (
     <Provider>
       <View style={styles.container}>
@@ -45,7 +56,7 @@ export const HomeScreen = ({ navigation }) => {
                 1110
               </Text>
               <Text style={{ color: "white", fontSize: 20 }}>Team Points</Text>
-              <MainButton>View details</MainButton>
+              <MainButton onPress={onPress}>View details</MainButton>
             </View>
           </ImageBackground>
         </View>
