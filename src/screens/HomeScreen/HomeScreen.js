@@ -27,7 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const HomeScreen = ({ navigation }) => {
 
   const user = useSelector(state=> state.user.user);
-  const team = useSelector(state=> state.team)
+  const {myPlayers} = useSelector(state=> state.team)
 
   console.log("User Pofile", user)
 
@@ -35,7 +35,7 @@ export const HomeScreen = ({ navigation }) => {
     navigation.navigate("MyTeamScreen")
   }
 
-  console.log("team state is : ",team)
+  // console.log("team state is : ",team)
 
   return (
     <Provider>
@@ -47,7 +47,7 @@ export const HomeScreen = ({ navigation }) => {
             style={styles.pointBg}
           >
             <View style={styles.pointTextSec}>
-              <Text style={styles.pointName}>{team.team.team_name}</Text>
+              <Text style={styles.pointName}>{myPlayers[0].team_name}</Text>
               <Text
                 style={{
                   color: "red",

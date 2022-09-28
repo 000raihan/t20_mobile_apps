@@ -38,8 +38,8 @@ const AllRounder = (props) => {
             // setSeletedPlayres={setSeletedPlayres}
             addValue={addBatsMan}
             removeValue={removeBatsMan}
-            key={player.code}
             name={player.player_name}
+            key={player.code}
             role={player.role}
             code={player.player_code}
             user_id={user.id}

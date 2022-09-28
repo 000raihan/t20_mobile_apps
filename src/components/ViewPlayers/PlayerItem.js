@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Checkbox from "expo-checkbox";
 import colors from "../../../constants/colors";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const PlayerItem = (props) => {
   const [isSelected, setSelection] = useState(false);
+  const {team} = useSelector(state=>state.team)
   const { name, code, role, addValue, removeValue, user_id, stateValue } =
     props;
 
@@ -28,7 +29,7 @@ const PlayerItem = (props) => {
 
     if (value) {
       dispatch(
-        addValue({ team_name: name, player_code: code, user_id: user_id })
+        addValue({ team_name: team.team_name, player_code: code, user_id: user_id })
       );
     } else {
       dispatch(removeValue(code));
