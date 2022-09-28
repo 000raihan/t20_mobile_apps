@@ -75,7 +75,7 @@ export const ViewPlayersScreen = ({ navigation }) => {
     if (newArray.length > 0) {
      
       axios.post(`${base_url}/save_player_select`, newArray).then((res) => {
-        navigation.navigate("MyTeamScreen")
+        navigation.navigate("HomeScreen");
       });
     }
   };
@@ -88,21 +88,21 @@ export const ViewPlayersScreen = ({ navigation }) => {
             <ScrollView style={styles.scrollStyle}>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }}>Batsman</Text>
-                <BatsMan batsMan={batsMan} user={user} />
+                <BatsMan batsMan={batsMan} user={user}  />
               </View>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }}>Allrounder</Text>
-                <AllRounder allRounder={allRounder} user={user} />
+                <AllRounder allRounder={allRounder} user={user}  />
               </View>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }}>Wicket keeper</Text>
-                <WicketKepper wiketKepper={wiketKepper} user={user} />
+                <WicketKepper wiketKepper={wiketKepper} user={user}  />
               </View>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }} user={user}>
                   Bowler
                 </Text>
-                <Bowler bowler={bowler} user={user} />
+                <Bowler bowler={bowler} user={user}/>
               </View>
             </ScrollView>
 

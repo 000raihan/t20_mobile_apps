@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Portal, Provider } from "react-native-paper";
+import {getTeam} from '../../store/features/teamSlice'
 import {
   View,
   StyleSheet,
@@ -19,6 +20,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 
 export const ViewMyTeamScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const { team,myPlayers, batsMan, bowler, allRounder, wiketKepper } = useSelector(
     (state) => state.team
   );
@@ -28,9 +30,13 @@ export const ViewMyTeamScreen = ({ navigation }) => {
   const [allPlayers, setAllPlayer] = useState([]);
   const [selectedPlayres, setSeletedPlayres] = useState([]);
 
+  // useEffect(()=>{
+  //   dispatch(getTeam(user.user_id))
+  // },[navigation])
+
   // useEffect(() => {}, [team]);
 
-  console.log("MY PLAYERS IS : ", myPlayers)
+  console.log("MY PLAYERS IS : ", batsMan)
 
   return (
     <Provider>

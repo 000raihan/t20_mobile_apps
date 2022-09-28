@@ -12,28 +12,29 @@ import { LoginStackScreen } from "./LoginNavigator";
 import { useSelector, useDispatch,  } from "react-redux";
 import { addUser } from "../store/features/userSlice";
 import {getTeam} from '../store/features/teamSlice';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AppNavigator = () => {
   const { user, error, loading } = useSelector((state) => state.user);
   const { team } = useSelector((state) => state.team);
   const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //   const getData = async () => {
-  //       try {
-  //         const jsonValue = await AsyncStorage.getItem('user')
-  //         return jsonValue != null ? JSON.parse(jsonValue) : null;
-  //       } catch(e) {
-  //         // error reading value
-  //       }
-  //     }
+  useEffect(()=>{
 
-  //       getData()
-  //       .then(res=>{
-  //         console.log(res)
-  //         dispatch(addUser(JSON.parse(AsyncStorage.getItem('user'))))
-  //       })
+    const getUser = async () => {
+        try {
 
-  // },[])
+          const user = await AsyncStorage.getItem("user");
+
+          console.log("user Data is : ", user)
+        } catch(e) {
+          // error reading value
+        }
+      }
+
+       getUser
+      
+
+  },[])
 
   // console.log("user data is : ", user);
   // console.log("team data is ------- : ", team);

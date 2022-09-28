@@ -80,6 +80,8 @@ export const TeamStackScreen = () => (
       //animationEnabled: false , nằm trong option
     />
     <CreateTeamStack.Screen name="ViewPlayers" component={ViewPlayersScreen} />
+    <CreateTeamStack.Screen name="HomeScreen" component={BottomTabScreen} />
+    
     <CreateTeamStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
     <CreateTeamStack.Screen name="EditMyTeam" component={EditMyTeamScreen} />
   </CreateTeamStack.Navigator>
@@ -234,7 +236,7 @@ export const MainNavigator = () => {
   }, [user]);
   const {myPlayers} = useSelector((state) => state.team);
 
-  console.log("Team is :::::::::::000 ", myPlayers)
+  // console.log("Team is :::::::::::000 ", myPlayers)
 
   return (
     <MainStack.Navigator

@@ -31,6 +31,7 @@ const Bowler = (props) => {
             role={player.role}
             code={player.player_code}
             user_id={user.id}
+            stateValue={bowler}
           />
         ))}
     </View>

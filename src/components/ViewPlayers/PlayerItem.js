@@ -6,20 +6,35 @@ import { useDispatch } from "react-redux";
 
 const PlayerItem = (props) => {
   const [isSelected, setSelection] = useState(false);
-  const { name, code, role, addValue, removeValue, user_id } = props;
+  const { name, code, role, addValue, removeValue, user_id, stateValue } =
+    props;
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isSelected) {
+  // useEffect(() => {
+  //   if (isSelected) {
+  //     dispatch(
+  //       addValue({ team_name: name, player_code: code, user_id: user_id })
+  //     );
+  //   } else {
+  //     // const newarr = selectedPlayres.filter(player => player.code !== code)
+
+  //     dispatch(removeValue(code));
+  //   }
+  // }, [isSelected]);
+
+  const changeCheck = (value) => {
+    setSelection(value);
+
+    if (value) {
       dispatch(
         addValue({ team_name: name, player_code: code, user_id: user_id })
       );
     } else {
-      // const newarr = selectedPlayres.filter(player => player.code !== code)
       dispatch(removeValue(code));
     }
-  }, [isSelected]);
+    // console.log("------------------",value)
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +57,7 @@ const PlayerItem = (props) => {
           onCheckColor={colors.primary}
           disabled={false}
           value={isSelected}
-          onValueChange={(newValue) => setSelection(newValue)}
+          onValueChange={(value) => changeCheck(value)}
           style={{ borderColor: colors.red }}
         />
       </View>
