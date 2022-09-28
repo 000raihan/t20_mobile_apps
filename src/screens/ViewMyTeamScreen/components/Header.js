@@ -24,7 +24,7 @@ export const Header = ({navigation}) => {
             </TouchableOpacity>
             <View style={{flex:1,flexDirection:"row", alignItems:"center", overflow:"hidden"}}>
                 
-                <Text style={{flex:1, color:"white"}}>May Dream Team</Text>
+                <Text style={{flex:1, color:"white"}}>My Dream Team</Text>
             </View>
            <View style={{flex:1}}>
            

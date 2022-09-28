@@ -15,41 +15,70 @@ import {
 import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
 import PlayerItem from "../../components/ViewPlayers/PlayerItem";
-import ViewTeamPlayer from "../../components/MyTeam/ViewTeamPlayer";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { setAllPlayers } from "../../store/features/allPlayerSlice";
+import BatsMan from "./components/BatsMan";
+import AllRounder from "./components/AllRounder";
+import WicketKepper from "./components/WicketKepper";
+import Bowler from "./components/Bowler";
+import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import { base_url } from "../../../constants/url";
 
 export const ViewPlayersScreen = ({ navigation }) => {
-  const [batter, setBatter] = useState();
-  const [bowler, setBowler] = useState();
-  const [allRounder, setAllrounder] = useState();
-  const [wicketKipper, setWiketKipper] = useState();
+  const { players, batsMan, bowler, allRounder, wiketKepper } = useSelector(
+    (state) => state.players
+  );
+
+  const {
+    team: myTeam,
+    myPlayers,
+    batsMan: myBatsman,
+    bowler: mybowler,
+    allRounder: myAlrounder,
+    wiketKepper: mywiketKepper,
+  } = useSelector((state) => state.team);
+
+  const [subAarray, setSubArray] = useState([]);
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+  const { team } = useSelector((state) => state.team);
 
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
-  const { team } = useSelector((state) => state.team);
-  const { players } = useSelector((state) => state.players);
-  const [allPlayers, setAllPlayer] = useState([]);
-  const [selectedPlayres, setSeletedPlayres] = useState([]);
 
   useEffect(() => {
     dispatch(setAllPlayers(team.country_id));
-    setAllPlayer(players);
   }, []);
 
   useEffect(() => {
-    if (players) {
-      setBatter(players.filter((p) => p.role == "Batter"));
-      setBowler(players.filter((p) => p.role == "Bowler"));
-      setAllrounder(players.filter((p) => p.role == "All-rounder"));
-      setWiketKipper(players.filter((p) => p.role == "Wicket Keeper"));
-    }
-  }, [players]);
+    setSelectedPlayers([
+      ...myBatsman,
+      ...mybowler,
+      ...myAlrounder,
+      ...mywiketKepper,
+    ]);
+  }, [myBatsman, mybowler, mybowler, mywiketKepper]);
 
-  console.log("players is : ------------------------", players);
-  console.log("btter is -------: ", bowler);
+  // console.log("players is : ------------------------", players);
+  // console.log("btter is -------: ", bowler);
+
+  const submitPlayers = () => {
+    const newArray = selectedPlayers.map((player) => ({
+      team_name: player.team_name,
+      player_code: player.player_code,
+      user_id: player.user_id,
+    }));
+    console.log("new Players is : ", newArray)
+
+    if (newArray.length > 0) {
+     
+      axios.post(`${base_url}/save_player_select`, newArray).then((res) => {
+        navigation.navigate("MyTeamScreen")
+      });
+    }
+  };
   return (
     <Provider>
       <Header navigation={navigation} title={team && team.country_name} />
@@ -59,62 +88,21 @@ export const ViewPlayersScreen = ({ navigation }) => {
             <ScrollView style={styles.scrollStyle}>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }}>Batsman</Text>
-                {batter &&
-                  batter.map((player) => {
-                    return (
-                      <PlayerItem
-                        selectedPlayres={selectedPlayres}
-                        setSeletedPlayres={setSeletedPlayres}
-                        key={player.code}
-                        name={player.player_name}
-                        role={player.role}
-                        code={player.player_code}
-                        user_id = {user.user_id}
-                      />
-                    );
-                  })}
+                <BatsMan batsMan={batsMan} user={user} />
               </View>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }}>Allrounder</Text>
-                {allRounder &&
-                  allRounder.map((player) => (
-                    <PlayerItem
-                      selectedPlayres={selectedPlayres}
-                      setSeletedPlayres={setSeletedPlayres}
-                      key={player.code}
-                      name={player.player_name}
-                      role={player.role}
-                      code={player.player_code}
-                    />
-                  ))}
+                <AllRounder allRounder={allRounder} user={user} />
               </View>
               <View style={{ marginTop: 5 }}>
                 <Text style={{ color: colors.red }}>Wicket keeper</Text>
-                {wicketKipper &&
-                  wicketKipper.map((player) => (
-                    <PlayerItem
-                      selectedPlayres={selectedPlayres}
-                      setSeletedPlayres={setSeletedPlayres}
-                      key={player.code}
-                      name={player.player_name}
-                      role={player.role}
-                      code={player.player_code}
-                    />
-                  ))}
+                <WicketKepper wiketKepper={wiketKepper} user={user} />
               </View>
               <View style={{ marginTop: 5 }}>
-                <Text style={{ color: colors.red }}>Bowler</Text>
-                {bowler &&
-                  bowler.map((player) => (
-                    <PlayerItem
-                      selectedPlayres={selectedPlayres}
-                      setSeletedPlayres={setSeletedPlayres}
-                      key={player.code}
-                      name={player.player_name}
-                      role={player.role}
-                      code={player.player_code}
-                    />
-                  ))}
+                <Text style={{ color: colors.red }} user={user}>
+                  Bowler
+                </Text>
+                <Bowler bowler={bowler} user={user} />
               </View>
             </ScrollView>
 
@@ -136,7 +124,7 @@ export const ViewPlayersScreen = ({ navigation }) => {
               </View>
 
               <View style={{ flex: 5 }}>
-                <TouchableOpacity
+                <Pressable
                   style={{
                     backgroundColor: colors.yellow,
                     width: "100%",
@@ -144,14 +132,18 @@ export const ViewPlayersScreen = ({ navigation }) => {
                     borderRadius: 2,
                   }}
                   activeOpacity={0.6}
+                  onPress={() => submitPlayers()}
                 >
                   <Text style={{ fontSize: 16, textAlign: "center" }}>
-                    6 Players Selected
+                    {selectedPlayers.length == 11
+                      ? "Save your Team"
+                      : `${selectedPlayers.length} Players Selected`}
+                    {/* 5 Players Remaining */}
                   </Text>
                   <Text style={{ fontSize: 12, textAlign: "center" }}>
-                    5 Players Remaining
+                    {`${11 - selectedPlayers.length} Players Remaining`}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           </View>

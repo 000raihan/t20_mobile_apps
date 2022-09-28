@@ -5,12 +5,13 @@ import { Host } from "react-native-portalize";
 import {
   DrawerNavigator,
   HomeStackScreen,
-  TeamStackScreen,
+  MainNavigator,
   BottomTabScreen
 } from "./StoneNavigator";
 import { LoginStackScreen } from "./LoginNavigator";
 import { useSelector, useDispatch,  } from "react-redux";
 import { addUser } from "../store/features/userSlice";
+import {getTeam} from '../store/features/teamSlice';
 export const AppNavigator = () => {
   const { user, error, loading } = useSelector((state) => state.user);
   const { team } = useSelector((state) => state.team);
@@ -34,21 +35,21 @@ export const AppNavigator = () => {
 
   // },[])
 
-  console.log("user data is : ", user);
-  console.log("team data is ------- : ", team);
+  // console.log("user data is : ", user);
+  // console.log("team data is ------- : ", team);
   return (
     <NavigationContainer ref={navigationRef}>
       <Host>
-        {/* {
+        {
         // user && team ? (
         //   <DrawerNavigator />
         // ) :
          user ? (
-          <BottomTabScreen />
+          <MainNavigator />
         ) : (
           <LoginStackScreen />
-        )} */}
-        <BottomTabScreen/>
+        )}
+        {/* <BottomTabScreen/> */}
       </Host>
     </NavigationContainer>
   );

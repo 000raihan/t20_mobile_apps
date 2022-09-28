@@ -31,7 +31,7 @@ export const HomeScreen = ({ navigation }) => {
   console.log("User Pofile", user)
 
   const onPress = ()=>{
-    navigation.navigate("TeamScreen")
+    navigation.navigate("MyTeamScreen")
   }
 
   return (
@@ -66,7 +66,7 @@ export const HomeScreen = ({ navigation }) => {
         <View style={{ width: "90%", alignSelf: "center" }}>
           <Image
             style={{ width: "100%", height:100, resizeMode: "cover" }}
-            source={require("../../../assets/exium_logo.png")}
+            source={require("../../../assets/brand_gif.gif")}
           />
         </View>
 

@@ -2,21 +2,24 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Checkbox from "expo-checkbox";
 import colors from "../../../constants/colors";
+import { useDispatch } from "react-redux";
 
 const PlayerItem = (props) => {
-  const [check, setCheck] = useState(false);
-  const { name, code, role, selectedPlayres, setSeletedPlayres, user_id } = props;
+  const [isSelected, setSelection] = useState(false);
+  const { name, code, role, addValue, removeValue, user_id } = props;
 
-  useEffect(()=>{
+  const dispatch = useDispatch();
 
-    if(check){
-      setSeletedPlayres(...selectedPlayres, {team_name:name,user_id:user_id, player_code:code })
-    }else{
-      const newarr = selectedPlayres.filter(player => player.code !== code)
-      setSeletedPlayres(newarr)
+  useEffect(() => {
+    if (isSelected) {
+      dispatch(
+        addValue({ team_name: name, player_code: code, user_id: user_id })
+      );
+    } else {
+      // const newarr = selectedPlayres.filter(player => player.code !== code)
+      dispatch(removeValue(code));
     }
-
-  },[check])
+  }, [isSelected]);
 
   return (
     <View style={styles.container}>
@@ -38,8 +41,8 @@ const PlayerItem = (props) => {
           onTintColor={colors.red}
           onCheckColor={colors.primary}
           disabled={false}
-          value={check}
-          onValueChange={(newValue) => setCheck(newValue)}
+          value={isSelected}
+          onValueChange={(newValue) => setSelection(newValue)}
           style={{ borderColor: colors.red }}
         />
       </View>

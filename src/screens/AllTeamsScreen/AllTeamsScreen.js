@@ -126,7 +126,7 @@ export const AllTeamsScreen = ({ navigation }) => {
 
   const onPress = (id) => {
     const country = countryList[id];
-    console.log("new country is  ", country);
+    // console.log("new country is  ", country);
     const newTeam = {
       team_name: team.team_name,
       user_id: team.user_id,

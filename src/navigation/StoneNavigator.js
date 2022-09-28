@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, Platform } from "react-native";
 import {
   createStackNavigator,
@@ -19,9 +19,12 @@ import { StandingScreen } from "../screens/StandingScreen/StandingScreen";
 import { LoginScreen } from "../screens/LoginScreen/LoginScreen";
 import { CreateTeamScreen } from "../screens/CreateTeamScreen/CreateTeamScreen";
 import { AllTeamsScreen } from "../screens/AllTeamsScreen/AllTeamsScreen";
-import { ViewMayTeamScreen } from "../screens/ViewMayTeamScreen/ViewMayTeamScreen";
+import { ViewMyTeamScreen } from "../screens/ViewMyTeamScreen/ViewMyTeamScreen";
 import { EditMyTeamScreen } from "../screens/EditMyTeamScreen/EditMyTeamScreen";
 import { ViewPlayersScreen } from "../screens/ViewPlayersScreen/ViewPlayersScreen";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getTeam } from "../store/features/teamSlice";
 
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/colors";
@@ -49,15 +52,10 @@ export const HomeStackScreen = () => (
       //animationEnabled: false , nằm trong option
     />
     <HomeStack.Screen
-      name="TeamScreen"
-      component={TeamStackScreen}
+      name="MyTeamScreen"
+      component={ViewMyTeamScreen}
       //animationEnabled: false , nằm trong option
     />
-    
-    {/* <HomeStack.Screen
-      name="ViewPlayers"
-      component={ViewPlayersScreen}
-    /> */}
   </HomeStack.Navigator>
 );
 
@@ -81,35 +79,26 @@ export const TeamStackScreen = () => (
       component={AllTeamsScreen}
       //animationEnabled: false , nằm trong option
     />
-    <CreateTeamStack.Screen
-      name="ViewPlayers"
-      component={ViewPlayersScreen}
-    />
-    <CreateTeamStack.Screen
-      name="MyTeam"
-      component={ViewMayTeamScreen}
-    />
-    <CreateTeamStack.Screen
-      name="EditMyTeam"
-      component={EditMyTeamScreen}
-    />
+    <CreateTeamStack.Screen name="ViewPlayers" component={ViewPlayersScreen} />
+    <CreateTeamStack.Screen name="MyTeam" component={ViewMyTeamScreen} />
+    <CreateTeamStack.Screen name="EditMyTeam" component={EditMyTeamScreen} />
   </CreateTeamStack.Navigator>
 );
 
 const Tab = createBottomTabNavigator();
 
 export const BottomTabScreen = () => {
+  console.log();
   return (
-    
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#00B1E5",},
+        tabBarStyle: { backgroundColor: "#00B1E5" },
         tabBarActiveTintColor: "white",
         tabBarActiveBackgroundColor: "#0093DF",
         // tabBarActiveBackgroundColor:colors.primary,
         tabBarInactiveTintColor: "white",
-        tabBarLabelStyle:{marginTop:-5, marginBottom:5, fontSize:12}
+        tabBarLabelStyle: { marginTop: -5, marginBottom: 5, fontSize: 12 },
       }}
     >
       <Tab.Screen
@@ -126,6 +115,7 @@ export const BottomTabScreen = () => {
         name="Home"
         component={HomeStackScreen}
       />
+
       <Tab.Screen
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -190,11 +180,9 @@ export const DrawerNavigator = () => {
       screen: LoginScreen,
       label: "Login",
       icon: icons.ic_notification,
-    }
-    
+    },
   ];
   return (
-    
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
@@ -230,5 +218,44 @@ export const DrawerNavigator = () => {
         />
       ))}
     </Drawer.Navigator>
+  );
+};
+
+const MainStack = createStackNavigator();
+
+export const MainNavigator = () => {
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(user){
+      dispatch(getTeam(user.id));
+    }
+
+  }, [user]);
+  const {myPlayers} = useSelector((state) => state.team);
+
+  console.log("Team is :::::::::::000 ", myPlayers)
+
+  return (
+    <MainStack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+      }}
+    >
+      {myPlayers && myPlayers.length > 0 ? (
+        <MainStack.Screen
+          name="BottomTabScreen"
+          component={BottomTabScreen}
+          //animationEnabled: false , nằm trong option
+        />
+      ) : (
+        <MainStack.Screen
+          name="CreateTeamScreen"
+          component={TeamStackScreen}
+          //animationEnabled: false , nằm trong option
+        />
+      )}
+    </MainStack.Navigator>
   );
 };

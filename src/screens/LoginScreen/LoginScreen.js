@@ -50,7 +50,7 @@ export const LoginScreen = ({ navigation }) => {
         Accept: "Application/json",
       };
       axios
-        .post(`http://192.168.1.106:6044/api/register`, data, headers)
+        .post(`http://192.168.1.108:6044/api/register`, data, headers)
         .then((res) => {
           console.log(res);
           setName(null);

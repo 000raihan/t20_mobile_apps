@@ -5,6 +5,7 @@ import colors from "../../../constants/colors";
 
 const ViewTeamPlayer = (props) => {
   const [check, setCheck] = useState(false);
+  const { name, role, code, user_id } = props;
   return (
     <View style={styles.container}>
       <View style={{ flex: 1, height: "100%", width: "100%" }}>
@@ -16,12 +17,14 @@ const ViewTeamPlayer = (props) => {
       </View>
       <View style={{ flex: 4 }}>
         <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-          Sakib Al Hasan
+         {name}
         </Text>
-        <Text style={{ color: "white" }}>Batsman</Text>
+        <Text style={{ color: "white" }}>{role}</Text>
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={{fontSize:15,fontWeight:"bold", color:colors.red}}>100</Text>
+        <Text style={{ fontSize: 15, fontWeight: "bold", color: colors.red }}>
+          100
+        </Text>
       </View>
     </View>
   );
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:"space-between"
+    justifyContent: "space-between",
   },
 });
 

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {base_url} from '../../../constants/url';
 
 export const userLogin = createAsyncThunk(
   "user/loginUser",
@@ -12,7 +13,7 @@ export const userLogin = createAsyncThunk(
         Accept: "Application/json",
       };
       const res =await axios.post(
-        `http://192.168.1.108:6044/api/login`,
+        `${base_url}/login`,
         data,
         headers
       );
