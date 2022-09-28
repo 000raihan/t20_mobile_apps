@@ -80,7 +80,7 @@ export const TeamStackScreen = () => (
       //animationEnabled: false , nằm trong option
     />
     <CreateTeamStack.Screen name="ViewPlayers" component={ViewPlayersScreen} />
-    <CreateTeamStack.Screen name="MyTeam" component={ViewMyTeamScreen} />
+    <CreateTeamStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
     <CreateTeamStack.Screen name="EditMyTeam" component={EditMyTeamScreen} />
   </CreateTeamStack.Navigator>
 );

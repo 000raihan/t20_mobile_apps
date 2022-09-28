@@ -70,7 +70,7 @@ export const ViewPlayersScreen = ({ navigation }) => {
       player_code: player.player_code,
       user_id: player.user_id,
     }));
-    console.log("new Players is : ", newArray)
+    // console.log("new Players is : ", newArray)
 
     if (newArray.length > 0) {
      

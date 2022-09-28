@@ -30,6 +30,8 @@ export const ViewMyTeamScreen = ({ navigation }) => {
 
   // useEffect(() => {}, [team]);
 
+  console.log("MY PLAYERS IS : ", myPlayers)
+
   return (
     <Provider>
       <Header navigation={navigation} />
