@@ -1,38 +1,37 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Pressable} from "react-native";
 import colors from "../../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 const AddNewPlayer = (props) => {
   const [check, setCheck] = useState(false);
+  const {onPress, selectedPlayres} = props;
   return (
-    <View style={styles.container}>
-      <View style={{ flex: 1, height: "100%", width: "100%" }}>
-        <Image
-          resizeMode="contain"
-          style={{ width: "100%", height: 40 }}
-          source={require("../../../assets/add_player.png")}
-        />
-      </View>
-      <View style={{ flex: 4 }}>
-        <Text style={{ color: colors.yellow, fontSize: 18, fontWeight: "bold" }}>
+    <Pressable onPress={onPress} style={styles.container}>
+      {/* <View style={{ flex: 1, height: "100%", width: "100%" }}>
+        <Text style={{fontSize:20}}>{`You selected ${selectedPlayres}`}</Text>
+  </View> */}
+      <View style={{ flex: 1}}>
+        <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }}>
           Add Player
         </Text>
       </View>
       <View style={{ flex: 1 }}>
         <Ionicons name="add-circle" style={{fontSize:25,fontWeight:"bold", color:colors.yellow}}/>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:colors.yellow,
     marginTop: 10,
     width: "100%",
-    flexDirection: "row",
+    flexDirection: "white",
     alignItems: "center",
     justifyContent:"space-between"
+  
   },
 });
 

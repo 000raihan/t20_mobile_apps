@@ -16,17 +16,8 @@ import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
-import { setAllPlayers } from "../../store/features/allPlayerSlice";
-import BatsMan from "./components/BatsMan";
-import AllRounder from "./components/AllRounder";
-import WicketKepper from "./components/WicketKepper";
-import Bowler from "./components/Bowler";
-
-import { base_url } from "../../../constants/url";
 import * as SecureStore from "expo-secure-store";
 import {CallApi} from "./api/Api";
-import PlayerItem from "../../components/ViewPlayers/PlayerItem";
-import {addBatsMan, removeBatsMan} from "../../store/features/teamSlice";
 import Checkbox from "expo-checkbox";
 import { Storage } from 'expo-storage';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
@@ -120,7 +111,7 @@ export const ViewPlayersScreen = (props) => {
       });
 
     }else{
-      Alert.alert('Validation', "Ypu are not select over 11 players.", [
+      Alert.alert('Validation', "You are not select over 11 players.", [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
       ]);
     }
@@ -145,7 +136,7 @@ export const ViewPlayersScreen = (props) => {
 
   return (
     <Provider>
-      <Header navigation={props.navigation} title="TEAm" />
+      <Header navigation={props.navigation}  title={props.route.params.country_name} />
       { playerList.length !== 0 ?
           <View style={styles.fullPage}>
             <View style={styles.container}>

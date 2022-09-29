@@ -19,6 +19,7 @@ import { CreateTeamScreen } from "../screens/CreateTeamScreen";
 import { AllTeamsScreen } from "../screens/AllTeamsScreen";
 import { ViewPlayersScreen } from "../screens/ViewPlayersScreen/ViewPlayersScreen";
 import { ViewMyTeamScreen } from "../screens/ViewMyTeamScreen/ViewMyTeamScreen";
+import {EditMyTeamScreen} from '../screens/EditMyTeamScreen/EditMyTeamScreen';
 
 import {FixturesScreen} from '../screens/FixturesScreen/FixturesScreen';
 import {LeaderBoardScreen} from '../screens/LeaderBoardScreen/LeaderBoardScreen';
@@ -53,6 +54,7 @@ export const HomeStackScreen = () => (
 
       <HomeStack.Screen name="LoginScreen" component={LoginStackScreen} />
       <HomeStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
+      <HomeStack.Screen name="EditTeamScreen" component={EditMyTeamScreen} />
       
       <HomeStack.Screen name="CreateTeamScreen" component={CreateTeamStackScreen} />
       <HomeStack.Screen name="AllTeamsScreen" component={AllTeamsScreen}/>
@@ -70,6 +72,7 @@ export const LoginStackScreen = () => (
     >
         <LoginStack.Screen name="LoginScreen" component={LoginScreen}/>
         <LoginStack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <LoginStack.Screen name="DrawerNavigator" component={DrawerNavigator}/>
     </LoginStack.Navigator>
 );
 
@@ -104,10 +107,8 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
   const drawers = [
         {
-          name: "Home",
-          screen: HomeStackScreen,
-          label: "Home",
-          icon: icons.ic_home,
+          name: "BottomScreen",
+          screen: BottomTabScreen,
         },
         {
           name: "Notification",

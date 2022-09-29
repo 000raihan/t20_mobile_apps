@@ -10,6 +10,7 @@ import {
   FlatList,
   ScrollView,
   useWindowDimensions,
+  ActivityIndicator,
 } from "react-native";
 import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
@@ -21,13 +22,8 @@ import { CallApi } from "../ViewPlayersScreen/api/Api";
 import * as SecureStore from "expo-secure-store";
 
 export const ViewMyTeamScreen = ({ navigation }) => {
-  const { team, myPlayers, batsMan, bowler, allRounder, wiketKepper } =
-    useSelector((state) => state.team);
-  const { user } = useSelector((state) => state.user);
-
-  const { players } = useSelector((state) => state.players);
   const [userID, setUserID] = useState(null);
-  const [selectedPlayres, setSelectedPlayers] = useState([]);
+  const [selectedPlayres, setSelectedPlayers] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -71,7 +67,7 @@ export const ViewMyTeamScreen = ({ navigation }) => {
     );
   };
 
-  console.log("selected players --------------, ", selectedPlayres);
+  // console.log("selected players --------------, ", selectedPlayres);
 
   // useEffect(() => {}, [team]);
 
@@ -81,210 +77,224 @@ export const ViewMyTeamScreen = ({ navigation }) => {
       <View style={styles.fullPage}>
         <View style={styles.container}>
           <ScrollView style={{ height: "92%" }}>
-            <View style={{ marginTop: 5 }}>
-              <Text style={{ color: colors.red }}>Batsman</Text>
-              {selectedPlayres
-                .filter((r) => {
-                  return r.role === "Batter";
-                })
-                .map((item) => (
-                  <View
-                    style={{
-                      marginTop: 10,
-                      width: "100%",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                      <Image
-                        resizeMode="contain"
-                        style={{ width: "100%", height: 40 }}
-                        source={require("../../../assets/img_circle.png")}
-                      />
-                    </View>
-                    <View style={{ flex: 4 }}>
-                      <Text
+            {selectedPlayres ? (
+              <View>
+                <View style={{ marginTop: 5 }}>
+                  <Text style={{ color: colors.red }}>Batsman</Text>
+                  {selectedPlayres
+                    .filter((r) => {
+                      return r.role === "Batter";
+                    })
+                    .map((item) => (
+                      <View
                         style={{
-                          color: "white",
-                          fontSize: 16,
-                          fontWeight: "bold",
+                          marginTop: 10,
+                          width: "100%",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {item.player_name && item.player_name}
-                      </Text>
-                      <Text style={{ color: "white" }}>
-                        {item.role && item.role}
-                      </Text>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text
+                        <View
+                          style={{ flex: 1, height: "100%", width: "100%" }}
+                        >
+                          <Image
+                            resizeMode="contain"
+                            style={{ width: "100%", height: 40 }}
+                            source={require("../../../assets/img_circle.png")}
+                          />
+                        </View>
+                        <View style={{ flex: 4 }}>
+                          <Text
+                            style={{
+                              color: "white",
+                              fontSize: 16,
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {item.player_name && item.player_name}
+                          </Text>
+                          <Text style={{ color: "white" }}>
+                            {item.role && item.role}
+                          </Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          >
+                            100
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                </View>
+                <View style={{ marginTop: 5 }}>
+                  <Text style={{ color: colors.red }}>Bowler</Text>
+                  {selectedPlayres
+                    .filter((r) => {
+                      return r.role === "Bowler";
+                    })
+                    .map((item) => (
+                      <View
                         style={{
-                          fontSize: 15,
-                          fontWeight: "bold",
-                          color: colors.red,
+                          marginTop: 10,
+                          width: "100%",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                       >
-                        100
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-            </View>
-            <View style={{ marginTop: 5 }}>
-              <Text style={{ color: colors.red }}>Bowler</Text>
-              {selectedPlayres
-                .filter((r) => {
-                  return r.role === "Bowler";
-                })
-                .map((item) => (
-                  <View
-                    style={{
-                      marginTop: 10,
-                      width: "100%",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                      <Image
-                        resizeMode="contain"
-                        style={{ width: "100%", height: 40 }}
-                        source={require("../../../assets/img_circle.png")}
-                      />
-                    </View>
-                    <View style={{ flex: 4 }}>
-                      <Text
+                        <View
+                          style={{ flex: 1, height: "100%", width: "100%" }}
+                        >
+                          <Image
+                            resizeMode="contain"
+                            style={{ width: "100%", height: 40 }}
+                            source={require("../../../assets/img_circle.png")}
+                          />
+                        </View>
+                        <View style={{ flex: 4 }}>
+                          <Text
+                            style={{
+                              color: "white",
+                              fontSize: 16,
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {item.player_name && item.player_name}
+                          </Text>
+                          <Text style={{ color: "white" }}>
+                            {item.role && item.role}
+                          </Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          >
+                            100
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                </View>
+                <View style={{ marginTop: 5 }}>
+                  <Text style={{ color: colors.red }}>All-rounder</Text>
+                  {selectedPlayres
+                    .filter((r) => {
+                      return r.role === "All-rounder";
+                    })
+                    .map((item) => (
+                      <View
                         style={{
-                          color: "white",
-                          fontSize: 16,
-                          fontWeight: "bold",
+                          marginTop: 10,
+                          width: "100%",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {item.player_name && item.player_name}
-                      </Text>
-                      <Text style={{ color: "white" }}>
-                        {item.role && item.role}
-                      </Text>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text
+                        <View
+                          style={{ flex: 1, height: "100%", width: "100%" }}
+                        >
+                          <Image
+                            resizeMode="contain"
+                            style={{ width: "100%", height: 40 }}
+                            source={require("../../../assets/img_circle.png")}
+                          />
+                        </View>
+                        <View style={{ flex: 4 }}>
+                          <Text
+                            style={{
+                              color: "white",
+                              fontSize: 16,
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {item.player_name && item.player_name}
+                          </Text>
+                          <Text style={{ color: "white" }}>
+                            {item.role && item.role}
+                          </Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          >
+                            100
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                </View>
+                <View style={{ marginTop: 5 }}>
+                  <Text style={{ color: colors.red }}>Wicket keeper</Text>
+                  {selectedPlayres
+                    .filter((r) => {
+                      return r.role === "Wicket Keeper";
+                    })
+                    .map((item) => (
+                      <View
                         style={{
-                          fontSize: 15,
-                          fontWeight: "bold",
-                          color: colors.red,
+                          marginTop: 10,
+                          width: "100%",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                       >
-                        100
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-            </View>
-            <View style={{ marginTop: 5 }}>
-              <Text style={{ color: colors.red }}>All-rounder</Text>
-              {selectedPlayres
-                .filter((r) => {
-                  return r.role === "All-rounder";
-                })
-                .map((item) => (
-                  <View
-                    style={{
-                      marginTop: 10,
-                      width: "100%",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                      <Image
-                        resizeMode="contain"
-                        style={{ width: "100%", height: 40 }}
-                        source={require("../../../assets/img_circle.png")}
-                      />
-                    </View>
-                    <View style={{ flex: 4 }}>
-                      <Text
-                        style={{
-                          color: "white",
-                          fontSize: 16,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {item.player_name && item.player_name}
-                      </Text>
-                      <Text style={{ color: "white" }}>
-                        {item.role && item.role}
-                      </Text>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text
-                        style={{
-                          fontSize: 15,
-                          fontWeight: "bold",
-                          color: colors.red,
-                        }}
-                      >
-                        100
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-            </View>
-            <View style={{ marginTop: 5 }}>
-              <Text style={{ color: colors.red }}>Wicket keeper</Text>
-              {selectedPlayres
-                .filter((r) => {
-                  return r.role === "Wicket Keeper";
-                })
-                .map((item) => (
-                  <View
-                    style={{
-                      marginTop: 10,
-                      width: "100%",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                      <Image
-                        resizeMode="contain"
-                        style={{ width: "100%", height: 40 }}
-                        source={require("../../../assets/img_circle.png")}
-                      />
-                    </View>
-                    <View style={{ flex: 4 }}>
-                      <Text
-                        style={{
-                          color: "white",
-                          fontSize: 16,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {item.player_name && item.player_name}
-                      </Text>
-                      <Text style={{ color: "white" }}>
-                        {item.role && item.role}
-                      </Text>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text
-                        style={{
-                          fontSize: 15,
-                          fontWeight: "bold",
-                          color: colors.red,
-                        }}
-                      >
-                        100
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-            </View>
+                        <View
+                          style={{ flex: 1, height: "100%", width: "100%" }}
+                        >
+                          <Image
+                            resizeMode="contain"
+                            style={{ width: "100%", height: 40 }}
+                            source={require("../../../assets/img_circle.png")}
+                          />
+                        </View>
+                        <View style={{ flex: 4 }}>
+                          <Text
+                            style={{
+                              color: "white",
+                              fontSize: 16,
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {item.player_name && item.player_name}
+                          </Text>
+                          <Text style={{ color: "white" }}>
+                            {item.role && item.role}
+                          </Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          >
+                            100
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                </View>
+              </View>
+            ) : (
+              <ActivityIndicator size="large" color="#00ff00" />
+            )}
           </ScrollView>
 
           <View
@@ -304,8 +314,8 @@ export const ViewMyTeamScreen = ({ navigation }) => {
                   borderRadius: 2,
                 }}
                 activeOpacity={0.6}
-                onPress={()=>{
-                  navigation.navigate("AllTeamsScreen")
+                onPress={() => {
+                  navigation.navigate("EditTeamScreen");
                 }}
               >
                 <Text

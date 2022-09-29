@@ -52,7 +52,7 @@ export const AllTeamsScreen = (props) => {
 
   const onPress = async (id) => {
       const country = countryList[id];
-      props.navigation.navigate("ViewPlayersScreen",{country_id: country.country_id});
+      props.navigation.navigate("ViewPlayersScreen",{country_id: country.country_id, country_name:country.country_name});
   };
   return (
     <Provider>
