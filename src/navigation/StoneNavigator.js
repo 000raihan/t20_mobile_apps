@@ -48,7 +48,7 @@ export const HomeStackScreen = () => (
   >
     <HomeStack.Screen
       name="HomeScreen"
-      component={BottomTabScreen}
+      component={HomeScreen}
     />
 
       <HomeStack.Screen name="LoginScreen" component={LoginStackScreen} />
