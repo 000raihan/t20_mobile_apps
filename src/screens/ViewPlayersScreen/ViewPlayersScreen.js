@@ -86,7 +86,7 @@ export const ViewPlayersScreen = (props) => {
 
 
   const selectPlayer = async (playerID,value) => {
-    if(selectedPlayers.length < 11){
+    if(selectedPlayers.length < 11 || !value){
       const item = JSON.parse(
           await Storage.getItem({ key: 'select_player' })
       );
@@ -106,8 +106,8 @@ export const ViewPlayersScreen = (props) => {
 
       await save_select_list({
         team_name: item.team_name,
-        user_id: userID,
-        player_code: playerID,
+        user_id: `${userID}`,
+        player_code: `${playerID}`,
       });
 
     }else{
@@ -249,11 +249,13 @@ export const ViewPlayersScreen = (props) => {
                           </View>
                           <View style={{ flex: 1 }}>
                             <Checkbox
-                                onTintColor={colors.red}
-                                onCheckColor={colors.primary}
-                                disabled={false}
-                                value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                              onTintColor={colors.red}
+                              onCheckColor={colors.primary}
+                              disabled={false}
+                              style={{ borderColor: colors.red }}
+                              value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
+                              onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                            // -------------
                             />
                           </View>
                         </View>
@@ -311,7 +313,7 @@ export const ViewPlayersScreen = (props) => {
                   }}
               >
                 <View style={{ flex: 1 }}>
-                  <TouchableOpacity activeOpacity={0.6}>
+                  <TouchableOpacity activeOpacity={0.6} onPress={()=>props.navigation.navigate("MyTeamScreen")}>
                     <Image
                         resizeMode="contain"
                         style={{ width: "100%", height: 40 }}
@@ -329,12 +331,10 @@ export const ViewPlayersScreen = (props) => {
                         borderRadius: 2,
                       }}
                       activeOpacity={0.6}
-                      onPress={() => submitPlayers()}
+                      // onPress={() => submitPlayers()}
                   >
                     <Text style={{ fontSize: 16, textAlign: "center" }}>
-                      {selectedPlayers.length == 11
-                          ? "Save your Team"
-                          : `${selectedPlayers.length} Players Selected`}
+                      {`${selectedPlayers.length} Players Selected`}
                     </Text>
                     <Text style={{ fontSize: 12, textAlign: "center" }}>
                       {`${11 - selectedPlayers.length} Players Remaining`}

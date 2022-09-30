@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Portal, Provider } from "react-native-paper";
 import {
   View,
@@ -28,6 +28,8 @@ import {Storage} from "expo-storage";
 
 
 export const HomeScreen = (props) => {
+  const [totalPoint, setTotalPoing] = useState(null);
+  const [teamName, setTeamName] = useState(null);
 
   useEffect( ()=>{
     (async() => {
@@ -46,11 +48,14 @@ export const HomeScreen = (props) => {
           if(result.success){
             if(result.result.length === 0){
               props.navigation.navigate("CreateTeamScreen");
+              
             }else{
               await Storage.setItem({
                 key: "select_player",
                 value: JSON.stringify({team_name: result.result[0].team_name})
               });
+              setTotalPoing(result.total_point);
+              setTeamName(result.result[0].team_name)
             }
           }else{
             Alert.alert('Error', result.message, [
@@ -79,7 +84,7 @@ export const HomeScreen = (props) => {
             style={styles.pointBg}
           >
             <View style={styles.pointTextSec}>
-              <Text style={styles.pointName}>Rahim Dream 11</Text>
+              <Text style={styles.pointName}>{teamName && teamName}</Text>
               <Text
                 style={{
                   color: "red",
@@ -88,7 +93,7 @@ export const HomeScreen = (props) => {
                   margin: -10,
                 }}
               >
-                1110
+               {totalPoint && totalPoint[0].point}
               </Text>
               <Text style={{ color: "white", fontSize: 20 }}>Team Points</Text>
               <MainButton onPress={onPress}>View details</MainButton>

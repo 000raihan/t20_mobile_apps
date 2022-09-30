@@ -8,11 +8,15 @@ export const CallApi = {
 
 
 function save_update_player_select(data) {
+    // console.log("DATA IS : ", data);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        // body: data
     };
+
+    console.log("data option :",requestOptions)
     return fetch(`${API_URL}/save_update_player_select`, requestOptions)
         .then(response => response.json())
         .then(result => {

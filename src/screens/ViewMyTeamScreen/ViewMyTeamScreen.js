@@ -24,6 +24,7 @@ import * as SecureStore from "expo-secure-store";
 export const ViewMyTeamScreen = ({ navigation }) => {
   const [userID, setUserID] = useState(null);
   const [selectedPlayres, setSelectedPlayers] = useState(null);
+  const [totalPoint, setTotalPoint] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -49,10 +50,12 @@ export const ViewMyTeamScreen = ({ navigation }) => {
               player_name: result.result[i].player_name,
               player_image: result.result[i].player_image,
               role: result.result[i].role,
+              point: result.result[i].point,
             };
             data.push(d);
           }
           setSelectedPlayers(data);
+          setTotalPoint(result.total_point[0].point)
         } else {
           Alert.alert("Error", result.message, [
             { text: "OK", onPress: () => console.log("OK Pressed") },
@@ -126,7 +129,7 @@ export const ViewMyTeamScreen = ({ navigation }) => {
                               color: colors.red,
                             }}
                           >
-                            100
+                           {item.point || 0}
                           </Text>
                         </View>
                       </View>
@@ -179,7 +182,7 @@ export const ViewMyTeamScreen = ({ navigation }) => {
                               color: colors.red,
                             }}
                           >
-                            100
+                           {item.point || 0}
                           </Text>
                         </View>
                       </View>
@@ -232,7 +235,7 @@ export const ViewMyTeamScreen = ({ navigation }) => {
                               color: colors.red,
                             }}
                           >
-                            100
+                            {item.point || 0}
                           </Text>
                         </View>
                       </View>
@@ -285,7 +288,7 @@ export const ViewMyTeamScreen = ({ navigation }) => {
                               color: colors.red,
                             }}
                           >
-                            100
+                           {item.point || 0}
                           </Text>
                         </View>
                       </View>
@@ -346,7 +349,7 @@ export const ViewMyTeamScreen = ({ navigation }) => {
                     textAlign: "center",
                   }}
                 >
-                  Total Point : 1110
+                  Total Point : {totalPoint}
                 </Text>
               </TouchableOpacity>
             </View>
