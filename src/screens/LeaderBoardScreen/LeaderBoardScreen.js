@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Portal, Provider } from "react-native-paper";
 import {
   View,
@@ -10,27 +10,53 @@ import {
   ScrollView,
   useWindowDimensions,
 } from "react-native";
-import Colors from "../../utils/Colors";
 import { Header } from "../NotificationScreen/components/Header";
 import { WebView } from "react-native-webview";
 import { Table, Row, Rows } from 'react-native-table-component';
 import colors from "../../../constants/colors";
 import RankTable from "../../components/LeaderBoard/RankTable";
 
-export const LeaderBoardScreen = ({ navigation }) => {
-//   const headTable = useState(["Rank", "Name", "Points"]);
-//   const dataTable = useState([
-//     ["1", "Mushfique", "280"],
-//     ["2", "Shakib", "150"],
-//     ["3", "Mashrafee", "280"],
-//     ["4", "Mahmudlullah", "280"],
-//     ["5", "Shohan", "280"],
-//     ["6", "Rubel", "280"],
-//     ["7", "Taskin", "280"],
-//   ]);
+import { CallApi } from "../HomeScreen/api/Api";
+import { useIsFocused } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
+
+export const LeaderBoardScreen = (props) => {
+  const isFocused = useIsFocused();
+
+
+  useEffect( ()=>{
+    if(isFocused){
+      (async() => {
+        const userDetailsString = await SecureStore.getItemAsync("userDetails");
+        if(userDetailsString === null){
+          props.navigation.navigate("LoginScreen");
+        }else{
+          const userDetails = JSON.parse(userDetailsString);
+          await checkPlayerList(userDetails.id);
+        }
+      }) ();
+    }
+
+  },[props, isFocused]);
+
+  const checkPlayerList = async (user_id) => {
+    CallApi.player_list(user_id).then(async (result)  => {
+      // console.log(result.result, "===========")
+          if(result.success){
+            if(result.result.length === 0){
+              props.navigation.navigate("CreateTeamScreen");
+            }
+          }
+        },(error) => {
+          console.log("=====",error)
+          alert("Invalid data.");
+        }
+    );
+  };
+
   return (
     <Provider>
-      <Header navigation={navigation} />
+      <Header navigation={props.navigation} />
       <View
         style={{
           backgroundColor: colors.primary,

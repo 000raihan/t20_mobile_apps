@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Portal, Provider } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import {
   View,
@@ -21,24 +22,32 @@ import {CallApi} from "./api/Api";
 import Checkbox from "expo-checkbox";
 import { Storage } from 'expo-storage';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import { Ionicons } from "@expo/vector-icons";
+import {updatePlayers} from '../../store/features/allPlayerSlice'
 
 export const ViewPlayersScreen = (props) => {
+  const isFocused = useIsFocused();
   const [playerList,setPlayerList] = useState([]);
   const [userID,setUserID] = useState(null);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
   const [isSelect, setIsSelected] = useState(false);
 
 
-  useEffect( ()=>{
-    (async() => {
-      const userDetailsString = await SecureStore.getItemAsync("userDetails");
-      const userDetails = JSON.parse(userDetailsString);
-      setUserID(userDetails.id);
-        await getPlayerList(props.route.params.country_id);
-        await getSelectPlayerList(userDetails.id);
 
-    }) ();
-  },[]);
+
+  useEffect( ()=>{
+    if(isFocused){
+      (async() => {
+        const userDetailsString = await SecureStore.getItemAsync("userDetails");
+        const userDetails = JSON.parse(userDetailsString);
+        setUserID(userDetails.id);
+          await getPlayerList(props.route.params.country_id);
+          await getSelectPlayerList(userDetails.id);
+  
+      }) ();
+    }
+
+  },[props, isFocused]);
 
   const getPlayerList = async (country_id) => {
     CallApi.player_list(country_id).then(async (result)  => {
@@ -313,12 +322,13 @@ export const ViewPlayersScreen = (props) => {
                   }}
               >
                 <View style={{ flex: 1 }}>
-                  <TouchableOpacity activeOpacity={0.6} onPress={()=>props.navigation.navigate("MyTeamScreen")}>
-                    <Image
+                  <TouchableOpacity activeOpacity={0.6} onPress={()=>props.navigation.navigate("HomeScreen")}>
+                    <Ionicons name="home" style={{fontSize:30, color:"white"}}/>
+                    {/* <Image
                         resizeMode="contain"
                         style={{ width: "100%", height: 40 }}
                         source={require("../../../assets/previous.png")}
-                    />
+                    /> */}
                   </TouchableOpacity>
                 </View>
 

@@ -1,22 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { base_url } from "../../../constants/url";
+import {API_URL} from '../../utils/BaseUrl'
+
+function player_select_list(user_id) {
+  return fetch(`${API_URL}/player_select/${user_id}`)
+      .then(response => response.json())
+      .then(result => {
+          return result;
+      });
+}
 
 export const setAllPlayers = createAsyncThunk(
-  "allPlayer/setAllPlayers",
-  async (id, thunkAPI) => {
+  "team_select/getTeam",
+  async (user_id, thunkAPI) => {
+    // const user_id = thunkAPI.getState(state=>state.user.user.id)
+    // console.log("user id is : =============== ", id)
+    console.log("IM CALLED", user_id)
     try {
-      // console.log("Id is : :::::::::::::::::: ", id);
-      const headers = {
-        "Content-type": "Application/json",
-        Accept: "Application/json",
-      };
-      const res = await axios.get(`${base_url}/player_list_by_id/${id}`);
-      // console.log("res data is : :::::::::::::::::: ", res.data.result);
-      return res.data;
+      const res = await player_select_list(user_id)
+      // console.log("RESULT IS :-------------------------------------- ", res)
+      return res.result;
     } catch (error) {
-      console.log(error);
+      console.log("error is :---------::::::::::::::::::::::: ",error);
     }
   }
 );
@@ -27,7 +33,7 @@ const initialState = {
   //     mobile: "01630542945",
   //     pin: "2323",
   //   },
-  players: null,
+  allPlayers: [],
   batsMan:[],
   bowler:[],
   allRounder:[],
@@ -37,14 +43,11 @@ const initialState = {
 };
 
 const allPlayerSlice = createSlice({
-  name: "allPlayer",
+  name: "allPlayers",
   initialState,
   reducers: {
-    addPlayers: (state, action) => {
-      return {
-        ...state,
-        players: action.payload,
-      };
+    updatePlayers: (state, action) => {
+        state.allPlayers = action.payload
     },
   },
   extraReducers:{
@@ -54,11 +57,11 @@ const allPlayerSlice = createSlice({
       [setAllPlayers.fulfilled]: (state, action) => {
         // console.log(action);
         state.loading = false;
-        state.players = action.payload.result;
-        state.batsMan =  state.players.filter((p) => p.role == "Batsman");
-        state.bowler= state.players.filter((p) => p.role == "Bowler");
-        state.allRounder = state.players.filter((p) => p.role == "All-rounder");
-        state.wiketKepper =  state.players.filter((p) => p.role == "Wicket Keeper");
+        state.players = action.payload;
+        // state.batsMan =  state.players.filter((p) => p.role == "Batsman");
+        // state.bowler= state.players.filter((p) => p.role == "Bowler");
+        // state.allRounder = state.players.filter((p) => p.role == "All-rounder");
+        // state.wiketKepper =  state.players.filter((p) => p.role == "Wicket Keeper");
       },
       [setAllPlayers.rejected]: (state, action) => {
         console.log(action);
@@ -68,7 +71,7 @@ const allPlayerSlice = createSlice({
 });
 
 //for dispatch
-export const { addPlayers } = allPlayerSlice.reducer;
+export const { updatePlayers } = allPlayerSlice.actions;
 
 //for configure store
 export default allPlayerSlice.reducer;

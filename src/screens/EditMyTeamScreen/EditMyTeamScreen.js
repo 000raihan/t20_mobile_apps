@@ -21,7 +21,11 @@ import * as SecureStore from "expo-secure-store";
 import { CallApi } from "../ViewPlayersScreen/api/Api";
 import { Ionicons } from "@expo/vector-icons";
 
-export const EditMyTeamScreen = ({ navigation }) => {
+import { useIsFocused } from "@react-navigation/native";
+
+export const EditMyTeamScreen = (props) => {
+  const {navigation} = props
+  const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);
   const [selectedPlayres, setSelectedPlayers] = useState(null);
 
@@ -62,24 +66,7 @@ export const EditMyTeamScreen = ({ navigation }) => {
     );
   };
 
-  useEffect(() => {
-    (async () => {
-      const userDetailsString = await SecureStore.getItemAsync("userDetails");
-      const userDetails = JSON.parse(userDetailsString);
-      setUserID(userDetails.id);
-      // await getPlayerList(props.route.params.country_id);
-      await getSelectPlayerList(userDetails.id);
-    })();
-  }, []);
 
-  useEffect(() => {
-    if (selectedPlayres) {
-      setBatter(selectedPlayres.filter((p) => p.role == "Batter"));
-      setBowlers(selectedPlayres.filter((p) => p.role == "Bowler"));
-      setAllrounder(selectedPlayres.filter((p) => p.role == "All-rounder"));
-      setWeiketKeeper(selectedPlayres.filter((p) => p.role == "Wicket Keeper"));
-    }
-  }, [selectedPlayres]);
 
   // console.log("se is  --------------, ", selectedPlayres);
 
@@ -104,6 +91,9 @@ export const EditMyTeamScreen = ({ navigation }) => {
   }
 
   const onDelete = async(code, name) => {
+    if(selectedPlayres.length <2){
+      return null
+    }
     Alert.alert("Delete Player", "Confirm you to delete this player?", [
       {
         text: "Cancel",
@@ -126,11 +116,36 @@ export const EditMyTeamScreen = ({ navigation }) => {
     ]);
   };
 
-  console.log("NEW ARRAY IS :-- ", selectedPlayres);
+  // console.log("NEW ARRAY IS :-- ", selectedPlayres);
 
   const addPress = () => {
     navigation.navigate("AllTeamsScreen");
   };
+
+
+  // ---------------------useEffect ----------------
+
+  useEffect(() => {
+    if(isFocused){
+      (async () => {
+        const userDetailsString = await SecureStore.getItemAsync("userDetails");
+        const userDetails = JSON.parse(userDetailsString);
+        setUserID(userDetails.id);
+        // await getPlayerList(props.route.params.country_id);
+        await getSelectPlayerList(userDetails.id);
+      })();
+    }
+
+  }, [props, isFocused]);
+
+  useEffect(() => {
+    if (selectedPlayres) {
+      setBatter(selectedPlayres.filter((p) => p.role == "Batter"));
+      setBowlers(selectedPlayres.filter((p) => p.role == "Bowler"));
+      setAllrounder(selectedPlayres.filter((p) => p.role == "All-rounder"));
+      setWeiketKeeper(selectedPlayres.filter((p) => p.role == "Wicket Keeper"));
+    }
+  }, [selectedPlayres]);
 
   return (
     <Provider>

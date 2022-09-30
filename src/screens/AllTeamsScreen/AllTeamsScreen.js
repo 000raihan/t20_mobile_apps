@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import Input from "../../components/Input";
 import MainButton from "../../components/MainButton";
-import { Header } from "../NotificationScreen/components/Header";
+import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
 import { addTeam } from "../../store/features/teamSlice";
 import { Storage } from 'expo-storage';

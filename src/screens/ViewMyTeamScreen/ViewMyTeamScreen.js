@@ -21,25 +21,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { CallApi } from "../ViewPlayersScreen/api/Api";
 import * as SecureStore from "expo-secure-store";
 
-export const ViewMyTeamScreen = ({ navigation }) => {
+import { useIsFocused } from "@react-navigation/native";
+
+export const ViewMyTeamScreen = (props) => {
+  const { navigation } = props;
+  const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);
   const [selectedPlayres, setSelectedPlayers] = useState(null);
   const [totalPoint, setTotalPoint] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      const userDetailsString = await SecureStore.getItemAsync("userDetails");
-      const userDetails = JSON.parse(userDetailsString);
-      setUserID(userDetails.id);
-      // await getPlayerList(props.route.params.country_id);
-      await getSelectPlayerList(userDetails.id);
-    })();
-  }, []);
 
   const getSelectPlayerList = async (country_id) => {
     CallApi.player_select_list(country_id).then(
       async (result) => {
         if (result.success) {
+
           // console.log(result.result);
           let data = [];
           for (let i = 0; i < result.result.length; i++) {
@@ -70,6 +66,19 @@ export const ViewMyTeamScreen = ({ navigation }) => {
     );
   };
 
+  
+  useEffect(() => {
+    if(isFocused){
+      (async () => {
+        const userDetailsString = await SecureStore.getItemAsync("userDetails");
+        const userDetails = JSON.parse(userDetailsString);
+        setUserID(userDetails.id);
+        // await getPlayerList(props.route.params.country_id);
+        await getSelectPlayerList(userDetails.id);
+      })();
+    }
+
+  }, [props, isFocused]);
   // console.log("selected players --------------, ", selectedPlayres);
 
   // useEffect(() => {}, [team]);

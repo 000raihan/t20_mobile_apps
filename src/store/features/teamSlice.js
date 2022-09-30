@@ -25,8 +25,7 @@ export const getTeam = createAsyncThunk(
 );
 
 const initialState = {
-  team: null, 
-  myPlayers:[],
+  selectedPlayers:[],
   batsMan: [],
   bowler: [],
   allRounder: [],

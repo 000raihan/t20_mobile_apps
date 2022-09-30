@@ -22,29 +22,38 @@ import MainButton from "../../components/MainButton";
 import LiveSection from "../../components/Home/LiveSection";
 import MatchButtons from "../../components/Home/MatchButtons";
 import { useDispatch, useSelector } from "react-redux";
-import * as SecureStore from "expo-secure-store";
+
 import {CallApi} from "./api/Api";
 import {Storage} from "expo-storage";
+
+import { useIsFocused } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
 
 
 export const HomeScreen = (props) => {
   const [totalPoint, setTotalPoing] = useState(null);
   const [teamName, setTeamName] = useState(null);
+  const isFocused = useIsFocused();
+
 
   useEffect( ()=>{
-    (async() => {
-      const userDetailsString = await SecureStore.getItemAsync("userDetails");
-      if(userDetailsString === null){
-        props.navigation.navigate("LoginScreen");
-      }else{
-        const userDetails = JSON.parse(userDetailsString);
-        await checkPlayerList(userDetails.id);
-      }
-    }) ();
-  },[]);
+    if(isFocused){
+      (async() => {
+        const userDetailsString = await SecureStore.getItemAsync("userDetails");
+        if(userDetailsString === null){
+          props.navigation.navigate("LoginScreen");
+        }else{
+          const userDetails = JSON.parse(userDetailsString);
+          await checkPlayerList(userDetails.id);
+        }
+      }) ();
+    }
+
+  },[props, isFocused]);
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result)  => {
+      console.log(result.result, "===========")
           if(result.success){
             if(result.result.length === 0){
               props.navigation.navigate("CreateTeamScreen");
@@ -93,7 +102,7 @@ export const HomeScreen = (props) => {
                   margin: -10,
                 }}
               >
-               {totalPoint && totalPoint[0].point}
+               {totalPoint && totalPoint[0].point || 0}
               </Text>
               <Text style={{ color: "white", fontSize: 20 }}>Team Points</Text>
               <MainButton onPress={onPress}>View details</MainButton>

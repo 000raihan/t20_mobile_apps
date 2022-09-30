@@ -8,6 +8,6 @@ export default configureStore({
   reducer: {
     user : userReducer,
     team : teamReducer,
-    players : allPlayerSlice
+    allPlayers : allPlayerSlice
   },
 });
