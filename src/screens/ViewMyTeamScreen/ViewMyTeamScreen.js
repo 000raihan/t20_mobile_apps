@@ -24,6 +24,7 @@ import * as SecureStore from "expo-secure-store";
 import { useIsFocused } from "@react-navigation/native";
 
 export const ViewMyTeamScreen = (props) => {
+  const {isEdit} = props.route.params;
   const { navigation } = props;
   const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);
@@ -66,7 +67,7 @@ export const ViewMyTeamScreen = (props) => {
     );
   };
 
-  
+
   useEffect(() => {
     if(isFocused){
       (async () => {
@@ -309,60 +310,65 @@ export const ViewMyTeamScreen = (props) => {
             )}
           </ScrollView>
 
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 10,
-              justifyContent: "center",
-            }}
-          >
-            <View style={{ flex: 1 }}>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: colors.yellow,
-                  width: "90%",
-                  padding: 7,
-                  borderRadius: 2,
-                }}
-                activeOpacity={0.6}
-                onPress={() => {
-                  navigation.navigate("EditTeamScreen");
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                  }}
+          {
+            isEdit ?
+                <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginTop: 10,
+                      justifyContent: "center",
+                    }}
                 >
-                  Edit Team
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ flex: 1 }}>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: colors.red,
-                  width: "90%",
-                  padding: 7,
-                  borderRadius: 2,
-                }}
-                activeOpacity={0.6}
-              >
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                  }}
-                >
-                  Total Point : {totalPoint}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+                  <View style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{
+                          backgroundColor: colors.yellow,
+                          width: "90%",
+                          padding: 7,
+                          borderRadius: 2,
+                        }}
+                        activeOpacity={0.6}
+                        onPress={() => {
+                          navigation.navigate("EditTeamScreen");
+                        }}
+                    >
+                      <Text
+                          style={{
+                            fontSize: 18,
+                            fontWeight: "bold",
+                            textAlign: "center",
+                          }}
+                      >
+                        Edit Team
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{
+                          backgroundColor: colors.red,
+                          width: "90%",
+                          padding: 7,
+                          borderRadius: 2,
+                        }}
+                        activeOpacity={0.6}
+                    >
+                      <Text
+                          style={{
+                            fontSize: 18,
+                            fontWeight: "bold",
+                            textAlign: "center",
+                          }}
+                      >
+                        Total Point : {totalPoint}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                : null
+          }
+
         </View>
       </View>
     </Provider>

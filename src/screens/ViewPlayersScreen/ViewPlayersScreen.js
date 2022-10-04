@@ -43,10 +43,8 @@ export const ViewPlayersScreen = (props) => {
         setUserID(userDetails.id);
           await getPlayerList(props.route.params.country_id);
           await getSelectPlayerList(userDetails.id);
-  
       }) ();
     }
-
   },[props, isFocused]);
 
   const getPlayerList = async (country_id) => {
@@ -118,6 +116,14 @@ export const ViewPlayersScreen = (props) => {
         user_id: `${userID}`,
         player_code: `${playerID}`,
       });
+
+      if(selectedPlayers.length >= 11){
+        Alert.alert('Congratulations', "You select 11 players!", [
+          { text: 'OK', onPress: () => props.navigation.navigate("HomeScreen") },
+        ]);
+      }else if(selectedPlayers.length <= 11){
+        console.log("Below 11")
+      }
 
     }else{
       Alert.alert('Validation', "You are not select over 11 players.", [
@@ -321,16 +327,6 @@ export const ViewPlayersScreen = (props) => {
                     marginTop: 10,
                   }}
               >
-                <View style={{ flex: 1 }}>
-                  <TouchableOpacity activeOpacity={0.6} onPress={()=>props.navigation.navigate("HomeScreen")}>
-                    <Ionicons name="home" style={{fontSize:30, color:"white"}}/>
-                    {/* <Image
-                        resizeMode="contain"
-                        style={{ width: "100%", height: 40 }}
-                        source={require("../../../assets/previous.png")}
-                    /> */}
-                  </TouchableOpacity>
-                </View>
 
                 <View style={{ flex: 5 }}>
                   <Pressable
@@ -351,6 +347,18 @@ export const ViewPlayersScreen = (props) => {
                     </Text>
                   </Pressable>
                 </View>
+
+                <View style={{ flex: 1, marginLeft: 10 }}>
+                  <TouchableOpacity activeOpacity={0.6} onPress={()=>props.navigation.navigate("MyTeamScreen",{isEdit: false})}>
+                    <Ionicons name="home" style={{fontSize:30, color:"white"}}/>
+                    {/* <Image
+                        resizeMode="contain"
+                        style={{ width: "100%", height: 40 }}
+                        source={require("../../../assets/previous.png")}
+                    /> */}
+                  </TouchableOpacity>
+                </View>
+
               </View>
 
             </View>

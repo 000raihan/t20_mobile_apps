@@ -53,11 +53,11 @@ export const HomeScreen = (props) => {
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result)  => {
-      console.log(result.result, "===========")
+      // console.log(result.result, "===========")
           if(result.success){
             if(result.result.length === 0){
               props.navigation.navigate("CreateTeamScreen");
-              
+
             }else{
               await Storage.setItem({
                 key: "select_player",
@@ -80,7 +80,7 @@ export const HomeScreen = (props) => {
   }
 
   const onPress = ()=>{
-    props.navigation.navigate("MyTeamScreen")
+    props.navigation.navigate("MyTeamScreen", {isEdit: true})
   }
 
   return (

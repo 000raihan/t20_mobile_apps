@@ -98,6 +98,11 @@ export const CreateTeamStackScreen = () => (
       name="AllTeamsScreen"
       component={AllTeamsStackScreen}
     />
+      <CreateTeamStack.Screen
+          name="HomeScreen"
+          component={HomeStackScreen}
+      />
+      <CreateTeamStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
   </CreateTeamStack.Navigator>
 );
 
@@ -129,7 +134,7 @@ export const DrawerNavigator = () => {
 
   //       const userDetails = JSON.parse(userDetailsString);
   //       dispatch(setAllPlayers(userDetails.id));
-      
+
   //   }) ();
 
   // },[allPlayers]);
@@ -199,7 +204,7 @@ export const BottomTabScreen = () => {
         // tabBarActiveBackgroundColor:colors.primary,
         tabBarInactiveTintColor: "white",
         tabBarLabelStyle: { marginTop: -5, marginBottom: 5, fontSize: 12 },
-        
+
       }}
     >
       <Tab.Screen
