@@ -33,8 +33,6 @@ export const ViewPlayersScreen = (props) => {
   const [isSelect, setIsSelected] = useState(false);
 
 
-
-
   useEffect( ()=>{
     if(isFocused){
       (async() => {
@@ -119,7 +117,11 @@ export const ViewPlayersScreen = (props) => {
 
       if(selectedPlayers.length >= 11){
         Alert.alert('Congratulations', "You select 11 players!", [
-          { text: 'OK', onPress: () => props.navigation.navigate("HomeScreen") },
+          { text: 'OK', onPress: async () => {
+              const userDetailsString = await SecureStore.getItemAsync("userDetails");
+              const userDetails = JSON.parse(userDetailsString);
+              props.navigation.navigate("DrawerNavigator", {result: userDetails});
+            }},
         ]);
       }else if(selectedPlayers.length <= 11){
         console.log("Below 11")

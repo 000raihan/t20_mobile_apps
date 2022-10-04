@@ -98,11 +98,8 @@ export const CreateTeamStackScreen = () => (
       name="AllTeamsScreen"
       component={AllTeamsStackScreen}
     />
-      <CreateTeamStack.Screen
-          name="HomeScreen"
-          component={HomeStackScreen}
-      />
       <CreateTeamStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
+      <CreateTeamStack.Screen name="DrawerNavigator" component={DrawerNavigator} />
   </CreateTeamStack.Navigator>
 );
 
@@ -145,9 +142,9 @@ export const DrawerNavigator = () => {
       screen: BottomTabScreen ,
     },
     {
-      name: "Notification",
-      screen: NotificationScreen,
-      label: "Notification",
+      name: "HomeScreen",
+      screen: HomeStackScreen,
+      label: "HomeScreen",
       icon: icons.ic_notification,
     },
   ];
