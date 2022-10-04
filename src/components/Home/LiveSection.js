@@ -130,7 +130,7 @@ const LiveSection = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
+    width: "100%",
     alignSelf: "center",
     alignItems: "center",
     backgroundColor:"white",
