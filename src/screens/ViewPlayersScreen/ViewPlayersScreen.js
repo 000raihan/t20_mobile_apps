@@ -26,6 +26,7 @@ import { Ionicons } from "@expo/vector-icons";
 import {updatePlayers} from '../../store/features/allPlayerSlice'
 
 export const ViewPlayersScreen = (props) => {
+  const {isEdit} = props.route.params;
   const isFocused = useIsFocused();
   const [playerList,setPlayerList] = useState([]);
   const [userID,setUserID] = useState(null);

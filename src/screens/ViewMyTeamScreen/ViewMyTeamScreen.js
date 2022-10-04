@@ -48,6 +48,7 @@ export const ViewMyTeamScreen = (props) => {
               player_image: result.result[i].player_image,
               role: result.result[i].role,
               point: result.result[i].point,
+              is_delete: result.result[i].is_delete,
             };
             data.push(d);
           }
@@ -96,7 +97,7 @@ export const ViewMyTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>Batsman</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "Batter";
+                      return r.role === "Batter" && r.is_delete === 0;
                     })
                     .map((item) => (
                       <View
@@ -149,7 +150,7 @@ export const ViewMyTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>Bowler</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "Bowler";
+                      return r.role === "Bowler" && r.is_delete === 0;
                     })
                     .map((item) => (
                       <View
@@ -202,7 +203,7 @@ export const ViewMyTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>All-rounder</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "All-rounder";
+                      return r.role === "All-rounder" && r.is_delete === 0;
                     })
                     .map((item) => (
                       <View
@@ -255,7 +256,7 @@ export const ViewMyTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>Wicket keeper</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "Wicket Keeper";
+                      return r.role === "Wicket Keeper" && r.is_delete === 0;
                     })
                     .map((item) => (
                       <View
@@ -330,7 +331,7 @@ export const ViewMyTeamScreen = (props) => {
                         }}
                         activeOpacity={0.6}
                         onPress={() => {
-                          navigation.navigate("EditTeamScreen");
+                          navigation.navigate("EditTeamScreen", {isEdit: isEdit});
                         }}
                     >
                       <Text

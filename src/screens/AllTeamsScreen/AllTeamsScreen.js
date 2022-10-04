@@ -24,6 +24,7 @@ import { Storage } from 'expo-storage';
 import {CallApi} from "./api/Api";
 
 export const AllTeamsScreen = (props) => {
+    const {isEdit} = props.route.params;
   const [countryList,setCountryList] = useState([]);
 
   useEffect( ()=>{
@@ -52,11 +53,11 @@ export const AllTeamsScreen = (props) => {
 
   const onPress = async (id) => {
       const country = countryList[id];
-      props.navigation.navigate("ViewPlayersScreen",{country_id: country.country_id, country_name:country.country_name});
+      props.navigation.navigate("ViewPlayersScreen",{country_id: country.country_id, country_name:country.country_name,isEdit: isEdit});
   };
   return (
     <Provider>
-      <Header navigation={props.navigation} />
+      <Header navigation={props.navigation} isEdit={isEdit} />
       <ImageBackground
         resizeMode="cover"
         style={{
