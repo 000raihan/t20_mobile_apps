@@ -79,7 +79,7 @@ export const EditMyTeamScreen = (props) => {
     console.log("DATA IS : ----------",data)
     CallApi.update_player_select(data).then(async (result)  => {
           if(result.success){
-            console.log(result.result);
+            // console.log(result.result);
           }else{
             Alert.alert('Error', result.message, [
               { text: 'yes', onPress: () => console.log('OK Pressed') },
@@ -94,6 +94,7 @@ export const EditMyTeamScreen = (props) => {
   }
 
   const onDelete = async(code, name, id) => {
+    console.log("ID IS : ", id)
     if(selectedPlayres.length <2){
       return null
     }
@@ -250,7 +251,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -299,7 +300,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -348,7 +349,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
