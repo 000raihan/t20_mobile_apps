@@ -28,12 +28,15 @@ import {Storage} from "expo-storage";
 
 import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
+import PlayerFild from "../../components/Home/PlayerFild";
 
 
 export const HomeScreen = (props) => {
   const [totalPoint, setTotalPoing] = useState(null);
   const [teamName, setTeamName] = useState(null);
   const isFocused = useIsFocused();
+  const [select_players, setSelectedPlayers] = useState([]);
+  
 
 
   useEffect( ()=>{
@@ -64,7 +67,8 @@ export const HomeScreen = (props) => {
                 value: JSON.stringify({team_name: result.result[0].team_name})
               });
               setTotalPoing(result.total_point);
-              setTeamName(result.result[0].team_name)
+              setTeamName(result.result[0].team_name);
+              setSelectedPlayers(result.result);
             }
           }else{
             Alert.alert('Error', result.message, [
@@ -84,57 +88,94 @@ export const HomeScreen = (props) => {
   }
 
   return (
-    <Provider>
+<Provider>
       <View style={styles.container}>
         <Header navigation={props.navigation} />
-        <View style={{backgroundColor:"black"}}>
-          <ImageBackground
-            source={require("../../../assets/point_bg.png")}
-            style={styles.pointBg}
-          >
-            <View style={styles.pointTextSec}>
-              <Text style={styles.pointName}>{teamName && teamName}</Text>
-              <Text
+        {/* <View style={{backgroundColor:colors.primary}}> */}
+        <ScrollView>
+          <View style={styles.pointBg}>
+            <View
+              style={{
+                width: "100%",
+                // height: "80%",
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+              }}
+            >
+              <View
                 style={{
-                  color: "red",
-                  fontSize: 80,
-                  fontWeight: "bold",
-                  margin: -10,
+                  flex: 4,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingHorizontal: 10,
+                  paddingVertical: 18,
                 }}
               >
-               {totalPoint && totalPoint[0].point || 0}
-              </Text>
-              <Text style={{ color: "white", fontSize: 20 }}>Team Points</Text>
-              <MainButton onPress={onPress}>View details</MainButton>
+                <View
+                  style={{
+                    height: 50,
+                    width: 50,
+                    borderRadius: 50 / 2,
+                    overflow: "hidden",
+                    marginRight: 8,
+                  }}
+                >
+                  <Image
+                    resizeMode="cover"
+                    style={{ height: "100%", width: "100%" }}
+                    source={require("../../../assets/team_logo.jpg")}
+                  />
+                </View>
+
+                <View>
+                  <Text style={{ fontSize: 12, color: colors.red }}>
+                    Team Name
+                  </Text>
+                  <Text style={styles.pointName}>{teamName && teamName}</Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 3,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  // height: "100%",
+                }}
+              >
+                <Text
+                  style={{ color: colors.red, fontSize: 12,  }}
+                >
+                  Team Points
+                </Text>
+                <Text
+                  style={{
+                    color: "red",
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    // margin: -10,
+                  }}
+                >
+                  {(totalPoint && totalPoint[0].point) || 0}
+                </Text>
+              </View>
+              {/* </View> */}
             </View>
-          </ImageBackground>
-        </View>
-        <LiveSection />
-        <MatchButtons />
+          </View>
+          <LiveSection />
+          <MatchButtons />
 
-        <View style={{ width: "90%", alignSelf: "center" }}>
-          <Image
-            style={{ width: "100%", height:100, resizeMode: "cover" }}
-            source={require("../../../assets/brand_gif.gif")}
-          />
-        </View>
+          <View style={{ width: "90%", alignSelf: "center" }}>
+            <Image
+              style={{ width: "100%", height: 100, resizeMode: "cover" }}
+              source={require("../../../assets/brand_gif.gif")}
+            />
+          </View>
 
-        <View style={styles.highlightMatch}>
-          <ImageBackground
-            style={{
-              width: "100%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              opacity:0.8
-            }}
-            source={require("../../../assets/point_bg.png")}
-          >
-            <Pressable  style={{backgroundColor:colors.yellow, colors:"white"}}>
-                <Text style={{padding:10, color:"white"}}>MATCH HIGHLIGHT</Text>
-            </Pressable>
-          </ImageBackground>
-        </View>
+          <PlayerFild players={select_players} onPress={onPress} />
+        </ScrollView>
       </View>
     </Provider>
   );
@@ -143,28 +184,24 @@ export const HomeScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.primary,
   },
   pointBg: {
     width: "100%",
-    height: 180,
-    opacity:0.8,
+    // height: 180,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+    marginTop: 10,
   },
-  pointTextSec: {
-    width: "80%",
-    height: "80%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  pointTextSec: {},
   pointName: {
-    color: "white",
+    color: colors.primary,
     fontSize: 20,
     fontWeight: "bold",
   },
   highlightMatch: {
-    marginTop:10,
+    marginTop: 10,
     alignSelf: "center",
     backgroundColor: "black",
     width: "90%",
