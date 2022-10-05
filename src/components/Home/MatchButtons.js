@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity,Pressable } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 
 import colors from "../../../constants/colors";
@@ -8,16 +8,13 @@ import MainButton from "../MainButton";
 const MatchButtons = (props) => {
   return (
     <View style={styles.container}>
-    <View style={{flexDirection:"row",width:"100%",overflow:"hidden", flexWrap:"wrap", alignItems:"center", justifyContent:"center", justifyContent:"space-between"}}>
-      <Pressable style={{backgroundColor:colors.red, paddingVertical:10, paddingHorizontal:10}}>
-        <Text style={{color:"white", fontSize:12,}}>Previous Match</Text>
-      </Pressable>
-      <Pressable style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:10}}>
-        <Text style={{color:"white", fontSize:12,}}>Upcoming Match</Text>
-      </Pressable>
-      <Pressable style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:10}}>
-        <Text style={{color:"white", fontSize:12,}}>Match highlight</Text>
-      </Pressable>
+    <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", justifyContent:"space-between"}}>
+      <Button style={{backgroundColor:colors.red}}>
+        <Text style={{color:"white"}}>Previus Match</Text>
+      </Button>
+      <Button style={{backgroundColor:colors.red, marginLeft:10}}>
+        <Text style={{color:"white"}}>Next Match</Text>
+      </Button>
     </View>
     </View>
 
@@ -29,15 +26,21 @@ const styles = StyleSheet.create({
         width: "90%",
         alignSelf: "center",
         alignItems: "center",
-        // paddingHorizontal:10,
+        paddingHorizontal:10,
         paddingVertical:5,
         marginBottom: 10,
-        flexWrap:"wrap"
       },
+  button: {
+    backgroundColor: colors.yellow,
+    paddingVertical: 5,
+    paddingHorizontal: 30,
+    marginVertical: 4,
+    // borderRadius: 25
+  },
   buttonText: {
-    // color: "black",
+    color: "black",
     fontFamily: "open-sans",
-    fontSize: 10,
+    fontSize: 18,
   },
 });
 

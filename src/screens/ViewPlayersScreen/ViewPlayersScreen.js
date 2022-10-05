@@ -26,6 +26,7 @@ import { Ionicons } from "@expo/vector-icons";
 import {updatePlayers} from '../../store/features/allPlayerSlice'
 
 export const ViewPlayersScreen = (props) => {
+  const {isEdit} = props.route.params;
   const isFocused = useIsFocused();
   const [playerList,setPlayerList] = useState([]);
   const [userID,setUserID] = useState(null);
@@ -68,12 +69,25 @@ export const ViewPlayersScreen = (props) => {
             // console.log(result.result);
             let data = [];
             for(let i=0;i<result.result.length;i++){
-              const d = {
-                team_name: result.result[i].team_name,
-                user_id: result.result[i].user_id,
-                player_code: result.result[i].player_code,
-              };
-              data.push(d);
+              if(isEdit){
+                if(!result.result[i].is_delete){
+                  const d = {
+                    id: result.result[i].id,
+                    team_name: result.result[i].team_name,
+                    user_id: result.result[i].user_id,
+                    player_code: result.result[i].player_code,
+                  };
+                  data.push(d);
+                }
+              }else{
+                const d = {
+                  id: result.result[i].id,
+                  team_name: result.result[i].team_name,
+                  user_id: result.result[i].user_id,
+                  player_code: result.result[i].player_code,
+                };
+                data.push(d);
+              }
             }
             setSelectedPlayers(data);
           }else{
@@ -110,6 +124,7 @@ export const ViewPlayersScreen = (props) => {
       setIsSelected(!isSelect);
 
       await save_select_list({
+        id: item.id,
         team_name: item.team_name,
         user_id: `${userID}`,
         player_code: `${playerID}`,
@@ -120,10 +135,15 @@ export const ViewPlayersScreen = (props) => {
           { text: 'OK', onPress: async () => {
               const userDetailsString = await SecureStore.getItemAsync("userDetails");
               const userDetails = JSON.parse(userDetailsString);
-              props.navigation.navigate("DrawerNavigator", {result: userDetails});
+              if(isEdit){
+                props.navigation.navigate("HomeScreen");
+              }else{
+                props.navigation.navigate("DrawerNavigator", {result: userDetails});
+              }
+
             }},
         ]);
-      }else if(selectedPlayers.length <= 11){
+      }else if(selectedPlayers.length < 11){
         console.log("Below 11")
       }
 
@@ -135,20 +155,38 @@ export const ViewPlayersScreen = (props) => {
   };
 
   const save_select_list = async (data) => {
-    CallApi.save_update_player_select(data).then(async (result)  => {
-          if(result.success){
-            // console.log(result.result);
-          }else{
-            Alert.alert('Error', result.message, [
-              { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ]);
-            // console.log("error", result.error);
+    if(isEdit){
+      CallApi.update_player_select(data).then(async (result)  => {
+            if(result.success){
+              // console.log(result.result);
+            }else{
+              Alert.alert('Error', result.message, [
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+              ]);
+              console.log("error", result.error);
+            }
+          },(error) => {
+            console.log("=====",error)
+            alert("Invalid data.");
           }
-        },(error) => {
-          console.log("=====",error)
-          alert("Invalid data.");
-        }
-    );
+      );
+    }else{
+      CallApi.save_update_player_select(data).then(async (result)  => {
+            if(result.success){
+              // console.log(result.result);
+            }else{
+              Alert.alert('Error', result.message, [
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+              ]);
+              // console.log("error", result.error);
+            }
+          },(error) => {
+            console.log("=====",error)
+            alert("Invalid data.");
+          }
+      );
+    }
+
   }
 
   return (

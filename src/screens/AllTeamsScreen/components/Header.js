@@ -7,21 +7,29 @@ import colors from "../../../../constants/colors";
 
 const { height } = Dimensions.get("window");
 const HEADER_MIN_HEIGHT = Platform.OS === "android" ? 70 : height > 667 ? 80 : 70;
-export const Header = ({navigation}) => {
+export const Header = ({navigation, isEdit}) => {
 
 
     return (
         <View style={styles.topBar}>
-            <TouchableOpacity
-                // onPress={() => navigation.goBack()}
-                style={{flex:1}}
-            >
-                {/* <Ionicons
-                    name='ios-arrow-back'
-                    size={30}
-                    color={Colors.white}
-                /> */}
-            </TouchableOpacity>
+            {
+                isEdit ?
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}
+                        style={{flex:1}}
+                    >
+                        <Ionicons
+                            name='ios-arrow-back'
+                            size={30}
+                            color={Colors.white}
+                        />
+                    </TouchableOpacity>
+                    :<TouchableOpacity
+                        style={{flex:1}}
+                    >
+                    </TouchableOpacity>
+            }
+
             <View style={{flex:1}}>
                 <Image
                     source={require('../../../../assets/t20_logo.png')}
@@ -33,7 +41,7 @@ export const Header = ({navigation}) => {
                 />
             </View>
            <View style={{flex:1}}>
-           
+
            </View>
         </View>
     );

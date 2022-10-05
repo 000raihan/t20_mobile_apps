@@ -24,6 +24,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 
 export const EditMyTeamScreen = (props) => {
+  const {isEdit} = props.route.params;
   const {navigation} = props
   const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);
@@ -38,7 +39,7 @@ export const EditMyTeamScreen = (props) => {
     CallApi.player_select_list(country_id).then(
       async (result) => {
         if (result.success) {
-          console.log(result.result);
+          // console.log("=======",result.result);
           let data = [];
           for (let i = 0; i < result.result.length; i++) {
             const d = {
@@ -48,6 +49,8 @@ export const EditMyTeamScreen = (props) => {
               player_name: result.result[i].player_name,
               player_image: result.result[i].player_image,
               role: result.result[i].role,
+              is_delete: result.result[i].is_delete,
+              id: result.result[i].id,
             };
             data.push(d);
           }
@@ -74,9 +77,9 @@ export const EditMyTeamScreen = (props) => {
 
   const save_select_list = async (data) => {
     console.log("DATA IS : ----------",data)
-    CallApi.save_update_player_select(data).then(async (result)  => {
+    CallApi.update_player_select(data).then(async (result)  => {
           if(result.success){
-            // console.log(result.result);
+            console.log(result.result);
           }else{
             Alert.alert('Error', result.message, [
               { text: 'yes', onPress: () => console.log('OK Pressed') },
@@ -90,7 +93,7 @@ export const EditMyTeamScreen = (props) => {
     );
   }
 
-  const onDelete = async(code, name) => {
+  const onDelete = async(code, name, id) => {
     if(selectedPlayres.length <2){
       return null
     }
@@ -107,6 +110,7 @@ export const EditMyTeamScreen = (props) => {
         setSelectedPlayers(newArrary);
 
         await save_select_list({
+          id: id,
           team_name: name,
           user_id: userID,
           player_code: code,
@@ -119,7 +123,7 @@ export const EditMyTeamScreen = (props) => {
   // console.log("NEW ARRAY IS :-- ", selectedPlayres);
 
   const addPress = () => {
-    navigation.navigate("AllTeamsScreen");
+    navigation.navigate("AllTeamsScreen", {isEdit: true});
   };
 
 
@@ -140,11 +144,15 @@ export const EditMyTeamScreen = (props) => {
 
   useEffect(() => {
     if (selectedPlayres) {
-      setBatter(selectedPlayres.filter((p) => p.role == "Batter"));
-      setBowlers(selectedPlayres.filter((p) => p.role == "Bowler"));
-      setAllrounder(selectedPlayres.filter((p) => p.role == "All-rounder"));
-      setWeiketKeeper(selectedPlayres.filter((p) => p.role == "Wicket Keeper"));
+      setBatter(selectedPlayres.filter((p) => p.role == "Batter" && p.is_delete === 0));
+      setBowlers(selectedPlayres.filter((p) => p.role == "Bowler" && p.is_delete === 0));
+      setAllrounder(selectedPlayres.filter((p) => p.role == "All-rounder" && p.is_delete === 0));
+      setWeiketKeeper(selectedPlayres.filter((p) => p.role == "Wicket Keeper" && p.is_delete === 0));
     }
+    console.log(batters)
+    console.log(bowlers)
+    console.log(allRounder)
+    console.log(wiketKepper)
   }, [selectedPlayres]);
 
   return (
@@ -190,7 +198,9 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => {
+                          onDelete(item.player_code, item.player_name, item.id).then(r  => console.log(r))
+                        }}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -360,11 +370,11 @@ export const EditMyTeamScreen = (props) => {
         <View>
           <Text style={{ color: colors.yellow, marginTop:10, textAlign: "center", fontSize: 18 }}>
             Your have Selected{" "}
-            {(selectedPlayres && selectedPlayres.length) || 0} players
+            {(selectedPlayres && selectedPlayres.filter((r) => {return r.is_delete === 0;}).length) || 0} players
           </Text>
         </View>
       </View>
-      {selectedPlayres && selectedPlayres.length < 11 && (
+      {selectedPlayres && selectedPlayres.filter((r) => {return r.is_delete === 0;}).length < 11 && (
         <Pressable
           onPress={() => addPress()}
           style={{
