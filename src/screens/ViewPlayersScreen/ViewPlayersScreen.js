@@ -43,7 +43,25 @@ export const ViewPlayersScreen = (props) => {
         const userDetails = JSON.parse(userDetailsString);
         setUserID(userDetails.id);
           await getPlayerList(props.route.params.country_id);
-          await getSelectPlayerList(userDetails.id);
+          if(isEdit){
+            const item = JSON.parse(
+                await Storage.getItem({ key: 'select_player_list' })
+            );
+            if(item.length === 0){
+              await getSelectPlayerList(userDetails.id);
+            }else{
+              const item = JSON.parse(
+                  await Storage.getItem({ key: 'select_player_list' })
+              );
+              setSelectedPlayers(item);
+            }
+          }else{
+            const item = JSON.parse(
+                await Storage.getItem({ key: 'select_player_list' })
+            );
+            setSelectedPlayers(item);
+          }
+
       }) ();
     }
   },[props, isFocused]);
@@ -91,6 +109,10 @@ export const ViewPlayersScreen = (props) => {
                 data.push(d);
               }
             }
+            await Storage.setItem({
+              key: "select_player_list",
+              value: JSON.stringify(data)
+            });
             setSelectedPlayers(data);
           }else{
             Alert.alert('Error', result.message, [
@@ -106,7 +128,45 @@ export const ViewPlayersScreen = (props) => {
   };
 
 
-  const selectPlayer = async (playerID,value) => {
+  const checkPlayerLogic = (data) =>{
+    console.log(data);
+    const batsman = data.filter((r) => {return r.role === "Batsman"}).length;
+    const wicketKeeper = data.filter((r) => {return r.role === "Wicket Keeper"}).length;
+    const bowler = data.filter((r) => {return r.role === "Bowler"}).length;
+    const allRounder = data.filter((r) => {return r.role === "All-Rounder"}).length;
+
+    if(batsman < 3){
+      Alert.alert('Validation', "Minimum 3 Batsman select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(bowler < 3){
+      Alert.alert('Validation', "Minimum 3 Bowler select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(wicketKeeper < 1){
+      Alert.alert('Validation', "Minimum 1 Wicket Keeper select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(wicketKeeper > 1){
+      Alert.alert('Validation', "Wicket Keeper Not Over 1", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }if(allRounder < 2){
+      Alert.alert('Validation', "Minimum 2 All-Rounder select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(allRounder > 2){
+      Alert.alert('Validation', "All-Rounder Not Over 2", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else{
+      return true;
+    }
+    return false;
+  }
+
+  const selectPlayer = async (details,value) => {
+    // console.log(details)
     if(selectedPlayers.length < 11 || !value){
       const item = JSON.parse(
           await Storage.getItem({ key: 'select_player' })
@@ -116,35 +176,58 @@ export const ViewPlayersScreen = (props) => {
         const d = {
           team_name: item.team_name,
           user_id: userID,
-          player_code: playerID,
+          player_code: details.player_code,
+          player_name: details.player_name,
+          role: details.role,
+          player_image: details.player_image,
         };
         data.push(d);
       }else{
-        data.splice(data.findIndex(v => v.player_code === playerID), 1);
+        data.splice(data.findIndex(v => v.player_code === details.player_code), 1);
       }
+
       setSelectedPlayers(data);
       setIsSelected(!isSelect);
 
-      await save_select_list({
-        id: item.id,
-        team_name: item.team_name,
-        user_id: `${userID}`,
-        player_code: `${playerID}`,
+      await Storage.setItem({
+        key: "select_player_list",
+        value: JSON.stringify(data)
       });
 
-      if(selectedPlayers.length >= 11){
-        Alert.alert('Congratulations', "You select 11 players!", [
-          { text: 'OK', onPress: async () => {
-              const userDetailsString = await SecureStore.getItemAsync("userDetails");
-              const userDetails = JSON.parse(userDetailsString);
-              if(isEdit){
-                props.navigation.navigate("HomeScreen");
-              }else{
-                props.navigation.navigate("DrawerNavigator", {result: userDetails});
-              }
+      // await save_select_list({
+      //   id: item.id,
+      //   team_name: item.team_name,
+      //   user_id: `${userID}`,
+      //   player_code: `${playerID}`,
+      // });
 
-            }},
-        ]);
+      if(selectedPlayers.length >= 11){
+        if(checkPlayerLogic(selectedPlayers)){
+          Alert.alert('Congratulations', "You select 11 players!", [
+            { text: 'OK', onPress: async () => {
+                const userDetailsString = await SecureStore.getItemAsync("userDetails");
+                const userDetails = JSON.parse(userDetailsString);
+                if(isEdit){
+                  // console.log(data)
+                  await update_select_list(data);
+                  await Storage.setItem({
+                    key: "select_player_list",
+                    value: JSON.stringify([])
+                  });
+                  props.navigation.navigate("HomeScreen");
+                }else{
+                  await save_select_list(data);
+                  await Storage.setItem({
+                    key: "select_player_list",
+                    value: JSON.stringify([])
+                  });
+                  props.navigation.navigate("DrawerNavigator", {result: userDetails});
+                }
+              }},
+          ]);
+        }else{
+          setIsSelected(!isSelect);
+        }
       }else if(selectedPlayers.length < 11){
         console.log("Below 11")
       }
@@ -159,39 +242,39 @@ export const ViewPlayersScreen = (props) => {
   console.log("selected players is : ",selectedPlayers)
 
   const save_select_list = async (data) => {
-    if(isEdit){
-      CallApi.update_player_select(data).then(async (result)  => {
-            if(result.success){
-              // console.log(result.result);
-            }else{
-              Alert.alert('Error', result.message, [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-              ]);
-              console.log("error", result.error);
-            }
-          },(error) => {
-            console.log("=====",error)
-            alert("Invalid data.");
+    CallApi.update_player_select(data).then(async (result)  => {
+          if(result.success){
+            // console.log(result.result);
+          }else{
+            Alert.alert('Error', result.message, [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
+            // console.log("error", result.error);
           }
-      );
-    }else{
-      CallApi.save_update_player_select(data).then(async (result)  => {
-            if(result.success){
-              // console.log(result.result);
-            }else{
-              Alert.alert('Error', result.message, [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-              ]);
-              // console.log("error", result.error);
-            }
-          },(error) => {
-            console.log("=====",error)
-            alert("Invalid data.");
-          }
-      );
-    }
-
+        },(error) => {
+          console.log("=====",error)
+          alert("Invalid data.");
+        }
+    );
   }
+
+  const update_select_list = async (data) => {
+    CallApi.update_player_select(data).then(async (result)  => {
+          if(result.success){
+            // console.log(result.result);
+          }else{
+            Alert.alert('Error', result.message, [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
+            // console.log("error", result.error);
+          }
+        },(error) => {
+          console.log("=====",error)
+          alert("Invalid data.");
+        }
+    );
+  }
+
 
   return (
     <Provider>
@@ -205,7 +288,7 @@ export const ViewPlayersScreen = (props) => {
                   <Text style={{ color: colors.red }}>Batsman</Text>
                   {
                     playerList.filter(r => {
-                      return r.role === 'Batter';
+                      return r.role === 'Batsman';
                     }).map((item) => (
                         <View style={{
                           marginTop: 10,
@@ -217,7 +300,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
@@ -233,7 +316,7 @@ export const ViewPlayersScreen = (props) => {
                                 disabled={false}
                                 style={{ borderColor: colors.red }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                                onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
                           </View>
                         </View>
@@ -245,7 +328,7 @@ export const ViewPlayersScreen = (props) => {
                   <Text style={{ color: colors.red }}>Allrounder</Text>
                   {
                     playerList.filter(r => {
-                      return r.role === 'All-rounder';
+                      return r.role === 'All-Rounder';
                     }).map((item) => (
                         <View style={{
                           marginTop: 10,
@@ -257,7 +340,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
@@ -273,7 +356,7 @@ export const ViewPlayersScreen = (props) => {
                                 disabled={false}
                                 style={{ borderColor: colors.red }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                                onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
                           </View>
                         </View>
@@ -297,7 +380,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
@@ -313,7 +396,7 @@ export const ViewPlayersScreen = (props) => {
                               disabled={false}
                               style={{ borderColor: colors.red }}
                               value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                              onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                              onValueChange={(newValue) => selectPlayer(item,newValue)}
                             // -------------
                             />
                           </View>
@@ -338,7 +421,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
@@ -354,7 +437,7 @@ export const ViewPlayersScreen = (props) => {
                                 disabled={false}
                                 style={{ borderColor: colors.red }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                                onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
                           </View>
                         </View>

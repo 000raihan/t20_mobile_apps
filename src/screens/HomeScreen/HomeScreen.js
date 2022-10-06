@@ -36,7 +36,7 @@ export const HomeScreen = (props) => {
   const [teamName, setTeamName] = useState(null);
   const isFocused = useIsFocused();
   const [select_players, setSelectedPlayers] = useState([]);
-  
+
 
 
   useEffect( ()=>{
@@ -83,7 +83,11 @@ export const HomeScreen = (props) => {
     );
   }
 
-  const onPress = ()=>{
+  const onPress = async () => {
+    await Storage.setItem({
+      key: "select_player_list",
+      value: JSON.stringify([])
+    });
     props.navigation.navigate("MyTeamScreen", {isEdit: true})
   }
 

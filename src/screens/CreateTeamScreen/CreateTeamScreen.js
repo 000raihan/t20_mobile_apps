@@ -16,6 +16,7 @@ import { Storage } from "expo-storage";
 export const CreateTeamScreen = (props) => {
   const [teamName, setTeamName] = useState("");
 
+<<<<<<< HEAD
   const onPress = async () => {
     if (teamName === "") {
       Alert.alert("Validation", "Please enter your team name", [
@@ -30,6 +31,27 @@ export const CreateTeamScreen = (props) => {
       props.navigation.navigate("AllTeamsScreen", { isEdit: false });
     }
   };
+=======
+  const onPress = async ()=> {
+      await Storage.setItem({
+          key: "select_player_list",
+          value: JSON.stringify([])
+      });
+
+      if(teamName === ""){
+          Alert.alert('Validation', 'Please enter your team name', [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ]);
+      }else{
+          await Storage.setItem({
+              key: "select_player",
+              value: JSON.stringify({team_name: teamName})
+          });
+
+          props.navigation.navigate("AllTeamsScreen");
+      }
+  }
+>>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
 
   return (
     <Provider>
