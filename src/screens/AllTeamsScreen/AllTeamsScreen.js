@@ -24,7 +24,7 @@ import { Storage } from 'expo-storage';
 import {CallApi} from "./api/Api";
 
 export const AllTeamsScreen = (props) => {
-    const {isEdit} = props.route.params;
+    const {isEdit} = props.route.params === undefined ? false : props.route.params;
   const [countryList,setCountryList] = useState([]);
 
   useEffect( ()=>{

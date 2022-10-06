@@ -41,7 +41,25 @@ export const ViewPlayersScreen = (props) => {
         const userDetails = JSON.parse(userDetailsString);
         setUserID(userDetails.id);
           await getPlayerList(props.route.params.country_id);
-          await getSelectPlayerList(userDetails.id);
+          if(isEdit){
+            const item = JSON.parse(
+                await Storage.getItem({ key: 'select_player_list' })
+            );
+            if(item.length === 0){
+              await getSelectPlayerList(userDetails.id);
+            }else{
+              const item = JSON.parse(
+                  await Storage.getItem({ key: 'select_player_list' })
+              );
+              setSelectedPlayers(item);
+            }
+          }else{
+            const item = JSON.parse(
+                await Storage.getItem({ key: 'select_player_list' })
+            );
+            setSelectedPlayers(item);
+          }
+
       }) ();
     }
   },[props, isFocused]);
@@ -89,6 +107,10 @@ export const ViewPlayersScreen = (props) => {
                 data.push(d);
               }
             }
+            await Storage.setItem({
+              key: "select_player_list",
+              value: JSON.stringify(data)
+            });
             setSelectedPlayers(data);
           }else{
             Alert.alert('Error', result.message, [
@@ -104,7 +126,8 @@ export const ViewPlayersScreen = (props) => {
   };
 
 
-  const selectPlayer = async (playerID,value) => {
+  const selectPlayer = async (details,value) => {
+    // console.log(details)
     if(selectedPlayers.length < 11 || !value){
       const item = JSON.parse(
           await Storage.getItem({ key: 'select_player' })
@@ -114,21 +137,29 @@ export const ViewPlayersScreen = (props) => {
         const d = {
           team_name: item.team_name,
           user_id: userID,
-          player_code: playerID,
+          player_code: details.player_code,
+          player_name: details.player_name,
+          role: details.role,
+          player_image: details.player_image,
         };
         data.push(d);
       }else{
-        data.splice(data.findIndex(v => v.player_code === playerID), 1);
+        data.splice(data.findIndex(v => v.player_code === details.player_code), 1);
       }
       setSelectedPlayers(data);
       setIsSelected(!isSelect);
 
-      await save_select_list({
-        id: item.id,
-        team_name: item.team_name,
-        user_id: `${userID}`,
-        player_code: `${playerID}`,
+      await Storage.setItem({
+        key: "select_player_list",
+        value: JSON.stringify(data)
       });
+
+      // await save_select_list({
+      //   id: item.id,
+      //   team_name: item.team_name,
+      //   user_id: `${userID}`,
+      //   player_code: `${playerID}`,
+      // });
 
       if(selectedPlayers.length >= 11){
         Alert.alert('Congratulations', "You select 11 players!", [
@@ -136,11 +167,21 @@ export const ViewPlayersScreen = (props) => {
               const userDetailsString = await SecureStore.getItemAsync("userDetails");
               const userDetails = JSON.parse(userDetailsString);
               if(isEdit){
+                // console.log(data)
+                await update_select_list(data);
+                await Storage.setItem({
+                  key: "select_player_list",
+                  value: JSON.stringify([])
+                });
                 props.navigation.navigate("HomeScreen");
               }else{
+                await save_select_list(data);
+                await Storage.setItem({
+                  key: "select_player_list",
+                  value: JSON.stringify([])
+                });
                 props.navigation.navigate("DrawerNavigator", {result: userDetails});
               }
-
             }},
         ]);
       }else if(selectedPlayers.length < 11){
@@ -155,39 +196,39 @@ export const ViewPlayersScreen = (props) => {
   };
 
   const save_select_list = async (data) => {
-    if(isEdit){
-      CallApi.update_player_select(data).then(async (result)  => {
-            if(result.success){
-              // console.log(result.result);
-            }else{
-              Alert.alert('Error', result.message, [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-              ]);
-              console.log("error", result.error);
-            }
-          },(error) => {
-            console.log("=====",error)
-            alert("Invalid data.");
+    CallApi.update_player_select(data).then(async (result)  => {
+          if(result.success){
+            // console.log(result.result);
+          }else{
+            Alert.alert('Error', result.message, [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
+            // console.log("error", result.error);
           }
-      );
-    }else{
-      CallApi.save_update_player_select(data).then(async (result)  => {
-            if(result.success){
-              // console.log(result.result);
-            }else{
-              Alert.alert('Error', result.message, [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-              ]);
-              // console.log("error", result.error);
-            }
-          },(error) => {
-            console.log("=====",error)
-            alert("Invalid data.");
-          }
-      );
-    }
-
+        },(error) => {
+          console.log("=====",error)
+          alert("Invalid data.");
+        }
+    );
   }
+
+  const update_select_list = async (data) => {
+    CallApi.update_player_select(data).then(async (result)  => {
+          if(result.success){
+            // console.log(result.result);
+          }else{
+            Alert.alert('Error', result.message, [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
+            // console.log("error", result.error);
+          }
+        },(error) => {
+          console.log("=====",error)
+          alert("Invalid data.");
+        }
+    );
+  }
+
 
   return (
     <Provider>
@@ -229,7 +270,7 @@ export const ViewPlayersScreen = (props) => {
                                 disabled={false}
                                 style={{ borderColor: colors.red }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                                onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
                           </View>
                         </View>
@@ -269,7 +310,7 @@ export const ViewPlayersScreen = (props) => {
                                 disabled={false}
                                 style={{ borderColor: colors.red }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                                onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
                           </View>
                         </View>
@@ -309,7 +350,7 @@ export const ViewPlayersScreen = (props) => {
                               disabled={false}
                               style={{ borderColor: colors.red }}
                               value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                              onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                              onValueChange={(newValue) => selectPlayer(item,newValue)}
                             // -------------
                             />
                           </View>
@@ -350,7 +391,7 @@ export const ViewPlayersScreen = (props) => {
                                 disabled={false}
                                 style={{ borderColor: colors.red }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
-                                onValueChange={(newValue) => selectPlayer(item.player_code,newValue)}
+                                onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
                           </View>
                         </View>

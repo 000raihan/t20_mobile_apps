@@ -17,6 +17,11 @@ export const CreateTeamScreen = (props) => {
   const [teamName, setTeamName] =useState("");
 
   const onPress = async ()=> {
+      await Storage.setItem({
+          key: "select_player_list",
+          value: JSON.stringify([])
+      });
+
       if(teamName === ""){
           Alert.alert('Validation', 'Please enter your team name', [
               { text: 'OK', onPress: () => console.log('OK Pressed') },
@@ -27,7 +32,7 @@ export const CreateTeamScreen = (props) => {
               value: JSON.stringify({team_name: teamName})
           });
 
-          props.navigation.navigate("AllTeamsScreen", );
+          props.navigation.navigate("AllTeamsScreen");
       }
   }
 

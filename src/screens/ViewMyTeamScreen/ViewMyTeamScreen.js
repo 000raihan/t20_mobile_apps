@@ -22,6 +22,7 @@ import { CallApi } from "../ViewPlayersScreen/api/Api";
 import * as SecureStore from "expo-secure-store";
 
 import { useIsFocused } from "@react-navigation/native";
+import {Storage} from "expo-storage";
 
 export const ViewMyTeamScreen = (props) => {
   const {isEdit} = props.route.params;
@@ -36,7 +37,6 @@ export const ViewMyTeamScreen = (props) => {
     CallApi.player_select_list(country_id).then(
       async (result) => {
         if (result.success) {
-
           // console.log(result.result);
           let data = [];
           for (let i = 0; i < result.result.length; i++) {
@@ -76,7 +76,29 @@ export const ViewMyTeamScreen = (props) => {
         const userDetails = JSON.parse(userDetailsString);
         setUserID(userDetails.id);
         // await getPlayerList(props.route.params.country_id);
-        await getSelectPlayerList(userDetails.id);
+        if(isEdit){
+          await getSelectPlayerList(userDetails.id);
+        }else{
+          const items = JSON.parse(
+              await Storage.getItem({ key: 'select_player_list' })
+          );
+          let data = [];
+          for (let i = 0; i < items.length; i++) {
+            const d = {
+              team_name: items[i].team_name,
+              user_id: items[i].user_id,
+              player_code: items[i].player_code,
+              player_name: items[i].player_name,
+              player_image: items[i].player_image,
+              role: items[i].role,
+              point: 0,
+              is_delete: 0,
+            };
+            data.push(d);
+          }
+          setSelectedPlayers(data);
+          setTotalPoint(0);
+        }
       })();
     }
 
