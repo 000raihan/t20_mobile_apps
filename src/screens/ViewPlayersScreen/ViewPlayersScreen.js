@@ -126,6 +126,43 @@ export const ViewPlayersScreen = (props) => {
   };
 
 
+  const checkPlayerLogic = (data) =>{
+    console.log(data);
+    const batsman = data.filter((r) => {return r.role === "Batsman"}).length;
+    const wicketKeeper = data.filter((r) => {return r.role === "Wicket Keeper"}).length;
+    const bowler = data.filter((r) => {return r.role === "Bowler"}).length;
+    const allRounder = data.filter((r) => {return r.role === "All-Rounder"}).length;
+
+    if(batsman < 3){
+      Alert.alert('Validation', "Minimum 3 Batsman select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(bowler < 3){
+      Alert.alert('Validation', "Minimum 3 Bowler select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(wicketKeeper < 1){
+      Alert.alert('Validation', "Minimum 1 Wicket Keeper select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(wicketKeeper > 1){
+      Alert.alert('Validation', "Wicket Keeper Not Over 1", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }if(allRounder < 2){
+      Alert.alert('Validation', "Minimum 2 All-Rounder select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(allRounder > 2){
+      Alert.alert('Validation', "All-Rounder Not Over 2", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else{
+      return true;
+    }
+    return false;
+  }
+
   const selectPlayer = async (details,value) => {
     // console.log(details)
     if(selectedPlayers.length < 11 || !value){
@@ -146,6 +183,7 @@ export const ViewPlayersScreen = (props) => {
       }else{
         data.splice(data.findIndex(v => v.player_code === details.player_code), 1);
       }
+
       setSelectedPlayers(data);
       setIsSelected(!isSelect);
 
@@ -162,28 +200,32 @@ export const ViewPlayersScreen = (props) => {
       // });
 
       if(selectedPlayers.length >= 11){
-        Alert.alert('Congratulations', "You select 11 players!", [
-          { text: 'OK', onPress: async () => {
-              const userDetailsString = await SecureStore.getItemAsync("userDetails");
-              const userDetails = JSON.parse(userDetailsString);
-              if(isEdit){
-                // console.log(data)
-                await update_select_list(data);
-                await Storage.setItem({
-                  key: "select_player_list",
-                  value: JSON.stringify([])
-                });
-                props.navigation.navigate("HomeScreen");
-              }else{
-                await save_select_list(data);
-                await Storage.setItem({
-                  key: "select_player_list",
-                  value: JSON.stringify([])
-                });
-                props.navigation.navigate("DrawerNavigator", {result: userDetails});
-              }
-            }},
-        ]);
+        if(checkPlayerLogic(selectedPlayers)){
+          Alert.alert('Congratulations', "You select 11 players!", [
+            { text: 'OK', onPress: async () => {
+                const userDetailsString = await SecureStore.getItemAsync("userDetails");
+                const userDetails = JSON.parse(userDetailsString);
+                if(isEdit){
+                  // console.log(data)
+                  await update_select_list(data);
+                  await Storage.setItem({
+                    key: "select_player_list",
+                    value: JSON.stringify([])
+                  });
+                  props.navigation.navigate("HomeScreen");
+                }else{
+                  await save_select_list(data);
+                  await Storage.setItem({
+                    key: "select_player_list",
+                    value: JSON.stringify([])
+                  });
+                  props.navigation.navigate("DrawerNavigator", {result: userDetails});
+                }
+              }},
+          ]);
+        }else{
+          setIsSelected(!isSelect);
+        }
       }else if(selectedPlayers.length < 11){
         console.log("Below 11")
       }
@@ -242,7 +284,7 @@ export const ViewPlayersScreen = (props) => {
                   <Text style={{ color: colors.red }}>Batsman</Text>
                   {
                     playerList.filter(r => {
-                      return r.role === 'Batter';
+                      return r.role === 'Batsman';
                     }).map((item) => (
                         <View style={{
                           marginTop: 10,
@@ -282,7 +324,7 @@ export const ViewPlayersScreen = (props) => {
                   <Text style={{ color: colors.red }}>Allrounder</Text>
                   {
                     playerList.filter(r => {
-                      return r.role === 'All-rounder';
+                      return r.role === 'All-Rounder';
                     }).map((item) => (
                         <View style={{
                           marginTop: 10,
@@ -294,7 +336,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
@@ -334,7 +376,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
@@ -375,7 +417,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>

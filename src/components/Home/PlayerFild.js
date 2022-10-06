@@ -8,7 +8,7 @@ import Player from "./Player";
 
 const PlayerFild = (props) => {
   const {players, onPress} = props;
-  console.log(players)
+  // console.log(players)
   return (
     <View style={styles.container}>
         <ImageBackground resizeMode="cover" resizeMethod="auto" style={{width:"100%", position:"relative", }} source={require("../../../assets/point_bg.png")}>
@@ -43,7 +43,7 @@ const PlayerFild = (props) => {
             </Pressable>
             </View>
           </View>
-           
+
 
 
         </ImageBackground>
