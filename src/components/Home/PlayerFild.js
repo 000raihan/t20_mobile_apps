@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TextInput, StyleSheet, Text, Image, ImageBackground, Button, Pressable } from "react-native";
 import { View } from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
@@ -7,7 +7,12 @@ import colors from "../../../constants/colors";
 import Player from "./Player";
 
 const PlayerFild = (props) => {
-  const {players, onPress} = props;
+  const {players:pl, onPress} = props;
+  const [players, setPlayers] = useState([]);
+
+  useEffect(()=>{
+    setPlayers(pl.filter(player=>player.is_delete == 0))
+  },[pl])
   // console.log(players)
   return (
     <View style={styles.container}>

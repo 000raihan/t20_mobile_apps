@@ -145,9 +145,9 @@ export const EditMyTeamScreen = (props) => {
 
   useEffect(() => {
     if (selectedPlayres) {
-      setBatter(selectedPlayres.filter((p) => p.role == "Batter" && p.is_delete === 0));
+      setBatter(selectedPlayres.filter((p) => p.role == "Batsman" && p.is_delete === 0));
       setBowlers(selectedPlayres.filter((p) => p.role == "Bowler" && p.is_delete === 0));
-      setAllrounder(selectedPlayres.filter((p) => p.role == "All-rounder" && p.is_delete === 0));
+      setAllrounder(selectedPlayres.filter((p) => p.role == "All-Rounder" && p.is_delete === 0));
       setWeiketKeeper(selectedPlayres.filter((p) => p.role == "Wicket Keeper" && p.is_delete === 0));
     }
     console.log(batters)
@@ -181,7 +181,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -233,7 +233,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -282,7 +282,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -331,7 +331,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
