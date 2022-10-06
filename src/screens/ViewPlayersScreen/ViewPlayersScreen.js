@@ -254,7 +254,7 @@ export const ViewPlayersScreen = (props) => {
                             <Image
                                 resizeMode="contain"
                                 style={{ width: "100%", height: 40 }}
-                                source={require("../../../assets/img_circle.png")}
+                                source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
                           <View style={{ flex: 4 }}>
