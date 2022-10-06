@@ -126,7 +126,7 @@ export const HomeScreen = (props) => {
                   <Image
                     resizeMode="cover"
                     style={{ height: "100%", width: "100%" }}
-                    source={require("../../../assets/team_logo.jpg")}
+                    source={require("../../../assets/team_logo.png")}
                   />
                 </View>
 

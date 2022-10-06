@@ -34,6 +34,8 @@ export const ViewPlayersScreen = (props) => {
   const [isSelect, setIsSelected] = useState(false);
 
 
+
+
   useEffect( ()=>{
     if(isFocused){
       (async() => {
@@ -153,6 +155,8 @@ export const ViewPlayersScreen = (props) => {
       ]);
     }
   };
+
+  console.log("selected players is : ",selectedPlayers)
 
   const save_select_list = async (data) => {
     if(isEdit){

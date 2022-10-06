@@ -56,8 +56,9 @@ export const LoginScreen = ({ navigation }) => {
     <Provider>
       <ImageBackground
         resizeMode="cover"
+      
         style={{ flex: 1, width: "100%", height: "100%", position: "relative" }}
-        source={require("../../../assets/image_4.png")}
+        source={require("../../../assets/login_img.png")}
       >
         <View
           style={{
