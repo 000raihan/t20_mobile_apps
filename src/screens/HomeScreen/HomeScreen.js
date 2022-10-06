@@ -173,7 +173,7 @@ export const HomeScreen = (props) => {
 
           <View style={{ width: "90%", alignSelf: "center" }}>
             <Image
-              style={{ width: "100%", height: 100, resizeMode: "cover" }}
+              style={{ width: "100%", resizeMode: "contain" }}
               source={require("../../../assets/brand_gif.gif")}
             />
           </View>

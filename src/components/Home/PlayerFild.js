@@ -12,10 +12,12 @@ const PlayerFild = (props) => {
 
   useEffect(()=>{
     setPlayers(pl.filter(player=>player.is_delete == 0))
-  },[pl])
+  },[pl]);
+
   // console.log(players)
   return (
     <View style={styles.container}>
+        
         <ImageBackground resizeMode="cover" resizeMethod="auto" style={{width:"100%", position:"relative", }} source={require("../../../assets/point_bg.png")}>
             <View style={{width:"100%", height:"100%",top:0, left:0, position:"absolute", backgroundColor:"black", opacity:.5}}>
             </View>
