@@ -64,7 +64,7 @@ const onPress = async ()=> {
             position: "relative",
             justifyContent:"center"
           }}
-          source={require("../../../assets/c_team_img.png")}
+          source={require("../../../assets/cricket.png")}
         >
           <View
             style={{

@@ -464,7 +464,7 @@ export const ViewPlayersScreen = (props) => {
                         borderRadius: 2,
                       }}
                       activeOpacity={0.6}
-                      // onPress={() => submitPlayers()}
+                      onPress={() => props.navigation.navigate("MyTeamScreen", {isEdit:true})}
                   >
                     <Text style={{ fontSize: 16, textAlign: "center" }}>
                       {`${selectedPlayers.length} Players Selected`}
@@ -475,16 +475,12 @@ export const ViewPlayersScreen = (props) => {
                   </Pressable>
                 </View>
 
-                <View style={{ flex: 1, marginLeft: 10 }}>
+                {/* <View style={{ flex: 1, marginLeft: 10 }}>
                   <TouchableOpacity activeOpacity={0.6} onPress={()=>props.navigation.navigate("MyTeamScreen",{isEdit: false})}>
                     <Ionicons name="home" style={{fontSize:30, color:"white"}}/>
-                    {/* <Image
-                        resizeMode="contain"
-                        style={{ width: "100%", height: 40 }}
-                        source={require("../../../assets/previous.png")}
-                    /> */}
+
                   </TouchableOpacity>
-                </View>
+                </View> */}
 
               </View>
 

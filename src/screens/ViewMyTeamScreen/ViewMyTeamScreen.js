@@ -25,7 +25,7 @@ import { useIsFocused } from "@react-navigation/native";
 import {Storage} from "expo-storage";
 
 export const ViewMyTeamScreen = (props) => {
-  const {isEdit} = props.route.params;
+  const {isEdit} = props.route.params === undefined ? false : props.route.params;
   const { navigation } = props;
   const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);

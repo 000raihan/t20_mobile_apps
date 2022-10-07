@@ -9,14 +9,14 @@ const MatchButtons = (props) => {
   return (
     <View style={styles.container}>
     <View style={{flexDirection:"row",width:"100%",overflow:"hidden", flexWrap:"wrap", alignItems:"center", justifyContent:"center", justifyContent:"space-between"}}>
-      <Pressable style={{backgroundColor:colors.red, paddingVertical:10, paddingHorizontal:10}}>
-        <Text style={{color:"white", fontSize:12,}}>Previous Match</Text>
+      <Pressable style={{backgroundColor:colors.red, paddingVertical:10, paddingHorizontal:8}}>
+        <Text style={{color:"white", fontSize:10,}}>Previous Match</Text>
       </Pressable>
-      <Pressable style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:10}}>
-        <Text style={{color:"white", fontSize:12,}}>Upcoming Match</Text>
+      <Pressable style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
+        <Text style={{color:"white", fontSize:10,}}>Upcoming Match</Text>
       </Pressable>
-      <Pressable style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:10}}>
-        <Text style={{color:"white", fontSize:12,}}>Match highlight</Text>
+      <Pressable style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
+        <Text style={{color:"white", fontSize:10,}}>Match highlight</Text>
       </Pressable>
     </View>
     </View>

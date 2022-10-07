@@ -17,9 +17,9 @@ const PlayerFild = (props) => {
   // console.log(players)
   return (
     <View style={styles.container}>
-        
-        <ImageBackground resizeMode="cover" resizeMethod="auto" style={{width:"100%", position:"relative", }} source={require("../../../assets/point_bg.png")}>
-            <View style={{width:"100%", height:"100%",top:0, left:0, position:"absolute", backgroundColor:"black", opacity:.5}}>
+
+        <ImageBackground resizeMode="cover" resizeMethod="auto" style={{width:"100%", position:"relative", }} source={require("../../../assets/pitch.jpg")}>
+            <View style={{width:"100%", height:"100%",top:0, left:0, position:"absolute", backgroundColor:"black", opacity:.2}}>
             </View>
           <View style={{paddingVertical:10}}>
           <View style={{paddingVertical:10,paddingHorizontal:7, flexDirection:"row", justifyContent:"space-between"}}>
@@ -46,7 +46,7 @@ const PlayerFild = (props) => {
 
             <View style={{alignItems:"center"}}>
             <Pressable onPress={onPress} style={{backgroundColor:colors.yellow, paddingVertical:7, paddingHorizontal:15}}>
-              <Text>View Details</Text>
+              <Text style={{fontWeight:"bold"}}> Edit Your Team</Text>
             </Pressable>
             </View>
           </View>

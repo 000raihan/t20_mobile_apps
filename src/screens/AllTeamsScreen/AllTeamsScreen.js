@@ -73,7 +73,7 @@ export const AllTeamsScreen = (props) => {
           height: "100%",
           position: "relative",
         }}
-        source={require("../../../assets/image_2.png")}
+        source={require("../../../assets/cricket2.png")}
       >
         <View
           style={{
