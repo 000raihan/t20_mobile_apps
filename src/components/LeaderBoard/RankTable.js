@@ -23,10 +23,6 @@ const RankTable = (props) => {
        <TableRow/>
        <TableRow/>
        <TableRow/>
-       <TableRow/>
-       <TableRow/>
-       <TableRow/>
-       <TableRow/>
     </View>
 
   );
