@@ -169,7 +169,7 @@ export const HomeScreen = (props) => {
             </View>
           </View>
           <LiveSection />
-          <MatchButtons />
+          <MatchButtons navigation={props.navigation}/>
 
           <View style={{ width: "90%", alignSelf: "center" }}>
             <Image

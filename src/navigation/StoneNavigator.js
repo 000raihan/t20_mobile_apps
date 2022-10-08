@@ -32,6 +32,8 @@ import { StandingScreen } from "../screens/StandingScreen/StandingScreen";
 
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/colors";
+import { PreviousMatchScreen } from "../screens/PreviousMatchScreen/PreviousMatchScreen";
+import { NextMatchScreen } from "../screens/NextMatchScreen/NextMatchScreen";
 
 const icons = {
   ic_home: require(`../../assets/Images/ic_home.png`),
@@ -61,6 +63,9 @@ export const HomeStackScreen = () => (
       component={CreateTeamStackScreen}
     />
     <HomeStack.Screen name="AllTeamsScreen" component={AllTeamsScreen} />
+    <HomeStack.Screen name="PreviousMatchScreen" component={PreviousMatchScreen} />
+    <HomeStack.Screen name="NextMatchScreen" component={NextMatchScreen} />
+    
     <AllTeamsStack.Screen
       name="ViewPlayersScreen"
       component={ViewPlayersScreen}
