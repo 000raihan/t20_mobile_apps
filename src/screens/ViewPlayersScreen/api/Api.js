@@ -4,8 +4,26 @@ export const CallApi = {
     player_list,
     save_update_player_select,
     player_select_list,
-    update_player_select
+    update_player_select,
+    delete_player_select,
 };
+
+function delete_player_select(data) {
+    // console.log("DATA IS : ", data);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        // body: data
+    };
+
+    // console.log("data option :",requestOptions)
+    return fetch(`${API_URL}/delete_player_select`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            return result;
+        });
+}
 
 function update_player_select(data) {
     // console.log("DATA IS : ", data);

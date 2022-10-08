@@ -24,11 +24,11 @@ export const Header = ({navigation}) => {
             </TouchableOpacity>
             <View style={{flex:1}}>
                 <Image
-                    source={require('../../../../assets/t20_logo.png')}
+                    source={require('../../../../assets/team_logo.png')}
                     style={{
                         width: height < 668 ? 130 : 120,
                         resizeMode: 'contain',
-                        height: 45,
+                        height: 32,
                     }}
                 />
             </View>
@@ -40,7 +40,7 @@ export const Header = ({navigation}) => {
 }
 const styles = StyleSheet.create({
     topBar: {
-        paddingTop: Platform.OS === "android" ? 15 : 25,
+        paddingTop: Platform.OS === "android" ? 28 : 25,
         width: "100%",
         display: "flex",
         flexDirection: "row",

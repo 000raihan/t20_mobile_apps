@@ -79,7 +79,7 @@ export const EditMyTeamScreen = (props) => {
     console.log("DATA IS : ----------",data)
     CallApi.update_player_select(data).then(async (result)  => {
           if(result.success){
-            console.log(result.result);
+            // console.log(result.result);
           }else{
             Alert.alert('Error', result.message, [
               { text: 'yes', onPress: () => console.log('OK Pressed') },
@@ -94,6 +94,7 @@ export const EditMyTeamScreen = (props) => {
   }
 
   const onDelete = async(code, name, id) => {
+    console.log("ID IS : ", id)
     if(selectedPlayres.length <2){
       return null
     }
@@ -144,11 +145,15 @@ export const EditMyTeamScreen = (props) => {
 
   useEffect(() => {
     if (selectedPlayres) {
-      setBatter(selectedPlayres.filter((p) => p.role == "Batter" && p.is_delete === 0));
+      setBatter(selectedPlayres.filter((p) => p.role == "Batsman" && p.is_delete === 0));
       setBowlers(selectedPlayres.filter((p) => p.role == "Bowler" && p.is_delete === 0));
-      setAllrounder(selectedPlayres.filter((p) => p.role == "All-rounder" && p.is_delete === 0));
+      setAllrounder(selectedPlayres.filter((p) => p.role == "All-Rounder" && p.is_delete === 0));
       setWeiketKeeper(selectedPlayres.filter((p) => p.role == "Wicket Keeper" && p.is_delete === 0));
     }
+    console.log(batters)
+    console.log(bowlers)
+    console.log(allRounder)
+    console.log(wiketKepper)
   }, [selectedPlayres]);
 
   return (
@@ -176,7 +181,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -194,7 +199,9 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name,item.id)}>
+                        <Pressable onPress={() => {
+                          onDelete(item.player_code, item.player_name, item.id).then(r  => console.log(r))
+                        }}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -226,7 +233,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -244,7 +251,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -275,7 +282,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -293,7 +300,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -324,7 +331,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={require("../../../assets/img_circle.png")}
+                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -342,7 +349,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name)}>
+                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{

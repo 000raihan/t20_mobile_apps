@@ -24,7 +24,14 @@ import { Storage } from 'expo-storage';
 import {CallApi} from "./api/Api";
 
 export const AllTeamsScreen = (props) => {
-    const {isEdit} = props.route.params;
+// <<<<<<< HEAD
+
+//   const {navigation, route} = props
+//   // console.log("0000000000000000000000000000",route);
+//   const [isEdit, setIsEdit] = useState(false)
+// =======
+    const {isEdit} = props.route.params === undefined ? false : props.route.params;
+// >>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
   const [countryList,setCountryList] = useState([]);
 
   useEffect( ()=>{
@@ -66,7 +73,7 @@ export const AllTeamsScreen = (props) => {
           height: "100%",
           position: "relative",
         }}
-        source={require("../../../assets/image_2.png")}
+        source={require("../../../assets/cricket2.png")}
       >
         <View
           style={{

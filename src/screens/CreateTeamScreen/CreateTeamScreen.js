@@ -2,47 +2,69 @@ import React, { useEffect, useState } from "react";
 import { Portal, Provider } from "react-native-paper";
 
 import {
-    View,
-    StyleSheet,
-    TextInput,
-    ImageBackground,
-    SafeAreaView,
-   Alert,
+  View,
+  StyleSheet,
+  TextInput,
+  ImageBackground,
+  SafeAreaView,
+  Alert,
 } from "react-native";
 import MainButton from "../../components/MainButton";
 import colors from "../../../constants/colors";
-import { Storage } from 'expo-storage';
+import { Storage } from "expo-storage";
 
 export const CreateTeamScreen = (props) => {
-  const [teamName, setTeamName] =useState("");
+  const [teamName, setTeamName] = useState("");
 
-  const onPress = async ()=> {
-      if(teamName === ""){
-          Alert.alert('Validation', 'Please enter your team name', [
-              { text: 'OK', onPress: () => console.log('OK Pressed') },
-          ]);
-      }else{
-          await Storage.setItem({
-              key: "select_player",
-              value: JSON.stringify({team_name: teamName})
-          });
+// <<<<<<< HEAD
+//   const onPress = async () => {
+//     if (teamName === "") {
+//       Alert.alert("Validation", "Please enter your team name", [
+//         { text: "OK", onPress: () => console.log("OK Pressed") },
+//       ]);
+//     } else {
+//       await Storage.setItem({
+//         key: "select_player",
+//         value: JSON.stringify({ team_name: teamName }),
+//       });
 
-          props.navigation.navigate("AllTeamsScreen", );
-      }
+//       props.navigation.navigate("AllTeamsScreen", { isEdit: false });
+//     }
+//   };
+// =======
+const onPress = async ()=> {
+  await Storage.setItem({
+      key: "select_player_list",
+      value: JSON.stringify([])
+  });
+
+  if(teamName === ""){
+      Alert.alert('Validation', 'Please enter your team name', [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ]);
+  }else{
+      await Storage.setItem({
+          key: "select_player",
+          value: JSON.stringify({team_name: teamName})
+      });
+
+      props.navigation.navigate("AllTeamsScreen");
   }
+}
+// >>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
 
   return (
     <Provider>
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <ImageBackground
           resizeMode="cover"
           style={{
-            flex: 1,
             width: "100%",
             height: "100%",
             position: "relative",
+            justifyContent:"center"
           }}
-          source={require("../../../assets/image_4.png")}
+          source={require("../../../assets/cricket.png")}
         >
           <View
             style={{
@@ -55,16 +77,21 @@ export const CreateTeamScreen = (props) => {
               opacity: 0.4,
             }}
           ></View>
-          <SafeAreaView
-            style={{ width: "100%", height: "100%" }}
-          ></SafeAreaView>
-        </ImageBackground>
-        <View style={{flex:2, backgroundColor:colors.primary}}>
-            <View style={styles.container}>
-            <TextInput onChangeText={setTeamName} value={teamName} style={styles.inputDesign} placeholder="Enter Your Team Name"/>
-            <MainButton onPress={onPress} style={{marginTop:10}}>{"Next   >>"}</MainButton>
-            </View>
+          <View >
+          <View style={styles.container}>
+            <TextInput
+              onChangeText={setTeamName}
+              value={teamName}
+              style={styles.inputDesign}
+              placeholder="Enter Your Team Name"
+            />
+            <MainButton onPress={onPress} style={{ marginTop: 10 }}>
+              {"Next   >>"}
+            </MainButton>
+          </View>
         </View>
+        </ImageBackground>
+
       </View>
     </Provider>
   );
@@ -75,8 +102,8 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: "80%",
     alignSelf: "center",
-    alignItems:"center",
-    justifyContent:"center"
+    alignItems: "center",
+    justifyContent: "center",
   },
   inputDesign: {
     backgroundColor: "white",

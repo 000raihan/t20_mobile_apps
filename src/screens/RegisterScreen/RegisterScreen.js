@@ -71,7 +71,7 @@ export const RegisterScreen = ({ navigation }) => {
             <ImageBackground
                 resizeMode="cover"
                 style={{ flex: 1, width: "100%", height: "100%", position: "relative" }}
-                source={require("../../../assets/image_4.png")}
+                source={require("../../../assets/regi_img.png")}
             >
                 <View
                     style={{
