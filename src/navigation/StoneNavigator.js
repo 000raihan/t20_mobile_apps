@@ -34,6 +34,7 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/colors";
 import { PreviousMatchScreen } from "../screens/PreviousMatchScreen/PreviousMatchScreen";
 import { NextMatchScreen } from "../screens/NextMatchScreen/NextMatchScreen";
+import { ViewSelectedTeamScreen } from "../screens/ViewMyTeamScreen/ViewSelectedTeamScreen";
 
 const icons = {
   ic_home: require(`../../assets/Images/ic_home.png`),
@@ -53,23 +54,20 @@ export const HomeStackScreen = () => (
     }}
   >
     <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+    {/* <HomeStack.Screen name="LoginScreen" component={LoginStackScreen} /> */}
 
-    <HomeStack.Screen name="LoginScreen" component={LoginStackScreen} />
+    {/* <HomeStack.Screen
+      name="CreateTeamStackScreen"
+      component={CreateTeamStackScreen}
+    /> */}
     <HomeStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
     <HomeStack.Screen name="EditTeamScreen" component={EditMyTeamScreen} />
+    <AllTeamsStack.Screen name="AllTeamScreen" component={AllTeamsScreen}/>
+    <AllTeamsStack.Screen name="ViewPlayersScreen" component={ViewPlayersScreen}/>
 
-    <HomeStack.Screen
-      name="CreateTeamScreen"
-      component={CreateTeamStackScreen}
-    />
-    <HomeStack.Screen name="AllTeamsScreen" component={AllTeamsScreen} />
     <HomeStack.Screen name="PreviousMatchScreen" component={PreviousMatchScreen} />
     <HomeStack.Screen name="NextMatchScreen" component={NextMatchScreen} />
-    
-    <AllTeamsStack.Screen
-      name="ViewPlayersScreen"
-      component={ViewPlayersScreen}
-    />
+
   </HomeStack.Navigator>
 );
 
@@ -83,9 +81,11 @@ export const LoginStackScreen = () => (
   >
     <LoginStack.Screen name="LoginScreen" component={LoginScreen} />
     <LoginStack.Screen name="RegisterScreen" component={RegisterScreen} />
-    <LoginStack.Screen name="HomeScreen" component={HomeStackScreen} />
+    <LoginStack.Screen name="BottomTabScreen" component={BottomTabScreen} />
   </LoginStack.Navigator>
 );
+
+// -------------------------------
 
 const CreateTeamStack = createStackNavigator();
 export const CreateTeamStackScreen = () => (
@@ -101,15 +101,17 @@ export const CreateTeamStackScreen = () => (
     />
     <CreateTeamStack.Screen
       name="AllTeamsScreen"
-      component={AllTeamsStackScreen}
+      component={AllTeamStackScreen}
     />
-      <CreateTeamStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
-      <CreateTeamStack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+      <CreateTeamStack.Screen name="MyTeamScreen" component={ViewSelectedTeamScreen} />
+      <CreateTeamStack.Screen name="BottomTabScreen" component={BottomTabScreen} />
   </CreateTeamStack.Navigator>
 );
 
+// -------------------------------
+
 const AllTeamsStack = createStackNavigator();
-export const AllTeamsStackScreen = () => (
+export const AllTeamStackScreen = () => (
   <AllTeamsStack.Navigator
     screenOptions={{
       headerShown: false,
@@ -121,76 +123,61 @@ export const AllTeamsStackScreen = () => (
       name="ViewPlayersScreen"
       component={ViewPlayersScreen}
     />
+    
   </AllTeamsStack.Navigator>
 );
 
-const Drawer = createDrawerNavigator();
-export const DrawerNavigator = () => {
-  // const [playerList, setPlayerList] = useState([]);
-  // const dispatch = useDispatch();
-  // const {allPlayers} = useSelector(state => state.allPlayers)
+// -------------------------------
 
-  // useEffect( ()=>{
-  //   (async() => {
-  //     const userDetailsString = await SecureStore.getItemAsync("userDetails");
+// const Drawer = createDrawerNavigator();
+// export const DrawerNavigator = () => {
 
-  //       const userDetails = JSON.parse(userDetailsString);
-  //       dispatch(setAllPlayers(userDetails.id));
+//   const drawers = [
+//     {
+//       name: "BottomScreen",
+//       screen: BottomTabScreen ,
+//     }
+//   ];
+//   return (
+//     <Drawer.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//         cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+//       }}
+//       drawerContent={(props) => <CustomDrawer {...props} />}
+//       drawerContentOptions={{
+//         activeTintColor: Colors.grey,
+//         itemStyle: { marginVertical: 3 },
+//       }}
+//     >
+//       {drawers.map(({ name, icon, label, screen }) => (
+//         <Drawer.Screen
+//           key={name}
+//           name={name}
+//           component={screen}
+//           options={() => ({
+//             title: ({ focused }) => (
+//               <CustomText
+//                 style={{
+//                   fontSize: 14,
+//                   color: focused ? Colors.lighter_green : Colors.white,
+//                   fontFamily: "Roboto-Medium",
+//                 }}
+//               >
+//                 {label}
+//               </CustomText>
+//             ),
+//             drawerIcon: ({ focused }) => (
+//               <Image style={{ width: 23, height: 23 }} source={icon} />
+//             ),
+//           })}
+//         />
+//       ))}
+//     </Drawer.Navigator>
+//   );
+// };
 
-  //   }) ();
-
-  // },[allPlayers]);
-
-  const drawers = [
-    {
-      name: "BottomScreen",
-      screen: BottomTabScreen ,
-    },
-    {
-      name: "HomeScreen",
-      screen: HomeStackScreen,
-      label: "HomeScreen",
-      icon: icons.ic_notification,
-    },
-  ];
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-      }}
-      drawerContent={(props) => <CustomDrawer {...props} />}
-      drawerContentOptions={{
-        activeTintColor: Colors.grey,
-        itemStyle: { marginVertical: 3 },
-      }}
-    >
-      {drawers.map(({ name, icon, label, screen }) => (
-        <Drawer.Screen
-          key={name}
-          name={name}
-          component={screen}
-          options={() => ({
-            title: ({ focused }) => (
-              <CustomText
-                style={{
-                  fontSize: 14,
-                  color: focused ? Colors.lighter_green : Colors.white,
-                  fontFamily: "Roboto-Medium",
-                }}
-              >
-                {label}
-              </CustomText>
-            ),
-            drawerIcon: ({ focused }) => (
-              <Image style={{ width: 23, height: 23 }} source={icon} />
-            ),
-          })}
-        />
-      ))}
-    </Drawer.Navigator>
-  );
-};
+// -------------------------------
 
 const Tab = createBottomTabNavigator();
 export const BottomTabScreen = () => {

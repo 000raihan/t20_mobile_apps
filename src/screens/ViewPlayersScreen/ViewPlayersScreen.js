@@ -228,7 +228,7 @@ export const ViewPlayersScreen = (props) => {
                     value: JSON.stringify([])
                   });
                   setConfetti(false);
-                  props.navigation.navigate("HomeScreen");
+                  props.navigation.navigate("BottomTabScreen");
                   
                 }else{
                   await save_select_list(data);
@@ -237,7 +237,7 @@ export const ViewPlayersScreen = (props) => {
                     value: JSON.stringify([])
                   });
                   setConfetti(false);
-                  props.navigation.navigate("DrawerNavigator", {result: userDetails});
+                  props.navigation.navigate("BottomTabScreen", {result: userDetails});
                 }
               }},
           ]);

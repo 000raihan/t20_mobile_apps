@@ -59,7 +59,7 @@ export const HomeScreen = (props) => {
       // console.log(result.result, "===========")
           if(result.success){
             if(result.result.length === 0){
-              props.navigation.navigate("CreateTeamScreen");
+              props.navigation.navigate("CreateTeamStackScreen");
 
             }else{
               await Storage.setItem({

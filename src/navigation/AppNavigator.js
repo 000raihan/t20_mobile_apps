@@ -6,62 +6,63 @@ import * as SecureStore from "expo-secure-store";
 import {
   DrawerNavigator,
   LoginStackScreen,
-    CreateTeamStackScreen
+  CreateTeamStackScreen,
+  BottomTabScreen
 } from "./StoneNavigator";
-import {CallApi} from "../screens/HomeScreen/api/Api";
-import {Storage} from "expo-storage";
-import {Alert} from "react-native";
+import { CallApi } from "../screens/HomeScreen/api/Api";
+import { Storage } from "expo-storage";
+import { Alert } from "react-native";
 export const AppNavigator = () => {
 
   const [user, setUser] = useState(false);
   const [isTeam, setIsTeam] = useState(true);
 
-  useEffect( ()=>{
-    (async() => {
+  useEffect(() => {
+    (async () => {
       const userDetailsString = await SecureStore.getItemAsync("userDetails");
-      if(userDetailsString === null){
+      if (userDetailsString === null) {
         // props.navigation.navigate("LoginScreen");
         setUser(false);
-      }else{
+      } else {
         // const userDetails = JSON.parse(userDetailsString);
         // await checkPlayerList(userDetails.id);
         setUser(true);
         const userDetails = JSON.parse(userDetailsString);
         await checkPlayerList(userDetails.id);
       }
-    }) ();
-  },[]);
+    })();
+  }, []);
 
   const checkPlayerList = async (user_id) => {
-    CallApi.player_list(user_id).then(async (result)  => {
-          if(result.success){
-            if(result.result.length === 0){
-              setIsTeam(false);
-            }else{
-              setIsTeam(true);
-            }
-          }else{
-            console.log("error", result.error);
-          }
-        },(error) => {
-          console.log("=====",error)
+    CallApi.player_list(user_id).then(async (result) => {
+      if (result.success) {
+        if (result.result.length === 0) {
+          setIsTeam(false);
+        } else {
+          setIsTeam(true);
         }
+      } else {
+        console.log("error", result.error);
+      }
+    }, (error) => {
+      console.log("=====", error)
+    }
     );
   }
 
   return (
-      <NavigationContainer ref={navigationRef}>
-        <Host>
-          {
-            user ?
-                isTeam ?
-                  <DrawerNavigator />
-                    : <CreateTeamStackScreen/>
-                :
-                <LoginStackScreen/>
-          }
-        </Host>
-      </NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
+      <Host>
+        {
+          user ?
+            isTeam ?
+              <BottomTabScreen />
+              : <CreateTeamStackScreen />
+            :
+            <LoginStackScreen />
+        }
+      </Host>
+    </NavigationContainer>
   );
 
 };

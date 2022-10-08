@@ -77,7 +77,7 @@ export const EditMyTeamScreen = (props) => {
 
   const save_select_list = async (data) => {
     console.log("DATA IS : ----------",data)
-    CallApi.update_player_select(data).then(async (result)  => {
+    CallApi.delete_player_select(data).then(async (result)  => {
           if(result.success){
             // console.log(result.result);
           }else{
@@ -124,7 +124,7 @@ export const EditMyTeamScreen = (props) => {
   // console.log("NEW ARRAY IS :-- ", selectedPlayres);
 
   const addPress = () => {
-    navigation.navigate("AllTeamsScreen", {isEdit: true});
+    navigation.navigate("AllTeamScreen", {isEdit: true});
   };
 
 
