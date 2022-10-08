@@ -62,13 +62,11 @@ export const NextMatchScreen = (props) => {
 
         </View>
       <View style={styles.container}>
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
+      <WebView
+            style={{margin: 5}}
+            originWhitelist={['*']}
+            source={{ uri: "http://116.68.200.97:6044/mobile_view/next_match" }}
+        />
       </View>
     </Provider>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Portal, Provider } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
@@ -13,6 +13,8 @@ import {
   ScrollView,
   useWindowDimensions, Alert,
 } from "react-native";
+import ConfettiCannon from 'react-native-confetti-cannon';
+import Confetti from 'react-native-confetti';
 import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -32,6 +34,7 @@ export const ViewPlayersScreen = (props) => {
   const [userID,setUserID] = useState(null);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
   const [isSelect, setIsSelected] = useState(false);
+  const [showConfetti, setConfetti] = useState(false);
 
 
 
@@ -174,6 +177,7 @@ export const ViewPlayersScreen = (props) => {
   }
 
   const selectPlayer = async (details,value) => {
+
     // console.log(details)
     if(selectedPlayers.length < 11 || !value){
       const item = JSON.parse(
@@ -211,7 +215,8 @@ export const ViewPlayersScreen = (props) => {
 
       if(selectedPlayers.length >= 11){
         if(checkPlayerLogic(selectedPlayers)){
-          Alert.alert('Congratulations', "You select 11 players!", [
+          setConfetti(true);
+          Alert.alert('Congratulations', "You have selected your best 11!", [
             { text: 'OK', onPress: async () => {
                 const userDetailsString = await SecureStore.getItemAsync("userDetails");
                 const userDetails = JSON.parse(userDetailsString);
@@ -222,13 +227,16 @@ export const ViewPlayersScreen = (props) => {
                     key: "select_player_list",
                     value: JSON.stringify([])
                   });
+                  setConfetti(false);
                   props.navigation.navigate("HomeScreen");
+                  
                 }else{
                   await save_select_list(data);
                   await Storage.setItem({
                     key: "select_player_list",
                     value: JSON.stringify([])
                   });
+                  setConfetti(false);
                   props.navigation.navigate("DrawerNavigator", {result: userDetails});
                 }
               }},
@@ -242,7 +250,9 @@ export const ViewPlayersScreen = (props) => {
 
     }else{
       Alert.alert('Validation', "You are not select over 11 players.", [
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        { text: 'OK', onPress: () => {
+          console.log('OK Pressed')
+        }},
       ]);
     }
   };
@@ -283,10 +293,26 @@ export const ViewPlayersScreen = (props) => {
     );
   }
 
+  if(showConfetti){
+    return (
+      <View style={styles.c_container}>
+        <ConfettiCannon count={200} fallSpeed={5000} origin={{ x: -10, y: 0 }} fadeOut={true} />
+    </View>
+    )
+
+  }
+
 
   return (
     <Provider>
       <Header navigation={props.navigation}  title={props.route.params.country_name} />
+    {/* {showConfetti && <View style={styles.c_container}>
+    <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} fadeOut={showConfetti} />
+    </View>}   */}
+      
+
+      
+      {/* {confetti &&  <Confetti ref={(node) => node}/>} */}
       { playerList.length !== 0 ?
           <View style={styles.fullPage}>
             <View style={styles.container}>
@@ -502,6 +528,13 @@ export const ViewPlayersScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
+  c_container: {
+    flex:1 ,
+    height:"100%",
+    width: "100%",
+    alignSelf: "center",
+    backgroundColor:colors.primary
+  },
   fullPage: {
     backgroundColor: colors.primary,
     width: "100%",
@@ -512,6 +545,7 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
   },
+
   HeadStyle: {},
   TableText: {},
   scrollStyle: {
