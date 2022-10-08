@@ -48,15 +48,13 @@ export const StandingScreen = (props) => {
   };
 
     return (
-        <Provider>
-      <Header navigation={props.navigation} />
-      <View style={{backgroundColor:colors.primary, justifyContent:"center", alignItems:"center", padding:10}}>
-          <Text style={{color:colors.red, fontWeight:"bold",fontSize:16}}>STANDINGS</Text>
-
-        </View>
-      <View style={styles.container}>
-        <TableView/>
-      </View>
+      <Provider>
+        <Header navigation={props.navigation} />
+        <WebView
+            style={{margin: 5}}
+            originWhitelist={['*']}
+            source={{ uri: "http://116.68.200.97:6044/mobile_view/standing" }}
+        />
     </Provider>
     );
 }

@@ -1,7 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f9d6040-ca1a-48ae-8826-a72ef2236e7a" name="Default Changelist" comment="" />
+    <list default="true" id="5f9d6040-ca1a-48ae-8826-a72ef2236e7a" name="Default Changelist" comment="tareq BottomTab problem solve">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._assets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._constants" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._src" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/._yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._Fonts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._Images" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._adaptive-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._add_player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._afg_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._aus_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._bd-flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._brand_gif.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._eng_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._exium_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._image_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._image_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._image_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._image_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._img_circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._ind_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._newz_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._pak_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._point_bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._point_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._previous.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._sou_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._sr-flag.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/._t20_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-BoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-LightItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-MediumItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Fonts/._Roboto-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._Zalo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._banner1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._banner3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._banner4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._banner5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._banner6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._bg1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._bg2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._bg3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._creditcards.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._defaultprofile.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._defaultprofile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._faceid.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._flower3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_baby_mom.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_call.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_cart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_devices.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_diabetic_care.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_eye_ear_care.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_facebook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_log_out.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_notification.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_order_history.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_personal_care.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_pill_reminder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_prescription.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_privacy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_profile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_rate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_request.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_return.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_sexual_wellness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_skin_care.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_tc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_vitamins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._ic_women_care.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._img_call_for_order.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._img_doctors_call.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._img_drop_message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._img_home_nursing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._img_lab_test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._img_prescription_upload.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._logo1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._logoNoText.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._logoTextWhite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._slide1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._slide2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._slide3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._social1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._social2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/Images/._social3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/assets/pitch.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/constants/._colors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/constants/._default-styles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/constants/._url.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/._components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/._navigation" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/._screens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/._store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/._utils" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._BodyText.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._Card.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._EditMyTeam" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._Fixtures" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._Home" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._Input.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._LeaderBoard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._MainButton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._MyTeam" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._NumberContainer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._Standings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._TitleText.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._UI" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/._ViewPlayers" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/EditMyTeam/._AddNewPlayer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/EditMyTeam/._EditPlayerView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/Fixtures/._FixtureView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/Home/._LiveSection.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/Home/._MatchButtons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/LeaderBoard/._RankTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/LeaderBoard/._TableRow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/MyTeam/._ViewTeamPlayer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/Standings/._StandingTableRow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/Standings/._TableView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/UI/._CustomText.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/components/ViewPlayers/._PlayerItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/navigation/._AppNavigator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/navigation/._CustomDrawer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/navigation/._RootNavigation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/navigation/._StoneNavigator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/navigation/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._AllTeamsScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._CreateTeamScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._EditMyTeamScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._FixturesScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._HomeScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._LeaderBoardScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._LoginScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._NotificationScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._RegisterScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._StandingScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._ViewMyTeamScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/._ViewPlayersScreen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/AllTeamsScreen/._AllTeamsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/AllTeamsScreen/._api" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/AllTeamsScreen/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/AllTeamsScreen/api/._Api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/CreateTeamScreen/._CreateTeamScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/CreateTeamScreen/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/EditMyTeamScreen/._EditMyTeamScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/EditMyTeamScreen/._components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/EditMyTeamScreen/components/._Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/FixturesScreen/._FixturesScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/HomeScreen/._HomeScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/HomeScreen/._api" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/HomeScreen/._components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/HomeScreen/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/HomeScreen/api/._Api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/HomeScreen/components/._Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/LeaderBoardScreen/._LeaderBoardScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/LoginScreen/._LoginScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/LoginScreen/._api" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/LoginScreen/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/LoginScreen/api/._Api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/NotificationScreen/._NotificationScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/NotificationScreen/._components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/NotificationScreen/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/NotificationScreen/components/._Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/RegisterScreen/._RegisterScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/RegisterScreen/._api" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/RegisterScreen/._index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/RegisterScreen/api/._Api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/StandingScreen/._StandingScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewMyTeamScreen/._ViewMyTeamScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewMyTeamScreen/._components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewMyTeamScreen/components/._Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/._ViewPlayersScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/._api" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/._components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/api/._Api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/components/._AllRounder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/components/._BatsMan.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/components/._Bowler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/components/._Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/screens/ViewPlayersScreen/components/._WicketKepper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/store/._features" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/store/._store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/store/features/._allPlayerSlice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/store/features/._teamSlice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/store/features/._userSlice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/utils/._BaseUrl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/utils/._Colors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__MACOSX/src/utils/._Tools.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/StoneNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/StoneNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LeaderBoardScreen/LeaderBoardScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LeaderBoardScreen/LeaderBoardScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/StandingScreen/StandingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/StandingScreen/StandingScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,17 +219,33 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2FQXS2yxrj2Ppo7OykdIvBGCM6k" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -34,10 +257,55 @@
       <option name="presentableId" value="Default" />
       <updated>1664425278081</updated>
       <workItem from="1664425279469" duration="8075000" />
+      <workItem from="1664519998206" duration="1216000" />
+      <workItem from="1664544098483" duration="326000" />
+      <workItem from="1664691715079" duration="3219000" />
+      <workItem from="1664770790425" duration="1677000" />
+      <workItem from="1664851232685" duration="18051000" />
+      <workItem from="1664886120860" duration="437000" />
+      <workItem from="1665195659785" duration="2502000" />
     </task>
+    <task id="LOCAL-00001" summary="tareq">
+      <created>1664860878758</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1664860878758</updated>
+    </task>
+    <task id="LOCAL-00002" summary="tareq BottomTab problem solve">
+      <created>1664864230852</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664864230852</updated>
+    </task>
+    <task id="LOCAL-00003" summary="tareq BottomTab problem solve">
+      <created>1664886138658</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1664886138658</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tareq" />
+    <MESSAGE value="tareq BottomTab problem solve" />
+    <option name="LAST_COMMIT_MESSAGE" value="tareq BottomTab problem solve" />
   </component>
 </project>

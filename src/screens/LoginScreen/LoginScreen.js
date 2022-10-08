@@ -24,7 +24,7 @@ export const LoginScreen = ({ navigation }) => {
                 if(result.success){
                     console.log(result.result)
                     await save("userDetails", JSON.stringify(result.result));
-                    navigation.navigate("DrawerNavigator",{result: result.result});
+                    navigation.navigate("HomeScreen",{result: result.result});
                 }else{
                     Alert.alert('Error', result.message, [
                         { text: 'OK', onPress: () => console.log('OK Pressed') },
@@ -56,7 +56,7 @@ export const LoginScreen = ({ navigation }) => {
     <Provider>
       <ImageBackground
         resizeMode="cover"
-      
+
         style={{ flex: 1, width: "100%", height: "100%", position: "relative" }}
         source={require("../../../assets/login_img.png")}
       >

@@ -57,19 +57,11 @@ export const FixturesScreen = (props) => {
   return (
     <Provider>
       <Header navigation={props.navigation} />
-      <View style={{backgroundColor:colors.primary, justifyContent:"center", alignItems:"center", padding:10}}>
-          <Text style={{color:colors.red, fontWeight:"bold",fontSize:16}}>MEN'S T20WC FIXTURES</Text>
-
-        </View>
-      <View style={styles.container}>
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-          <FixtureView />
-      </View>
+        <WebView
+            style={{margin: 5}}
+            originWhitelist={['*']}
+            source={{ uri: "http://116.68.200.97:6044/mobile_view/fixtures" }}
+        />
     </Provider>
   );
 };

@@ -57,23 +57,11 @@ export const LeaderBoardScreen = (props) => {
   return (
     <Provider>
       <Header navigation={props.navigation} />
-      <View
-        style={{
-          backgroundColor: colors.primary,
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 10,
-        }}
-      >
-        <Text style={{ color: colors.red, fontWeight: "bold", fontSize: 16 }}>
-          LEADER BOARD
-        </Text>
-      </View>
-      <View style={styles.container}>
-       
-        <RankTable/>
-      
-      </View>
+        <WebView
+            style={{margin: 5}}
+            originWhitelist={['*']}
+            source={{ uri: "http://116.68.200.97:6044/mobile_view/leader_board" }}
+        />
     </Provider>
   );
 };

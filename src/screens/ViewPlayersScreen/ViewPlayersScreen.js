@@ -135,28 +135,36 @@ export const ViewPlayersScreen = (props) => {
     const bowler = data.filter((r) => {return r.role === "Bowler"}).length;
     const allRounder = data.filter((r) => {return r.role === "All-Rounder"}).length;
 
-    if(batsman < 3){
-      Alert.alert('Validation', "Minimum 3 Batsman select", [
+    if(batsman == 0){
+      Alert.alert('Validation', "Minimum 1 Batsman select", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }else if(bowler < 3){
-      Alert.alert('Validation', "Minimum 3 Bowler select", [
+    }else if(bowler == 0){
+      Alert.alert('Validation', "Minimum 1 Bowler select", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }else if(wicketKeeper < 1){
+    }else if(wicketKeeper == 0){
       Alert.alert('Validation', "Minimum 1 Wicket Keeper select", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }else if(wicketKeeper > 1){
-      Alert.alert('Validation', "Wicket Keeper Not Over 1", [
+    }else if(allRounder == 0){
+      Alert.alert('Validation', "Minimum 1 All Rounder select", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }if(allRounder < 2){
-      Alert.alert('Validation', "Minimum 2 All-Rounder select", [
+    }else if(batsman > 4){
+      Alert.alert('Validation', "Maximum 4 Batsman select", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }else if(allRounder > 2){
-      Alert.alert('Validation', "All-Rounder Not Over 2", [
+    }else if(bowler > 4){
+      Alert.alert('Validation', "Maximum 4 Bowler select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(wicketKeeper > 3){
+      Alert.alert('Validation', "Maximum 3 Wicket Keeper select", [
+        { text: 'OK', onPress: async () => console.log("Press")},
+      ]);
+    }else if(allRounder > 4){
+      Alert.alert('Validation', "Maximum 2 All-Rounder select", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else{
