@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image, Platform } from "react-native";
+import * as SecureStore from "expo-secure-store";
 import {
   createStackNavigator,
   CardStyleInterpolators,
@@ -10,7 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CustomDrawer from "./CustomDrawer";
 import Colors from "../utils/Colors";
 import CustomText from "../components/UI/CustomText";
-
+import { CallApi } from "../screens/HomeScreen/api/Api";
 import { HomeScreen } from "../screens/HomeScreen";
 import { NotificationScreen } from "../screens/NotificationScreen";
 import { LoginScreen } from "../screens/LoginScreen";
@@ -64,14 +65,16 @@ export const HomeStackScreen = () => (
 
     <HomeStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
     <HomeStack.Screen name="EditTeamScreen" component={EditMyTeamScreen} />
-    <AllTeamsStack.Screen name="AllTeamScreen" component={AllTeamsScreen}/>
-    <AllTeamsStack.Screen name="ViewPlayersScreen" component={ViewPlayersScreen}/>
+    <AllTeamsStack.Screen name="AllTeamScreen" component={AllTeamsScreen} />
+    <AllTeamsStack.Screen name="ViewPlayersScreen" component={ViewPlayersScreen} />
 
     <HomeStack.Screen name="PreviousMatchScreen" component={PreviousMatchScreen} />
     <HomeStack.Screen name="NextMatchScreen" component={NextMatchScreen} />
 
   </HomeStack.Navigator>
 );
+
+// -----------------------------------------------------------------------------------
 
 const LoginStack = createStackNavigator();
 export const LoginStackScreen = () => (
@@ -83,7 +86,7 @@ export const LoginStackScreen = () => (
   >
     <LoginStack.Screen name="LoginScreen" component={LoginScreen} />
     <LoginStack.Screen name="RegisterScreen" component={RegisterScreen} />
-    <LoginStack.Screen name="BottomTabScreen" component={BottomTabScreen} />
+    <LoginStack.Screen name="MainNavigator" component={MainNavigatorScreen} />
   </LoginStack.Navigator>
 );
 
@@ -105,8 +108,8 @@ export const CreateTeamStackScreen = () => (
       name="AllTeamsScreen"
       component={AllTeamStackScreen}
     />
-      <CreateTeamStack.Screen name="MyTeamScreen" component={ViewSelectedTeamScreen} />
-      <CreateTeamStack.Screen name="BottomTabScreen" component={BottomTabScreen} />
+    <CreateTeamStack.Screen name="MyTeamScreen" component={ViewSelectedTeamScreen} />
+    <CreateTeamStack.Screen name="BottomTabScreen" component={BottomTabScreen} />
   </CreateTeamStack.Navigator>
 );
 
@@ -125,7 +128,7 @@ export const AllTeamStackScreen = () => (
       name="ViewPlayersScreen"
       component={ViewPlayersScreen}
     />
-    
+
   </AllTeamsStack.Navigator>
 );
 
@@ -188,7 +191,7 @@ export const BottomTabScreen = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarShown:false,
+        tabBarShown: false,
         tabBarStyle: { backgroundColor: "#00B1E5" },
         tabBarActiveTintColor: "white",
         tabBarActiveBackgroundColor: "#0093DF",
@@ -257,4 +260,68 @@ export const BottomTabScreen = () => {
       />
     </Tab.Navigator>
   );
+};
+
+
+
+const MainNavigator = createStackNavigator();
+export const MainNavigatorScreen = () => {
+  const [user, setUser] = useState(false);
+  const [isTeam, setIsTeam] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const userDetailsString = await SecureStore.getItemAsync("userDetails");
+      if (userDetailsString === null) {
+        // props.navigation.navigate("LoginScreen");
+        setUser(false);
+      } else {
+        // const userDetails = JSON.parse(userDetailsString);
+        // await checkPlayerList(userDetails.id);
+        setUser(true);
+        const userDetails = JSON.parse(userDetailsString);
+        await checkPlayerList(userDetails.id);
+      }
+    })();
+  }, []);
+
+
+  const checkPlayerList = async (user_id) => {
+    CallApi.player_list(user_id).then(async (result) => {
+      console.log("IAM CALLED FORM ETS")
+      if (result.success) {
+        if (result.result.length === 0) {
+          setIsTeam(false);
+
+        } else {
+          setIsTeam(true);
+        }
+      } else {
+        console.log("error", result.error);
+
+      }
+    }, (error) => {
+      console.log("=====", error)
+    }
+    );
+  }
+
+
+  console.log("IS TEAM:", isTeam)
+
+
+  return (
+    <MainNavigator.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+      }}
+    >
+      {isTeam ? <AllTeamsStack.Screen name="BottomScreen" component={BottomTabScreen} /> : <AllTeamsStack.Screen name="CreateTeamStackScreen" component={CreateTeamStackScreen} />}
+
+
+    </MainNavigator.Navigator>
+  )
+
+
 };

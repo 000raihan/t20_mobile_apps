@@ -25,7 +25,7 @@ export const LoginScreen = ({ navigation }) => {
                     console.log(result.result)
                     await save("userDetails", JSON.stringify(result.result));
                     // props.navigation.navigate("DrawerNavigator", {result: userDetails});
-                    navigation.navigate("BottomTabScreen",{result: result.result});
+                    navigation.navigate("MainNavigator",{result: result.result});
                 }else{
                     Alert.alert('Error', result.message, [
                         { text: 'OK', onPress: () => console.log('OK Pressed') },
