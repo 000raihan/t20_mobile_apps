@@ -17,21 +17,7 @@ export const AppNavigator = () => {
   const [user, setUser] = useState(false);
   const [isTeam, setIsTeam] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      const userDetailsString = await SecureStore.getItemAsync("userDetails");
-      if (userDetailsString === null) {
-        // props.navigation.navigate("LoginScreen");
-        setUser(false);
-      } else {
-        // const userDetails = JSON.parse(userDetailsString);
-        // await checkPlayerList(userDetails.id);
-        setUser(true);
-        const userDetails = JSON.parse(userDetailsString);
-        await checkPlayerList(userDetails.id);
-      }
-    })();
-  }, [isTeam]);
+
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result) => {
@@ -50,11 +36,27 @@ export const AppNavigator = () => {
     );
   }
 
+  useEffect(() => {
+    (async () => {
+      const userDetailsString = await SecureStore.getItemAsync("userDetails");
+      if (userDetailsString === null) {
+        // props.navigation.navigate("LoginScreen");
+        setUser(false);
+      } else {
+        // const userDetails = JSON.parse(userDetailsString);
+        // await checkPlayerList(userDetails.id);
+        setUser(true);
+        const userDetails = JSON.parse(userDetailsString);
+        await checkPlayerList(userDetails.id);
+      }
+    })();
+  }, []);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Host>
         {
-          user ? isTeam ?<BottomTabScreen />: <CreateTeamStackScreen />: <LoginStackScreen />
+          user ? isTeam ? <BottomTabScreen />: <CreateTeamStackScreen />: <LoginStackScreen />
         }
       </Host>
     </NavigationContainer>
