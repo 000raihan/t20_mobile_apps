@@ -89,7 +89,7 @@ export const ViewPlayersScreen = (props) => {
   const getSelectPlayerList = async (country_id) => {
     CallApi.player_select_list(country_id).then(async (result)  => {
           if(result.success){
-            // console.log(result.result);
+            console.log("RESULT : ",result.result);
             let data = [];
             for(let i=0;i<result.result.length;i++){
               if(isEdit){
@@ -99,6 +99,7 @@ export const ViewPlayersScreen = (props) => {
                     team_name: result.result[i].team_name,
                     user_id: result.result[i].user_id,
                     player_code: result.result[i].player_code,
+                    role: result.result[i].role
                   };
                   data.push(d);
                 }
@@ -132,8 +133,9 @@ export const ViewPlayersScreen = (props) => {
 
 
   const checkPlayerLogic = (data) =>{
-    console.log(data);
+    // console.log(data);
     const batsman = data.filter((r) => {return r.role === "Batsman"}).length;
+    // console.log("BATSMAN : ", batsman);
     const wicketKeeper = data.filter((r) => {return r.role === "Wicket Keeper"}).length;
     const bowler = data.filter((r) => {return r.role === "Bowler"}).length;
     const allRounder = data.filter((r) => {return r.role === "All-Rounder"}).length;
@@ -214,8 +216,10 @@ export const ViewPlayersScreen = (props) => {
       // });
 
       if(selectedPlayers.length >= 11){
+        console.log("SELECTPLAYER : ", selectedPlayers)
         if(checkPlayerLogic(selectedPlayers)){
           setConfetti(true);
+          
           Alert.alert('Congratulations', "You have selected your best 11!", [
             { text: 'OK', onPress: async () => {
                 const userDetailsString = await SecureStore.getItemAsync("userDetails");
@@ -257,7 +261,7 @@ export const ViewPlayersScreen = (props) => {
     }
   };
 
-  console.log("selected players is : ",selectedPlayers)
+  // console.log("selected players is : ",selectedPlayers)
 
   const save_select_list = async (data) => {
     CallApi.update_player_select(data).then(async (result)  => {

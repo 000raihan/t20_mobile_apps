@@ -71,7 +71,7 @@ export const EditMyTeamScreen = (props) => {
 
 
 
-  // console.log("se is  --------------, ", selectedPlayres);
+  // console.log("SELECTED PLAYERS 00000  --------------, ", selectedPlayres);
 
   // useEffect(() => {}, [team]);
 
@@ -94,10 +94,29 @@ export const EditMyTeamScreen = (props) => {
   }
 
   const onDelete = async(code, name, id) => {
-    console.log("ID IS : ", id)
+    console.log("ID IS : ", id);
+
+    if(selectedPlayres.length === 16){
+      Alert.alert("Delete Player", "You can't delete & add player anymore. Alreay selected 16 players", [
+        {
+          text: "Cancel",
+          onPress: () => {
+            console.log("Cancel Pressed")
+          },
+          style: "cancel",
+        },
+        { text: "ok", onPress:async () => {
+          console.log("ok Pressed")
+          return null
+        }},
+      ]);
+      return null;
+    }
+
     if(selectedPlayres.length <2){
       return null
     }
+    
     Alert.alert("Delete Player", "Confirm you to delete this player?", [
       {
         text: "Cancel",
