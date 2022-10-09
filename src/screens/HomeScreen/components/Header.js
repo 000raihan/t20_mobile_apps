@@ -16,7 +16,7 @@ export const Header = ({navigation}) => {
             </View>
             <View style={{flex:1}}>
                 <Image
-                    source={require('../../../../assets/team_logo.png')}
+                    source={require('../../../../assets/icon.png')}
                     style={{
                         width: height < 668 ? 130 : 120,
                         resizeMode: 'contain',
@@ -35,7 +35,7 @@ export const Header = ({navigation}) => {
                     color={Colors.white}
                 />
             </TouchableOpacity>
-          
+
         </View>
     );
 }
