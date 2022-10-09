@@ -8,7 +8,7 @@ import {
   LoginStackScreen,
   CreateTeamStackScreen,
   BottomTabScreen,
-  MainNavigator
+  MainNavigatorScreen
 } from "./StoneNavigator";
 import { CallApi } from "../screens/HomeScreen/api/Api";
 import { Storage } from "expo-storage";
@@ -48,7 +48,7 @@ export const AppNavigator = () => {
         // await checkPlayerList(userDetails.id);
         setUser(true);
         const userDetails = JSON.parse(userDetailsString);
-        await checkPlayerList(userDetails.id);
+        // await checkPlayerList(userDetails.id);
       }
     })();
   }, []);
@@ -60,7 +60,7 @@ export const AppNavigator = () => {
     <NavigationContainer ref={navigationRef}>
       <Host>
         {
-          user ? <MainNavigator/> : <LoginStackScreen />
+          user ? <MainNavigatorScreen/> : <LoginStackScreen />
         }
       </Host>
     </NavigationContainer>

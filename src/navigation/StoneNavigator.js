@@ -307,7 +307,7 @@ export const MainNavigatorScreen = () => {
   }
 
 
-  console.log("IS TEAM:", isTeam)
+  // console.log("IS TEAM:", isTeam)
 
 
   return (
@@ -317,7 +317,8 @@ export const MainNavigatorScreen = () => {
         cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
       }}
     >
-      {isTeam ? <AllTeamsStack.Screen name="BottomScreen" component={BottomTabScreen} /> : <AllTeamsStack.Screen name="CreateTeamStackScreen" component={CreateTeamStackScreen} />}
+      {/* <AllTeamsStack.Screen name="MainNavigator" component={BottomTabScreenn} /> */}
+      <AllTeamsStack.Screen name="MainNavigator" component={isTeam ? BottomTabScreen : CreateTeamStackScreen} /> 
 
 
     </MainNavigator.Navigator>
