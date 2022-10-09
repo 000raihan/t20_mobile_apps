@@ -53,13 +53,15 @@ export const HomeStackScreen = () => (
       cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
     }}
   >
-    <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-    {/* <HomeStack.Screen name="LoginScreen" component={LoginStackScreen} /> */}
-
     {/* <HomeStack.Screen
       name="CreateTeamStackScreen"
       component={CreateTeamStackScreen}
     /> */}
+
+    <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+    {/* <HomeStack.Screen name="LoginScreen" component={LoginStackScreen} /> */}
+
+
     <HomeStack.Screen name="MyTeamScreen" component={ViewMyTeamScreen} />
     <HomeStack.Screen name="EditTeamScreen" component={EditMyTeamScreen} />
     <AllTeamsStack.Screen name="AllTeamScreen" component={AllTeamsScreen}/>

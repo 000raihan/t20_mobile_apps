@@ -31,7 +31,7 @@ export const AppNavigator = () => {
         await checkPlayerList(userDetails.id);
       }
     })();
-  }, []);
+  }, [isTeam]);
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result) => {
@@ -54,12 +54,7 @@ export const AppNavigator = () => {
     <NavigationContainer ref={navigationRef}>
       <Host>
         {
-          user ?
-            isTeam ?
-              <BottomTabScreen />
-              : <CreateTeamStackScreen />
-            :
-            <LoginStackScreen />
+          user ? isTeam ?<BottomTabScreen />: <CreateTeamStackScreen />: <LoginStackScreen />
         }
       </Host>
     </NavigationContainer>

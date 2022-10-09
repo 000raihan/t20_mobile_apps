@@ -25,85 +25,15 @@ import { useIsFocused } from "@react-navigation/native";
 import {Storage} from "expo-storage";
 
 export const ViewSelectedTeamScreen = (props) => {
-  const {isEdit} = props.route.params === undefined ? false : props.route.params;
+  const {isEdit, selectedPlayers:selectedPlayres} = props.route.params === undefined ? false : props.route.params;
   const { navigation } = props;
   const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);
-  const [selectedPlayres, setSelectedPlayers] = useState(null);
+  // const [selectedPlayres, setSelectedPlayers] = useState(null);
   const [totalPoint, setTotalPoint] = useState(null);
 
+  // console.log("SELECTED PLAYER IS:", selectedPlayres)
 
-  const getSelectPlayerList = async (country_id) => {
-    CallApi.player_select_list(country_id).then(
-      async (result) => {
-        if (result.success) {
-          // console.log(result.result);
-          let data = [];
-          for (let i = 0; i < result.result.length; i++) {
-            const d = {
-              team_name: result.result[i].team_name,
-              user_id: result.result[i].user_id,
-              player_code: result.result[i].player_code,
-              player_name: result.result[i].player_name,
-              player_image: result.result[i].player_image,
-              role: result.result[i].role,
-              point: result.result[i].point,
-              is_delete: result.result[i].is_delete,
-            };
-            data.push(d);
-          }
-          setSelectedPlayers(data);
-          setTotalPoint(result.total_point[0].point)
-        } else {
-          Alert.alert("Error", result.message, [
-            { text: "OK", onPress: () => console.log("OK Pressed") },
-          ]);
-          // console.log("error", result.error);
-        }
-      },
-      (error) => {
-        console.log("=====", error);
-        alert("Invalid data.");
-      }
-    );
-  };
-
-
-  useEffect(() => {
-    if(isFocused){
-      (async () => {
-        const userDetailsString = await SecureStore.getItemAsync("userDetails");
-        const userDetails = JSON.parse(userDetailsString);
-        setUserID(userDetails.id);
-        // await getPlayerList(props.route.params.country_id);
-        if(isEdit){
-          await getSelectPlayerList(userDetails.id);
-        }else{
-          const items = JSON.parse(
-              await Storage.getItem({ key: 'select_player_list' })
-          );
-          let data = [];
-          for (let i = 0; i < items.length; i++) {
-            const d = {
-              team_name: items[i].team_name,
-              user_id: items[i].user_id,
-              player_code: items[i].player_code,
-              player_name: items[i].player_name,
-              player_image: items[i].player_image,
-              role: items[i].role,
-              point: 0,
-              is_delete: 0,
-            };
-            data.push(d);
-          }
-          setSelectedPlayers(data);
-          setTotalPoint(0);
-        }
-      })();
-    }
-
-  }, [props, isFocused]);
-  // console.log("selected players --------------, ", selectedPlayres);
 
   // useEffect(() => {}, [team]);
 
@@ -119,7 +49,7 @@ export const ViewSelectedTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>Batsman</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "Batsman" && r.is_delete === 0;
+                      return r.role === "Batsman"
                     })
                     .map((item) => (
                       <View
@@ -172,7 +102,7 @@ export const ViewSelectedTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>Bowler</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "Bowler" && r.is_delete === 0;
+                      return r.role === "Bowler"
                     })
                     .map((item) => (
                       <View
@@ -225,7 +155,7 @@ export const ViewSelectedTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>All-rounder</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "All-Rounder" && r.is_delete === 0;
+                      return r.role === "All-Rounder"
                     })
                     .map((item) => (
                       <View
@@ -278,7 +208,7 @@ export const ViewSelectedTeamScreen = (props) => {
                   <Text style={{ color: colors.red }}>Wicket keeper</Text>
                   {selectedPlayres
                     .filter((r) => {
-                      return r.role === "Wicket Keeper" && r.is_delete === 0;
+                      return r.role === "Wicket Keeper" 
                     })
                     .map((item) => (
                       <View

@@ -232,7 +232,7 @@ export const ViewPlayersScreen = (props) => {
                     value: JSON.stringify([])
                   });
                   setConfetti(false);
-                  props.navigation.navigate("BottomTabScreen");
+                  props.navigation.navigate("HomeScreen");
                   
                 }else{
                   await save_select_list(data);
@@ -502,7 +502,7 @@ export const ViewPlayersScreen = (props) => {
                         borderRadius: 2,
                       }}
                       activeOpacity={0.6}
-                      onPress={() => props.navigation.navigate("MyTeamScreen", {isEdit:true})}
+                      onPress={() => props.navigation.navigate("MyTeamScreen", {isEdit:true, selectedPlayers:selectedPlayers})}
                   >
                     <Text style={{ fontSize: 16, textAlign: "center" }}>
                       {`${selectedPlayers.length} Players Selected`}
