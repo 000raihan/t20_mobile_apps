@@ -35,7 +35,7 @@ export const Header = ({navigation}) => {
                     color={Colors.white}
                 />
             </TouchableOpacity>
-          
+
         </View>
     );
 }

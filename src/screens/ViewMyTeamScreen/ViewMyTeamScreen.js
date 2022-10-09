@@ -333,64 +333,7 @@ export const ViewMyTeamScreen = (props) => {
             )}
           </ScrollView>
 
-          {
-            isEdit ?
-                <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      marginTop: 10,
-                      justifyContent: "center",
-                    }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={{
-                          backgroundColor: colors.yellow,
-                          width: "90%",
-                          padding: 7,
-                          borderRadius: 2,
-                        }}
-                        activeOpacity={0.6}
-                        onPress={() => {
-                          navigation.navigate("EditTeamScreen", {isEdit: isEdit});
-                        }}
-                    >
-                      <Text
-                          style={{
-                            fontSize: 18,
-                            fontWeight: "bold",
-                            textAlign: "center",
-                          }}
-                      >
-                        Edit Team
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={{
-                          backgroundColor: colors.red,
-                          width: "90%",
-                          padding: 7,
-                          borderRadius: 2,
-                        }}
-                        activeOpacity={0.6}
-                    >
-                      <Text
-                          style={{
-                            fontSize: 18,
-                            fontWeight: "bold",
-                            textAlign: "center",
-                          }}
-                      >
-                        Total Point : {totalPoint}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                : null
-          }
+
 
         </View>
       </View>

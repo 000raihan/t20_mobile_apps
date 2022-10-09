@@ -33,7 +33,7 @@ export const Header = ({navigation}) => {
                 />
             </View>
            <View style={{flex:1}}>
-           
+
            </View>
         </View>
     );

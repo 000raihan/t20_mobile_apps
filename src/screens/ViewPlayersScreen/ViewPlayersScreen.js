@@ -216,10 +216,10 @@ export const ViewPlayersScreen = (props) => {
       // });
 
       if(selectedPlayers.length >= 11){
-        console.log("SELECTPLAYER : ", selectedPlayers)
+        // console.log("SELECTPLAYER : ", selectedPlayers)
         if(checkPlayerLogic(selectedPlayers)){
           setConfetti(true);
-          
+
           Alert.alert('Congratulations', "You have selected your best 11!", [
             { text: 'OK', onPress: async () => {
                 const userDetailsString = await SecureStore.getItemAsync("userDetails");
@@ -233,7 +233,7 @@ export const ViewPlayersScreen = (props) => {
                   });
                   setConfetti(false);
                   props.navigation.navigate("HomeScreen");
-                  
+
                 }else{
                   await save_select_list(data);
                   await Storage.setItem({
@@ -313,9 +313,9 @@ export const ViewPlayersScreen = (props) => {
     {/* {showConfetti && <View style={styles.c_container}>
     <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} fadeOut={showConfetti} />
     </View>}   */}
-      
 
-      
+
+
       {/* {confetti &&  <Confetti ref={(node) => node}/>} */}
       { playerList.length !== 0 ?
           <View style={styles.fullPage}>

@@ -13,7 +13,7 @@ import {
   Image,
   ImageBackground,
   Pressable, Alert,
-  BackHandler 
+  BackHandler
 } from "react-native";
 import colors from "../../../constants/colors";
 import { Header } from "./components/Header";
@@ -58,7 +58,7 @@ export const HomeScreen = (props) => {
   useEffect(
     () =>
       props.navigation.addListener('beforeRemove', (e) => {
-   
+
           // If we don't have unsaved changes, then we don't need to do anything
           // return;
 
@@ -120,7 +120,8 @@ export const HomeScreen = (props) => {
       key: "select_player_list",
       value: JSON.stringify([])
     });
-    props.navigation.navigate("MyTeamScreen", {isEdit: true})
+    // props.navigation.navigate("MyTeamScreen", {isEdit: true})
+    props.navigation.navigate("EditTeamScreen", {isEdit: true})
   }
 
 
