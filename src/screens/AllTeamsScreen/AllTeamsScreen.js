@@ -30,6 +30,7 @@ export const AllTeamsScreen = (props) => {
 //   // console.log("0000000000000000000000000000",route);
 //   const [isEdit, setIsEdit] = useState(false)
 // =======
+
     const {isEdit} = props.route.params === undefined ? false : props.route.params;
 // >>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
   const [countryList,setCountryList] = useState([]);

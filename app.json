@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "t20_exium_mups",
+    "name": "Exium MUPS Fantasy Cricket",
     "slug": "t20_exium_mups",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,11 +21,15 @@
       "supportsTablet": true
     },
     "android": {
+      "blockedPermissions": [
+        "android.permission.INTERNET"
+      ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.t20_exium_mups"
+      "package": "com.t20_exium_mups",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

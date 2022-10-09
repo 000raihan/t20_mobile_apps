@@ -140,20 +140,20 @@ export const ViewPlayersScreen = (props) => {
     const bowler = data.filter((r) => {return r.role === "Bowler"}).length;
     const allRounder = data.filter((r) => {return r.role === "All-Rounder"}).length;
 
-    if(batsman == 0){
-      Alert.alert('Validation', "Minimum 1 Batsman select", [
+    if(batsman < 2){
+      Alert.alert('Caution', "You need to select minimum 2 Batsman", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }else if(bowler == 0){
-      Alert.alert('Validation', "Minimum 1 Bowler select", [
+    }else if(bowler < 2){
+      Alert.alert('Caution', "You need to select minimum 2 Bowler", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(wicketKeeper == 0){
-      Alert.alert('Validation', "Minimum 1 Wicket Keeper select", [
+      Alert.alert('Caution', "You need to select minimum 1 Wicket Keeper", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
-    }else if(allRounder == 0){
-      Alert.alert('Validation', "Minimum 1 All Rounder select", [
+    }else if(allRounder < 2){
+      Alert.alert('Caution', "You need to select minimum 2 All-rounder", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(batsman > 4){
@@ -161,15 +161,15 @@ export const ViewPlayersScreen = (props) => {
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(bowler > 4){
-      Alert.alert('Validation', "Maximum 4 Bowler select", [
+      Alert.alert('Caution', "You can select maximum 4 Bowler", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(wicketKeeper > 3){
-      Alert.alert('Validation', "Maximum 3 Wicket Keeper select", [
+      Alert.alert('Caution', "You can select maximum 3 Wicket Keeper", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(allRounder > 4){
-      Alert.alert('Validation', "Maximum 2 All-Rounder select", [
+      Alert.alert('Caution', "You can select maximum 4 All-Rounder", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else{
@@ -537,7 +537,7 @@ const styles = StyleSheet.create({
     height:"100%",
     width: "100%",
     alignSelf: "center",
-    backgroundColor:colors.primary
+    backgroundColor:"white"
   },
   fullPage: {
     backgroundColor: colors.primary,
