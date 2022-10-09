@@ -26,6 +26,7 @@ import { Storage } from 'expo-storage';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { Ionicons } from "@expo/vector-icons";
 import {updatePlayers} from '../../store/features/allPlayerSlice'
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export const ViewPlayersScreen = (props) => {
   const {isEdit} = props.route.params;
@@ -36,7 +37,9 @@ export const ViewPlayersScreen = (props) => {
   const [isSelect, setIsSelected] = useState(false);
   const [showConfetti, setConfetti] = useState(false);
 
-
+  const [showAlert, setShowAlert] = React.useState(false);
+  const [alertTitle, setAlertTitle] = React.useState("");
+  const [alertDetails, setAlertDetails] = React.useState("");
 
 
   useEffect( ()=>{
@@ -178,6 +181,23 @@ export const ViewPlayersScreen = (props) => {
     return false;
   }
 
+  const hideAlert = async () => {
+    setShowAlert(false);
+    setAlertTitle("");
+    setAlertDetails("");
+  };
+
+
+  const saveSelectedPlayer = async () => {
+    if(isEdit){
+      props.navigation.navigate("HomeScreen");
+    }else{
+      const userDetailsString = await SecureStore.getItemAsync("userDetails");
+      const userDetails = JSON.parse(userDetailsString);
+      props.navigation.navigate("BottomTabScreen", {result: userDetails});
+    }
+  }
+
   const selectPlayer = async (details,value) => {
 
     // console.log(details)
@@ -216,35 +236,38 @@ export const ViewPlayersScreen = (props) => {
       // });
 
       if(selectedPlayers.length >= 11){
-        // console.log("SELECTPLAYER : ", selectedPlayers)
+        // console.log("SELECTPLAYER : ", checkPlayerLogic(selectedPlayers))
         if(checkPlayerLogic(selectedPlayers)){
-          setConfetti(true);
+          // setConfetti(true);
 
-          Alert.alert('Congratulations', "You have selected your best 11!", [
-            { text: 'OK', onPress: async () => {
-                const userDetailsString = await SecureStore.getItemAsync("userDetails");
-                const userDetails = JSON.parse(userDetailsString);
-                if(isEdit){
-                  // console.log(data)
-                  await update_select_list(data);
-                  await Storage.setItem({
-                    key: "select_player_list",
-                    value: JSON.stringify([])
-                  });
-                  setConfetti(false);
-                  props.navigation.navigate("HomeScreen");
+          setAlertTitle("Congratulations");
+          setAlertDetails("You have selected your best 11 !");
+          setShowAlert(true);
 
-                }else{
-                  await save_select_list(data);
-                  await Storage.setItem({
-                    key: "select_player_list",
-                    value: JSON.stringify([])
-                  });
-                  setConfetti(false);
-                  props.navigation.navigate("BottomTabScreen", {result: userDetails});
-                }
-              }},
-          ]);
+
+          const userDetailsString = await SecureStore.getItemAsync("userDetails");
+          const userDetails = JSON.parse(userDetailsString);
+          if(isEdit){
+            // console.log(data)
+            await update_select_list(data);
+            await Storage.setItem({
+              key: "select_player_list",
+              value: JSON.stringify([])
+            });
+            // setConfetti(false);
+            // props.navigation.navigate("HomeScreen");
+
+          }else{
+            await save_select_list(data);
+            await Storage.setItem({
+              key: "select_player_list",
+              value: JSON.stringify([])
+            });
+            // setConfetti(false);
+            // props.navigation.navigate("BottomTabScreen", {result: userDetails});
+          }
+
+
         }else{
           setIsSelected(!isSelect);
         }
@@ -297,15 +320,14 @@ export const ViewPlayersScreen = (props) => {
     );
   }
 
-  if(showConfetti){
-    return (
-      <View style={styles.c_container}>
-        <ConfettiCannon count={200} fallSpeed={5000} origin={{ x: -10, y: 0 }} fadeOut={true} />
-    </View>
-    )
-
-  }
-
+  // if(showConfetti){
+  //   return (
+  //     <View style={styles.c_container}>
+  //       <ConfettiCannon count={200} fallSpeed={5000} origin={{ x: -10, y: 0 }} fadeOut={true} />
+  //   </View>
+  //   )
+  //
+  // }
 
   return (
     <Provider>
@@ -521,6 +543,22 @@ export const ViewPlayersScreen = (props) => {
                 </View> */}
 
               </View>
+
+              <AwesomeAlert
+                  show={showAlert}
+                  showProgress={false}
+                  title={alertTitle}
+                  message={alertDetails}
+                  closeOnTouchOutside={true}
+                  closeOnHardwareBackPress={false}
+                  showConfirmButton={true}
+                  confirmText="OK"
+                  confirmButtonColor="#DD6B55"
+                  onDismiss={ async ()=> await saveSelectedPlayer()}
+                  onConfirmPressed={ async () => {
+                    await saveSelectedPlayer();
+                  }}
+              />
 
             </View>
           </View>
