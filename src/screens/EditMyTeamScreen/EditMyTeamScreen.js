@@ -24,8 +24,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 
 export const EditMyTeamScreen = (props) => {
-  const {isEdit} = props.route.params;
-  const {navigation} = props
+  const { isEdit } = props.route.params;
+  const { navigation } = props
   const isFocused = useIsFocused();
   const [userID, setUserID] = useState(null);
   const [selectedPlayres, setSelectedPlayers] = useState(null);
@@ -34,6 +34,8 @@ export const EditMyTeamScreen = (props) => {
   const [batters, setBatter] = useState([]);
   const [allRounder, setAllrounder] = useState([]);
   const [wiketKepper, setWeiketKeeper] = useState([]);
+
+  const [deleted, setDeleted] = useState(false)
 
   const getSelectPlayerList = async (country_id) => {
     CallApi.player_select_list(country_id).then(
@@ -75,28 +77,33 @@ export const EditMyTeamScreen = (props) => {
 
   // useEffect(() => {}, [team]);
 
-  const save_select_list = async (data) => {
-    console.log("DATA IS : ----------",data)
-    CallApi.delete_player_select(data).then(async (result)  => {
-          if(result.success){
-            // console.log(result.result);
-          }else{
-            Alert.alert('Error', result.message, [
-              { text: 'yes', onPress: () => console.log('OK Pressed') },
-            ]);
-            // console.log("error", result.error);
-          }
-        },(error) => {
-          console.log("=====",error)
-          alert("Invalid data.");
-        }
+  const save_select_list = async (data, newArrary) => {
+    console.log("DATA IS : ----------", data)
+    CallApi.delete_player_select(data).then(async (result) => {
+      if (result.success) {
+        console.log("success delte")
+        setSelectedPlayers(newArrary);
+        
+      } else {
+        Alert.alert('Error', result.message, [
+          { text: 'yes', onPress: () => console.log('OK Pressed') },
+        ]);
+        // console.log("error", result.error);
+        setDeleted(false)
+      }
+    }, (error) => {
+      console.log("=====", error)
+      alert("Invalid data.");
+      setDeleted(false)
+    }
     );
+    // return;
   }
 
-  const onDelete = async(code, name, id) => {
+  const onDelete = async (code, name, id) => {
     console.log("ID IS : ", id);
 
-    if(selectedPlayres.length === 16){
+    if (selectedPlayres.length === 16) {
       Alert.alert("Delete Player", "You can't delete & add player anymore. Alreay selected 16 players", [
         {
           text: "Cancel",
@@ -105,18 +112,20 @@ export const EditMyTeamScreen = (props) => {
           },
           style: "cancel",
         },
-        { text: "ok", onPress:async () => {
-          console.log("ok Pressed")
-          return null
-        }},
+        {
+          text: "ok", onPress: async () => {
+            console.log("ok Pressed")
+            return null
+          }
+        },
       ]);
       return null;
     }
 
-    if(selectedPlayres.length <2){
+    if (selectedPlayres.length < 2) {
       return null
     }
-    
+
     Alert.alert("Delete Player", "Confirm you to delete this player?", [
       {
         text: "Cancel",
@@ -125,32 +134,42 @@ export const EditMyTeamScreen = (props) => {
         },
         style: "cancel",
       },
-      { text: "yes", onPress:async () => {
-        const newArrary = await selectedPlayres.filter(p=> p.player_code !== code);
-        setSelectedPlayers(newArrary);
+      {
+        text: "yes", onPress: async () => {
+          const newArrary = await selectedPlayres.filter(p => p.player_code !== code);
 
-        await save_select_list({
-          id: id,
-          team_name: name,
-          user_id: userID,
-          player_code: code,
-        });
+          await save_select_list({
+            id: id,
+            team_name: name,
+            user_id: userID,
+            player_code: code,
+          }, newArrary);
 
-      } },
+          // console.log("RETURN VALUE IS: ", returnValue)
+
+          // if (deleted) {
+          //   alert("Hello")
+          //   console.log("RETURN CONSOLE")
+          //   setSelectedPlayers(newArrary);
+          //   setDeleted(false)
+          // }
+
+        }
+      },
     ]);
   };
 
   // console.log("NEW ARRAY IS :-- ", selectedPlayres);
 
   const addPress = () => {
-    navigation.navigate("AllTeamScreen", {isEdit: true});
+    navigation.navigate("AllTeamScreen", { isEdit: true });
   };
 
 
   // ---------------------useEffect ----------------
 
   useEffect(() => {
-    if(isFocused){
+    if (isFocused) {
       (async () => {
         const userDetailsString = await SecureStore.getItemAsync("userDetails");
         const userDetails = JSON.parse(userDetailsString);
@@ -200,7 +219,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -219,7 +238,7 @@ export const EditMyTeamScreen = (props) => {
                       </View>
                       <View style={{ flex: 1 }}>
                         <Pressable onPress={() => {
-                          onDelete(item.player_code, item.player_name, item.id).then(r  => console.log(r))
+                          onDelete(item.player_code, item.player_name, item.id).then(r => console.log(r))
                         }}>
                           <Ionicons
                             name="trash"
@@ -252,7 +271,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -270,7 +289,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
+                        <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -301,7 +320,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -319,7 +338,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
+                        <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -350,7 +369,7 @@ export const EditMyTeamScreen = (props) => {
                         <Image
                           resizeMode="contain"
                           style={{ width: "100%", height: 40 }}
-                          source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
                         />
                       </View>
                       <View style={{ flex: 4 }}>
@@ -368,7 +387,7 @@ export const EditMyTeamScreen = (props) => {
                         </Text>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Pressable onPress={() => onDelete(item.player_code,item.player_name, item.id)}>
+                        <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
                           <Ionicons
                             name="trash"
                             style={{
@@ -388,13 +407,13 @@ export const EditMyTeamScreen = (props) => {
           )}
         </View>
         <View>
-          <Text style={{ color: colors.yellow, marginTop:10, textAlign: "center", fontSize: 18 }}>
+          <Text style={{ color: colors.yellow, marginTop: 10, textAlign: "center", fontSize: 18 }}>
             Your have Selected{" "}
-            {(selectedPlayres && selectedPlayres.filter((r) => {return r.is_delete === 0;}).length) || 0} players
+            {(selectedPlayres && selectedPlayres.filter((r) => { return r.is_delete === 0; }).length) || 0} players
           </Text>
         </View>
       </View>
-      {selectedPlayres && selectedPlayres.filter((r) => {return r.is_delete === 0;}).length < 11 && (
+      {selectedPlayres && selectedPlayres.filter((r) => { return r.is_delete === 0; }).length < 11 && (
         <Pressable
           onPress={() => addPress()}
           style={{
