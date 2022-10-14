@@ -27,6 +27,7 @@ import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { Ionicons } from "@expo/vector-icons";
 import {updatePlayers} from '../../store/features/allPlayerSlice'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import * as Notification from "expo-notifications";
 
 export const ViewPlayersScreen = (props) => {
   const {isEdit} = props.route.params;
@@ -87,6 +88,18 @@ export const ViewPlayersScreen = (props) => {
           alert("Invalid data.");
         }
     );
+  };
+
+  const handleNotification = () => {
+    Notification.scheduleNotificationAsync({
+      content: {
+        title: "অভিনন্দন",
+        body: "আপনি আপনার সেরা 11 জন নির্বাচন করেছেন৷ আপনি সর্বোচ্চ আর 5 জন খেলোয়াড় আপডেট করতে পারবেন ৷"
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
   };
 
   const getSelectPlayerList = async (country_id) => {
@@ -242,6 +255,7 @@ export const ViewPlayersScreen = (props) => {
 
           setAlertTitle("Congratulations");
           setAlertDetails("You have selected your best 11 !");
+          handleNotification();
           setShowAlert(true);
 
 

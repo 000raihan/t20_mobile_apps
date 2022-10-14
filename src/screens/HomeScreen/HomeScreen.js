@@ -32,7 +32,17 @@ import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import PlayerFild from "../../components/Home/PlayerFild";
 
+import * as Notification from "expo-notifications";
+import * as Permission from "expo-permissions";
 
+Notification.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldPlaySound: true,
+      shouldShowAlert: true,
+    };
+  },
+});
 
 export const HomeScreen = (props) => {
   const [totalPoint, setTotalPoing] = useState(null);
@@ -42,27 +52,27 @@ export const HomeScreen = (props) => {
   const [animation, setAnimation] = useState(new Animated.Value(0));
   // const [animationCall, setAnimationCall] = useState(1)
 
-  const handleAnimation = () => {
-    Animated.timing(animation, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true
-    }).start(() => {
-      Animated.timing(animation, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true
-      }).start()
-    })
-  }
-  const boxInterpolation = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [colors.primary, colors.red]
-  });
+  // const handleAnimation = () => {
+  //   Animated.timing(animation, {
+  //     toValue: 1,
+  //     duration: 500,
+  //     useNativeDriver: true
+  //   }).start(() => {
+  //     Animated.timing(animation, {
+  //       toValue: 0,
+  //       duration: 500,
+  //       useNativeDriver: true
+  //     }).start()
+  //   })
+  // }
+  // const boxInterpolation = animation.interpolate({
+  //   inputRange: [0, 1],
+  //   outputRange: [colors.primary, colors.red]
+  // });
 
-  const animatedStyle = {
-    color: boxInterpolation
-  }
+  // const animatedStyle = {
+  //   color: boxInterpolation
+  // }
 
 
   useEffect(() => {
@@ -77,9 +87,8 @@ export const HomeScreen = (props) => {
         }
       })();
     }
-    handleAnimation();
+  
   }, [props, isFocused]);
-
 
 
   useEffect(
@@ -94,25 +103,37 @@ export const HomeScreen = (props) => {
         // Prevent default behavior of leaving the screen
         e.preventDefault();
 
-        // Prompt the user before leaving the screen
-        // Alert.alert(
-        //   'Discard changes?',
-        //   'You have unsaved changes. Are you sure to discard them and leave the screen?',
-        //   [
-        //     { text: "Don't leave", style: 'cancel', onPress: () => {} },
-        //     {
-        //       text: 'Discard',
-        //       style: 'destructive',
-        //       // If the user confirmed, then we dispatch the action we blocked earlier
-        //       // This will continue the action that had triggered the removal of the screen
-        //       onPress: () => navigation.dispatch(e.data.action),
-        //     },
-        //   ]
-        // );
       }),
       
     [props.navigation]
   );
+
+  useEffect(() => {
+    Permission.getAsync(Permission.NOTIFICATIONS)
+      .then((response) => {
+        if (response.status !== "granted") {
+          return Permission.askAsync(Permission.NOTIFICATIONS);
+        }
+        return response;
+      })
+      .then((response) => {
+        if (response.status !== "granted") {
+          return;
+        }
+      });
+  }, []);
+
+  const handleNotification = () => {
+    Notification.scheduleNotificationAsync({
+      content: {
+        title: "অভিনন্দন",
+        body: "আপনি আপনার সেরা 11 জন নির্বাচন করেছেন৷ আপনি সর্বোচ্চ আর 5 জন খেলোয়াড় আপডেট করতে পারবেন ৷"
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+  };
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result) => {
@@ -212,9 +233,9 @@ export const HomeScreen = (props) => {
                   // height: "100%",
                 }}
               >
-                <Animated.Text style={{ ...styles.pointStyle, ...animatedStyle }}>
+                <Text style={styles.pointStyle}>
                   {(totalPoint && totalPoint[0].point) || 0}
-                </Animated.Text>
+                </Text>
                 {/* <Text
                   style={{
 
@@ -226,7 +247,7 @@ export const HomeScreen = (props) => {
               {/* </View> */}
             </View>
           </View>
-          <LiveSection />
+          <LiveSection onPress={handleNotification} />
           <MatchButtons navigation={props.navigation} />
 
           <View style={{ width: "90%", alignSelf: "center" }}>
