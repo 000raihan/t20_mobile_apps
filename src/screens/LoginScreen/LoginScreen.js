@@ -15,6 +15,7 @@ import {
 import {CallApi} from "./api/Api";
 import * as SecureStore from 'expo-secure-store';
 import MainButton from "../../components/MainButton";
+import colors from "../../../constants/colors";
 
 export const LoginScreen = ({ navigation }) => {
     const [mobile, setMobile] = useState("");
@@ -25,7 +26,7 @@ export const LoginScreen = ({ navigation }) => {
                     console.log(result.result)
                     await save("userDetails", JSON.stringify(result.result));
                     // props.navigation.navigate("DrawerNavigator", {result: userDetails});
-                    navigation.navigate("MainNavigator",{result: result.result});
+                    navigation.navigate("SplashTwoNavigator",{result: result.result});
                 }else{
                     Alert.alert('Error', result.message, [
                         { text: 'OK', onPress: () => console.log('OK Pressed') },
@@ -110,13 +111,13 @@ export const LoginScreen = ({ navigation }) => {
               <Pressable
                 onPress={() => navigation.navigate("RegisterScreen")}
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: colors.red,
                   paddingVertical: 2,
                   paddingHorizontal: 10,
                   marginTop: 5,
                 }}
               >
-                <Text>Go to Registration</Text>
+                <Text style={{fontSize:18, color:"white", fontWeight:"bold"}}>Go to Registration</Text>
               </Pressable>
             </View>
           </View>

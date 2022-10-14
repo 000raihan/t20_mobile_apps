@@ -13,7 +13,8 @@ import {
   Image,
   ImageBackground,
   Pressable, Alert,
-  BackHandler
+  BackHandler,
+  Animated
 } from "react-native";
 import colors from "../../../constants/colors";
 import { Header } from "./components/Header";
@@ -24,12 +25,13 @@ import LiveSection from "../../components/Home/LiveSection";
 import MatchButtons from "../../components/Home/MatchButtons";
 import { useDispatch, useSelector } from "react-redux";
 
-import {CallApi} from "./api/Api";
-import {Storage} from "expo-storage";
+import { CallApi } from "./api/Api";
+import { Storage } from "expo-storage";
 
 import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import PlayerFild from "../../components/Home/PlayerFild";
+
 
 
 export const HomeScreen = (props) => {
@@ -37,30 +39,55 @@ export const HomeScreen = (props) => {
   const [teamName, setTeamName] = useState(null);
   const isFocused = useIsFocused();
   const [select_players, setSelectedPlayers] = useState([]);
+  const [animation, setAnimation] = useState(new Animated.Value(0));
+  // const [animationCall, setAnimationCall] = useState(1)
+
+  const handleAnimation = () => {
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true
+    }).start(() => {
+      Animated.timing(animation, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true
+      }).start()
+    })
+  }
+  const boxInterpolation = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [colors.primary, colors.red]
+  });
+
+  const animatedStyle = {
+    color: boxInterpolation
+  }
 
 
-
-  useEffect( ()=>{
-    if(isFocused){
-      (async() => {
+  useEffect(() => {
+    if (isFocused) {
+      (async () => {
         const userDetailsString = await SecureStore.getItemAsync("userDetails");
-        if(userDetailsString === null){
+        if (userDetailsString === null) {
           props.navigation.navigate("LoginScreen");
-        }else{
+        } else {
           const userDetails = JSON.parse(userDetailsString);
           await checkPlayerList(userDetails.id);
         }
-      }) ();
+      })();
     }
+    handleAnimation();
+  }, [props, isFocused]);
 
-  },[props, isFocused]);
+
 
   useEffect(
     () =>
       props.navigation.addListener('beforeRemove', (e) => {
 
-          // If we don't have unsaved changes, then we don't need to do anything
-          // return;
+        // If we don't have unsaved changes, then we don't need to do anything
+        // return;
 
         BackHandler.exitApp();
 
@@ -83,35 +110,36 @@ export const HomeScreen = (props) => {
         //   ]
         // );
       }),
+      
     [props.navigation]
   );
 
   const checkPlayerList = async (user_id) => {
-    CallApi.player_list(user_id).then(async (result)  => {
+    CallApi.player_list(user_id).then(async (result) => {
       // console.log(result.result, "===========")
-          if(result.success){
-            if(result.result.length === 0){
-              props.navigation.navigate("CreateTeamStackScreen");
+      if (result.success) {
+        if (result.result.length === 0) {
+          props.navigation.navigate("CreateTeamStackScreen");
 
-            }else{
-              await Storage.setItem({
-                key: "select_player",
-                value: JSON.stringify({team_name: result.result[0].team_name})
-              });
-              setTotalPoing(result.total_point);
-              setTeamName(result.result[0].team_name);
-              setSelectedPlayers(result.result);
-            }
-          }else{
-            Alert.alert('Error', result.message, [
-              { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ]);
-            // console.log("error", result.error);
-          }
-        },(error) => {
-          console.log("=====",error)
-          alert("Invalid data.");
+        } else {
+          await Storage.setItem({
+            key: "select_player",
+            value: JSON.stringify({ team_name: result.result[0].team_name })
+          });
+          setTotalPoing(result.total_point);
+          setTeamName(result.result[0].team_name);
+          setSelectedPlayers(result.result);
         }
+      } else {
+        Alert.alert('Error', result.message, [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ]);
+        // console.log("error", result.error);
+      }
+    }, (error) => {
+      console.log("=====", error)
+      alert("Invalid data.");
+    }
     );
   }
 
@@ -121,13 +149,13 @@ export const HomeScreen = (props) => {
       value: JSON.stringify([])
     });
     // props.navigation.navigate("MyTeamScreen", {isEdit: true})
-    props.navigation.navigate("EditTeamScreen", {isEdit: true})
+    props.navigation.navigate("EditTeamScreen", { isEdit: true })
   }
 
 
 
   return (
-<Provider>
+    <Provider>
       <View style={styles.container}>
         <Header navigation={props.navigation} />
         {/* <View style={{backgroundColor:colors.primary}}> */}
@@ -184,27 +212,22 @@ export const HomeScreen = (props) => {
                   // height: "100%",
                 }}
               >
-                <Text
-                  style={{ color: colors.red, fontSize: 12,  }}
-                >
-                  Team Points
-                </Text>
-                <Text
+                <Animated.Text style={{ ...styles.pointStyle, ...animatedStyle }}>
+                  {(totalPoint && totalPoint[0].point) || 0}
+                </Animated.Text>
+                {/* <Text
                   style={{
-                    color: "red",
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    // margin: -10,
+
                   }}
                 >
-                  {(totalPoint && totalPoint[0].point) || 0}
-                </Text>
+             
+                </Text> */}
               </View>
               {/* </View> */}
             </View>
           </View>
           <LiveSection />
-          <MatchButtons navigation={props.navigation}/>
+          <MatchButtons navigation={props.navigation} />
 
           <View style={{ width: "90%", alignSelf: "center" }}>
             <Image
@@ -248,4 +271,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  pointStyle: {
+    color: colors.primary,
+    fontSize: 35,
+    fontWeight: "bold",
+    // margin: -10,
+    
+  },
+
 });

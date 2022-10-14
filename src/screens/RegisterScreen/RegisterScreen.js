@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Portal, Provider } from "react-native-paper";
 import axios from "axios";
+import * as SecureStore from 'expo-secure-store';
 import {
     View,
     StyleSheet,
@@ -17,51 +18,76 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { addUser, userLogin } from "../../store/features/userSlice";
-
+import AwesomeAlert from 'react-native-awesome-alerts';
 import MainButton from "../../components/MainButton";
-import {CallApi} from "./api/Api";
+import { CallApi } from "./api/Api";
+import colors from "../../../constants/colors";
 
 export const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [pin, setPin] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
+    const [userData, setUserData] = useState(null)
+ 
+
+
+    async function save(key, value) {
+        await SecureStore.setItemAsync(key, value);
+    }
 
 
     const onPress = () => {
-        if(name === ""){
+        if (name === "") {
             Alert.alert('Validation', 'Please enter your full nam', [
                 { text: 'OK', onPress: () => console.log('OK Pressed') },
             ]);
-        }else if(mobile === ""){
+        } else if (mobile === "") {
             Alert.alert('Validation', 'Please enter your mobile number', [
                 { text: 'OK', onPress: () => console.log('OK Pressed') },
             ]);
-        }else if(pin === ""){
+        } else if (pin === "") {
             Alert.alert('Validation', 'Please enter your pin number', [
                 { text: 'OK', onPress: () => console.log('OK Pressed') },
             ]);
-        }else{
-            Registration(name,mobile,pin);
+        } else {
+            Registration(name, mobile, pin);
         }
     };
 
-    const Registration = (name,mobile,pin) => {
-        CallApi.register(name,mobile,pin).then(async (result)  => {
-                if(result.success){
-                    console.log(result.result)
-                    Alert.alert('Success', 'Registration Successfully ', [
-                        { text: 'OK', onPress: () => navigation.navigate("LoginScreen",{result: result.result}) },
-                    ]);
-                }else{
-                    Alert.alert('Error', result.message, [
-                        { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ]);
-                    // console.log("error", result.error);
-                }
-            },(error) => {
-                console.log("=====",error)
-                alert("Invalid data.");
+
+    const saveAlert = async () => {
+
+        if(userData){
+            await save("userDetails", JSON.stringify(userData));
+            // props.navigation.navigate("DrawerNavigator", {result: userDetails});
+            navigation.navigate("SplashTwoNavigator", { result: userData });
+        }
+
+        setShowAlert(false)
+
+
+    }
+
+    const Registration = (name, mobile, pin) => {
+        CallApi.register(name, mobile, pin).then(async (result) => {
+            if (result.success) {
+                console.log(result.result)
+                // Alert.alert('Success', 'Registration Successfull ', [
+                //     { text: 'OK', onPress: () => navigation.navigate("LoginScreen",{result: result.result}) },
+                // ]);
+                setUserData(result.result)
+                setShowAlert(true);
+            } else {
+                Alert.alert('Error', result.message, [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ]);
+                // console.log("error", result.error);
             }
+        }, (error) => {
+            console.log("=====", error)
+            alert("Invalid data.");
+        }
         );
     }
 
@@ -131,18 +157,33 @@ export const RegisterScreen = ({ navigation }) => {
                             <Pressable
                                 onPress={() => navigation.navigate("LoginScreen")}
                                 style={{
-                                    backgroundColor: "white",
+                                    backgroundColor: colors.red,
                                     paddingVertical: 2,
                                     paddingHorizontal: 10,
                                     marginTop: 5,
                                 }}
                             >
-                                <Text>Got login</Text>
+                                <Text style={{ fontSize: 18, color: "white", fontWeight: "bold" }}>Go to login</Text>
                             </Pressable>
                         </View>
                     </View>
                 </SafeAreaView>
             </ImageBackground>
+            <AwesomeAlert
+                show={showAlert}
+                showProgress={false}
+                title={"Registration"}
+                message={"Registration Successfull"}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="OK"
+                confirmButtonColor="#DD6B55"
+                onDismiss={async () => saveAlert()}
+                onConfirmPressed={async () => {
+                    saveAlert();
+                }}
+            />
         </Provider>
     );
 };

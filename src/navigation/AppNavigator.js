@@ -8,7 +8,8 @@ import {
   LoginStackScreen,
   CreateTeamStackScreen,
   BottomTabScreen,
-  MainNavigatorScreen
+  MainNavigatorScreen,
+  SplashTwoNavigator
 } from "./StoneNavigator";
 import { CallApi } from "../screens/HomeScreen/api/Api";
 import { Storage } from "expo-storage";
@@ -60,7 +61,7 @@ export const AppNavigator = () => {
     <NavigationContainer ref={navigationRef}>
       <Host>
         {
-          user ? <MainNavigatorScreen/> : <LoginStackScreen />
+          user ? <SplashTwoNavigator/> : <LoginStackScreen />
         }
       </Host>
     </NavigationContainer>

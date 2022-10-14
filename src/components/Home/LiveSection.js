@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, StyleSheet, Text, Image } from "react-native";
+import { TextInput, StyleSheet, Text, Image, Pressable } from "react-native";
 import { View } from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -124,6 +124,9 @@ const LiveSection = (props) => {
          Ban WON by 3 Runs
         </Text>
       </View>
+      <Pressable style={{paddingVertical:5,paddingHorizontal:10, backgroundColor:colors.primary, marginTop:5}}>
+        <Text style={{color:"white"}}>View Details</Text>
+      </Pressable>
     </View>
   );
 };

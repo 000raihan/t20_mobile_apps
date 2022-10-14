@@ -11,7 +11,7 @@ import {
   Platform,
   FlatList,
   ScrollView,
-  useWindowDimensions, Alert,
+  useWindowDimensions, Alert, ImageBackground,
 } from "react-native";
 import ConfettiCannon from 'react-native-confetti-cannon';
 import Confetti from 'react-native-confetti';
@@ -336,10 +336,9 @@ export const ViewPlayersScreen = (props) => {
     <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} fadeOut={showConfetti} />
     </View>}   */}
 
-
-
+    <ImageBackground source={require('../../../assets/bg.png')} style={{width:"100%", height:"100%"}}>
       {/* {confetti &&  <Confetti ref={(node) => node}/>} */}
-      { playerList.length !== 0 ?
+    { playerList.length !== 0 ?
           <View style={styles.fullPage}>
             <View style={styles.container}>
               <ScrollView style={styles.scrollStyle}>
@@ -359,7 +358,7 @@ export const ViewPlayersScreen = (props) => {
                           <View style={{ flex: 1, height: "100%", width: "100%" }}>
                             <Image
                                 resizeMode="contain"
-                                style={{ width: "100%", height: 40 }}
+                                style={{ width: 40, height: 40, borderRadius:20 }}
                                 source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
@@ -374,7 +373,7 @@ export const ViewPlayersScreen = (props) => {
                                 onTintColor={colors.red}
                                 onCheckColor={colors.primary}
                                 disabled={false}
-                                style={{ borderColor: colors.red }}
+                                style={{ borderColor: colors.red, height:25,  width:25 }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
                                 onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
@@ -399,7 +398,7 @@ export const ViewPlayersScreen = (props) => {
                           <View style={{ flex: 1, height: "100%", width: "100%" }}>
                             <Image
                                 resizeMode="contain"
-                                style={{ width: "100%", height: 40 }}
+                                style={{ width: 40, height: 40, borderRadius:20 }}
                                 source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
@@ -414,7 +413,7 @@ export const ViewPlayersScreen = (props) => {
                                 onTintColor={colors.red}
                                 onCheckColor={colors.primary}
                                 disabled={false}
-                                style={{ borderColor: colors.red }}
+                                style={{ borderColor: colors.red, height:25,  width:25 }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
                                 onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
@@ -439,7 +438,7 @@ export const ViewPlayersScreen = (props) => {
                           <View style={{ flex: 1, height: "100%", width: "100%" }}>
                             <Image
                                 resizeMode="contain"
-                                style={{ width: "100%", height: 40 }}
+                                style={{ width: 40, height: 40, borderRadius:20 }}
                                 source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
@@ -454,7 +453,7 @@ export const ViewPlayersScreen = (props) => {
                               onTintColor={colors.red}
                               onCheckColor={colors.primary}
                               disabled={false}
-                              style={{ borderColor: colors.red }}
+                              style={{ borderColor: colors.red, height:25,  width:25 }}
                               value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
                               onValueChange={(newValue) => selectPlayer(item,newValue)}
                             // -------------
@@ -480,7 +479,7 @@ export const ViewPlayersScreen = (props) => {
                           <View style={{ flex: 1, height: "100%", width: "100%" }}>
                             <Image
                                 resizeMode="contain"
-                                style={{ width: "100%", height: 40 }}
+                                style={{ width: 40, height: 40, borderRadius:20 }}
                                 source={{uri: "http://116.68.200.97:6044/images/players/"+item.player_image}}
                             />
                           </View>
@@ -495,7 +494,7 @@ export const ViewPlayersScreen = (props) => {
                                 onTintColor={colors.red}
                                 onCheckColor={colors.primary}
                                 disabled={false}
-                                style={{ borderColor: colors.red }}
+                                style={{ borderColor: colors.red, height:25,  width:25 }}
                                 value={selectedPlayers.find(o => o.player_code === item.player_code) !== undefined ? true : false}
                                 onValueChange={(newValue) => selectPlayer(item,newValue)}
                             />
@@ -511,7 +510,7 @@ export const ViewPlayersScreen = (props) => {
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginTop: 10,
+                    // marginTop: 10,
                   }}
               >
 
@@ -565,6 +564,9 @@ export const ViewPlayersScreen = (props) => {
 
           :null
       }
+    </ImageBackground>
+
+      
     </Provider>
   );
 };
@@ -578,7 +580,7 @@ const styles = StyleSheet.create({
     backgroundColor:"white"
   },
   fullPage: {
-    backgroundColor: colors.primary,
+    // backgroundColor: colors.primary,
     width: "100%",
     flex: 1,
   },
@@ -591,6 +593,6 @@ const styles = StyleSheet.create({
   HeadStyle: {},
   TableText: {},
   scrollStyle: {
-    height: "90%",
+    height: "83.5%",
   },
 });

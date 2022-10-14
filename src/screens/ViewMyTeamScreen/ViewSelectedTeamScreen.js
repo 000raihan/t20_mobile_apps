@@ -10,6 +10,7 @@ import {
   FlatList,
   ScrollView,
   useWindowDimensions,
+  ImageBackground,
   ActivityIndicator,
 } from "react-native";
 import { Header } from "./components/Header";
@@ -40,9 +41,11 @@ export const ViewSelectedTeamScreen = (props) => {
   return (
     <Provider>
       <Header navigation={navigation} />
+     
       <View style={styles.fullPage}>
+      <ImageBackground source={require('../../../assets/bg.png')} style={{width:"100%", height:"100%"}}>
         <View style={styles.container}>
-          <ScrollView style={{ height: "92%" }}>
+          <ScrollView style={{ height: "92%"}}>
             {selectedPlayres ? (
               <View>
                 <View style={{ marginTop: 5 }}>
@@ -262,17 +265,18 @@ export const ViewSelectedTeamScreen = (props) => {
               <ActivityIndicator size="large" color="#00ff00" />
             )}
           </ScrollView>
-
+   
         </View>
+        </ImageBackground>
       </View>
+      
     </Provider>
   );
 };
 
 const styles = StyleSheet.create({
   fullPage: {
-    backgroundColor: colors.primary,
-    width: "100%",
+    // width: "100%",
     flex: 1,
   },
   container: {

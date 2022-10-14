@@ -36,6 +36,7 @@ import colors from "../../constants/colors";
 import { PreviousMatchScreen } from "../screens/PreviousMatchScreen/PreviousMatchScreen";
 import { NextMatchScreen } from "../screens/NextMatchScreen/NextMatchScreen";
 import { ViewSelectedTeamScreen } from "../screens/ViewMyTeamScreen/ViewSelectedTeamScreen";
+import SplashTwoScreen from "../screens/splash2/SplashTwoScreen";
 
 const icons = {
   ic_home: require(`../../assets/Images/ic_home.png`),
@@ -86,7 +87,7 @@ export const LoginStackScreen = () => (
   >
     <LoginStack.Screen name="LoginScreen" component={LoginScreen} />
     <LoginStack.Screen name="RegisterScreen" component={RegisterScreen} />
-    <LoginStack.Screen name="MainNavigator" component={MainNavigatorScreen} />
+    <LoginStack.Screen name="SplashTwoNavigator" component={SplashTwoNavigator} />
   </LoginStack.Navigator>
 );
 
@@ -131,6 +132,7 @@ export const AllTeamStackScreen = () => (
 
   </AllTeamsStack.Navigator>
 );
+
 
 // -------------------------------
 
@@ -318,7 +320,7 @@ export const MainNavigatorScreen = () => {
       }}
     >
       {/* <AllTeamsStack.Screen name="MainNavigator" component={BottomTabScreenn} /> */}
-      <AllTeamsStack.Screen name="MainNavigator" component={isTeam ? BottomTabScreen : CreateTeamStackScreen} /> 
+      <AllTeamsStack.Screen name="BottomScreen" component={isTeam ? BottomTabScreen : CreateTeamStackScreen} /> 
 
 
     </MainNavigator.Navigator>
@@ -326,3 +328,19 @@ export const MainNavigatorScreen = () => {
 
 
 };
+
+// -------------------------------
+
+const SplashTwoStack = createStackNavigator();
+export const SplashTwoNavigator = () => (
+  <SplashTwoStack.Navigator
+    screenOptions={{
+      headerShown: false,
+      cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+    }}
+  >
+    <SplashTwoStack.Screen name="SplashTwoScreen" component={SplashTwoScreen} />
+    <SplashTwoStack.Screen name="MainNavigatorScreen" component={MainNavigatorScreen} />
+
+  </SplashTwoStack.Navigator>
+);

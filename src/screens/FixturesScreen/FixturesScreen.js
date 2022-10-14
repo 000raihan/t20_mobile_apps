@@ -55,9 +55,6 @@ export const FixturesScreen = (props) => {
   };
 
 
-  const runFirst = `
-  setTimeout(function() { window.alert('hi') }, 2000);
-`;
 
   // (function() {
   //   document.getElementByClassName(".global-navigation").style.display = none;;
@@ -69,11 +66,10 @@ export const FixturesScreen = (props) => {
       <Header navigation={props.navigation} />
       <WebView
         style={{ margin: 5 }}
-        // source={{
-        //   uri: 'https://www.t20worldcup.com/fixtures',
-        // }}
-        // // onMessage={(event) => { }}
-        // injectedJavaScript={runFirst}
+        source={{
+          uri: 'http://192.168.1.108:6044/mobile_view/fixtures',
+        }}
+        // onMessage={(event) => { }}
         // injectedJavaScriptBeforeContentLoaded={runFirst}
 
       />

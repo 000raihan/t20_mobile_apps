@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5f9d6040-ca1a-48ae-8826-a72ef2236e7a" name="Default Changelist" comment="tareq BottomTab problem solve">
-      <change afterPath="$PROJECT_DIR$/assets/Images/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Images/logo1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/AllTeamsScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AllTeamsScreen/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/NotificationScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NotificationScreen/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ViewMyTeamScreen/ViewMyTeamScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ViewMyTeamScreen/ViewMyTeamScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,17 +34,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/tareq/ReactNativeProjects/t20_mobile_apps/assets/Images",
-    "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="com.android.tools.idea.emulator.frame.visible" value="false" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/Images" />
