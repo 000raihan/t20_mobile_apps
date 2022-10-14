@@ -42,6 +42,8 @@ export const ViewPlayersScreen = (props) => {
   const [alertTitle, setAlertTitle] = React.useState("");
   const [alertDetails, setAlertDetails] = React.useState("");
 
+  // console.log("SELECTED PLAYER : ", selectedPlayers.length)
+
 
   useEffect( ()=>{
     if(isFocused){
@@ -94,7 +96,7 @@ export const ViewPlayersScreen = (props) => {
     Notification.scheduleNotificationAsync({
       content: {
         title: "অভিনন্দন",
-        body: "আপনি আপনার সেরা 11 জন নির্বাচন করেছেন৷ আপনি সর্বোচ্চ আর 5 জন খেলোয়াড় আপডেট করতে পারবেন ৷"
+        body: `আপনি আপনার সেরা ১১ জন খেলোয়াড় নির্বাচন করেছেন ৷ সেমিফাইনালের আগের দিন পর্যন্ত আপনি সর্বোচ্চ আর ৫ জন খেলোয়াড় আপডেট করতে পারবেন ৷`
       },
       trigger: {
         seconds: 10,
@@ -208,6 +210,7 @@ export const ViewPlayersScreen = (props) => {
       const userDetailsString = await SecureStore.getItemAsync("userDetails");
       const userDetails = JSON.parse(userDetailsString);
       props.navigation.navigate("BottomTabScreen", {result: userDetails});
+      handleNotification();
     }
   }
 
@@ -255,7 +258,7 @@ export const ViewPlayersScreen = (props) => {
 
           setAlertTitle("Congratulations");
           setAlertDetails("You have selected your best 11 !");
-          handleNotification();
+          // handleNotification();
           setShowAlert(true);
 
 
