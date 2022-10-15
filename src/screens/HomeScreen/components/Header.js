@@ -26,14 +26,14 @@ export const Header = ({navigation}) => {
             </View>
 
            <TouchableOpacity
-                onPress={() => navigation.goBack()}
+                // onPress={() => navigation.goBack()}
                 style={{flex:1, flexDirection:"row", justifyContent:"flex-end", alignItems:"center"}}
             >
-                <Ionicons
+                {/* <Ionicons
                     name='notifications-outline'
                     size={30}
                     color={Colors.white}
-                />
+                /> */}
             </TouchableOpacity>
 
         </View>

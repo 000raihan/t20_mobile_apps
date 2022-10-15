@@ -23,11 +23,11 @@ const FixtureView = props => {
             </View>
             <View style={{flex:3,}}>
                 <View style={{flex:1,flexDirection:"row", alignItems:'center' }}>
-                    <Image style={{width:"30%", height:30}} resizeMode="cover" source={require("../../../assets/bd-flag.png")}/>
+                    {/* <Image style={{width:"30%", height:30}} resizeMode="cover" source={require("../../../assets/bd-flag.png")}/> */}
                     <Text style={{fontSize:15,fontWeight:"bold", marginLeft:5}}>Bangladesh</Text>
                 </View>
                 <View style={{flex:1,flexDirection:"row", }}>
-                    <Image style={{width:"30%", height:30}} resizeMode="cover" source={require("../../../assets/sr-flag.jpg")}/>
+                    {/* <Image style={{width:"30%", height:30}} resizeMode="cover" source={require("../../../assets/sr-flag.jpg")}/> */}
                     <Text style={{fontSize:15,fontWeight:"bold", marginLeft:5}}>Srilanka</Text>
                 </View>
             </View>

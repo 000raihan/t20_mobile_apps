@@ -175,7 +175,7 @@ export const ViewPlayersScreen = (props) => {
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(batsman > 4){
-      Alert.alert('Validation', "Maximum 4 Batsman select", [
+      Alert.alert('Caution', "You can select maximum 4 batsman", [
         { text: 'OK', onPress: async () => console.log("Press")},
       ]);
     }else if(bowler > 4){
@@ -209,8 +209,9 @@ export const ViewPlayersScreen = (props) => {
     }else{
       const userDetailsString = await SecureStore.getItemAsync("userDetails");
       const userDetails = JSON.parse(userDetailsString);
-      props.navigation.navigate("BottomTabScreen", {result: userDetails});
       handleNotification();
+      props.navigation.navigate("BottomTabScreen", {result: userDetails});
+
     }
   }
 
@@ -293,7 +294,7 @@ export const ViewPlayersScreen = (props) => {
       }
 
     }else{
-      Alert.alert('Validation', "You are not select over 11 players.", [
+      Alert.alert('Caution', "You are not select over 11 players.", [
         { text: 'OK', onPress: () => {
           console.log('OK Pressed')
         }},

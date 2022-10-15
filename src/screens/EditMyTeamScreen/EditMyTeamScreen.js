@@ -35,6 +35,7 @@ export const EditMyTeamScreen = (props) => {
   const [batters, setBatter] = useState([]);
   const [allRounder, setAllrounder] = useState([]);
   const [wiketKepper, setWeiketKeeper] = useState([]);
+  const window = useWindowDimensions();
 
   const [deleted, setDeleted] = useState(false)
 
@@ -127,7 +128,7 @@ export const EditMyTeamScreen = (props) => {
       return null
     }
 
-    Alert.alert("Delete Player", "Confirm you to delete this player?", [
+    Alert.alert("Warning!", "Are you sure to delete this player?", [
       {
         text: "Cancel",
         onPress: () => {
@@ -198,217 +199,218 @@ export const EditMyTeamScreen = (props) => {
   return (
     <Provider>
       <Header navigation={navigation} />
-      <ImageBackground source={require('../../../assets/bg.png')} style={{ width: "100%", height: "100%",}}>
-          <View style={styles.container}>
-            {selectedPlayres ? (
-              <ScrollView style={{ height:"90%", width:"100%"}}>
-                <View style={{ marginTop: 5 }}>
-                  <Text style={{ color: colors.red }}>Batsman</Text>
-                  {batters &&
-                    batters.map((item) => (
-                      <View
-                        style={{
-                          marginTop: 10,
-                          width: "100%",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        
-                        }}
-                      >
-                        <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                          <Image
-                            resizeMode="contain"
-                            style={{ width: 40, height: 40, borderRadius: 20 }}
-                            source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
-                          />
-                        </View>
-                        <View style={{ flex: 5 }}>
-                          <Text
-                            style={{
-                              color: "white",
-                              fontSize: 16,
-                              fontWeight: "bold",
-                            }}
-                          >
-                            {item.player_name && item.player_name}
-                          </Text>
-                          <Text style={{ color: "white" }}>
-                            {item.role && item.role}
-                          </Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <Pressable onPress={() => {
-                            onDelete(item.player_code, item.player_name, item.id).then(r => console.log(r))
-                          }}>
-                            <Ionicons
-                              name="trash"
-                              style={{
-                                fontSize: 20,
-                                fontWeight: "bold",
-                                color: colors.red,
-                              }}
-                            />
-                          </Pressable>
-                        </View>
-                      </View>
-                    ))}
-                </View>
+      <ImageBackground source={require('../../../assets/bg.png')} style={{ width: "100%", height: "100%", }}>
+        <View style={styles.container}>
+          {selectedPlayres ? (
+            <ScrollView style={{ maxHeight:"85%", width: "100%" }}>
+              <View style={{ marginTop: 5 }}>
+                <Text style={{ color: colors.red }}>Batsman</Text>
+                {batters &&
+                  batters.map((item) => (
+                    <View
+                      style={{
+                        marginTop: 10,
+                        width: "100%",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
 
-                <View style={{ marginTop: 5 }}>
-                  <Text style={{ color: colors.red }}>Bowler</Text>
-                  {bowlers &&
-                    bowlers.map((item) => (
-                      <View
-                        style={{
-                          marginTop: 10,
-                          width: "100%",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                          <Image
-                            resizeMode="contain"
-                            style={{ width: 40, height: 40, borderRadius: 20 }}
-                            source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
-                          />
-                        </View>
-                        <View style={{ flex: 5 }}>
-                          <Text
-                            style={{
-                              color: "white",
-                              fontSize: 16,
-                              fontWeight: "bold",
-                            }}
-                          >
-                            {item.player_name && item.player_name}
-                          </Text>
-                          <Text style={{ color: "white" }}>
-                            {item.role && item.role}
-                          </Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
-                            <Ionicons
-                              name="trash"
-                              style={{
-                                fontSize: 20,
-                                fontWeight: "bold",
-                                color: colors.red,
-                              }}
-                            />
-                          </Pressable>
-                        </View>
+                      }}
+                    >
+                      <View style={{ flex: 1, height: "100%", width: "100%" }}>
+                        <Image
+                          resizeMode="contain"
+                          style={{ width: 40, height: 40, borderRadius: 20 }}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
+                        />
                       </View>
-                    ))}
-                </View>
-                <View style={{ marginTop: 5 }}>
-                  <Text style={{ color: colors.red }}>All-rounder</Text>
-                  {allRounder &&
-                    allRounder.map((item) => (
-                      <View
-                        style={{
-                          marginTop: 10,
-                          width: "100%",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                          <Image
-                            resizeMode="contain"
-                            style={{ width: 40, height: 40, borderRadius: 20 }}
-                            source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
-                          />
-                        </View>
-                        <View style={{ flex: 5 }}>
-                          <Text
-                            style={{
-                              color: "white",
-                              fontSize: 16,
-                              fontWeight: "bold",
-                            }}
-                          >
-                            {item.player_name && item.player_name}
-                          </Text>
-                          <Text style={{ color: "white" }}>
-                            {item.role && item.role}
-                          </Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
-                            <Ionicons
-                              name="trash"
-                              style={{
-                                fontSize: 20,
-                                fontWeight: "bold",
-                                color: colors.red,
-                              }}
-                            />
-                          </Pressable>
-                        </View>
+                      <View style={{ flex: 5 }}>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 16,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {item.player_name && item.player_name}
+                        </Text>
+                        <Text style={{ color: "white" }}>
+                          {item.role && item.role}
+                        </Text>
                       </View>
-                    ))}
-                </View>
-                <View style={{ marginTop: 5 }}>
-                  <Text style={{ color: colors.red }}>Wicket keeper</Text>
-                  {wiketKepper &&
-                    wiketKepper.map((item) => (
-                      <View
-                        style={{
-                          marginTop: 10,
-                          width: "100%",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <View style={{ flex: 1, height: "100%", width: "100%" }}>
-                          <Image
-                            resizeMode="contain"
-                            style={{ width: 40, height: 40, borderRadius: 20 }}
-                            source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
-                          />
-                        </View>
-                        <View style={{ flex: 5 }}>
-                          <Text
+                      <View style={{ flex: 1 }}>
+                        <Pressable onPress={() => {
+                          onDelete(item.player_code, item.player_name, item.id).then(r => console.log(r))
+                        }}>
+                          <Ionicons
+                            name="trash"
                             style={{
-                              color: "white",
-                              fontSize: 16,
+                              fontSize: 20,
                               fontWeight: "bold",
+                              color: colors.red,
                             }}
-                          >
-                            {item.player_name && item.player_name}
-                          </Text>
-                          <Text style={{ color: "white" }}>
-                            {item.role && item.role}
-                          </Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
-                            <Ionicons
-                              name="trash"
-                              style={{
-                                fontSize: 20,
-                                fontWeight: "bold",
-                                color: colors.red,
-                              }}
-                            />
-                          </Pressable>
-                        </View>
+                          />
+                        </Pressable>
                       </View>
-                    ))}
-                </View>
-              </ScrollView>
+                    </View>
+                  ))}
+              </View>
 
-            ) : (
-              <ActivityIndicator size="large" color="#00ff00" />
-            )}
+              <View style={{ marginTop: 5 }}>
+                <Text style={{ color: colors.red }}>Bowler</Text>
+                {bowlers &&
+                  bowlers.map((item) => (
+                    <View
+                      style={{
+                        marginTop: 10,
+                        width: "100%",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <View style={{ flex: 1, height: "100%", width: "100%" }}>
+                        <Image
+                          resizeMode="contain"
+                          style={{ width: 40, height: 40, borderRadius: 20 }}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
+                        />
+                      </View>
+                      <View style={{ flex: 5 }}>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 16,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {item.player_name && item.player_name}
+                        </Text>
+                        <Text style={{ color: "white" }}>
+                          {item.role && item.role}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
+                          <Ionicons
+                            name="trash"
+                            style={{
+                              fontSize: 20,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          />
+                        </Pressable>
+                      </View>
+                    </View>
+                  ))}
+              </View>
+              <View style={{ marginTop: 5 }}>
+                <Text style={{ color: colors.red }}>All-rounder</Text>
+                {allRounder &&
+                  allRounder.map((item) => (
+                    <View
+                      style={{
+                        marginTop: 10,
+                        width: "100%",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <View style={{ flex: 1, height: "100%", width: "100%" }}>
+                        <Image
+                          resizeMode="contain"
+                          style={{ width: 40, height: 40, borderRadius: 20 }}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
+                        />
+                      </View>
+                      <View style={{ flex: 5 }}>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 16,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {item.player_name && item.player_name}
+                        </Text>
+                        <Text style={{ color: "white" }}>
+                          {item.role && item.role}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
+                          <Ionicons
+                            name="trash"
+                            style={{
+                              fontSize: 20,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          />
+                        </Pressable>
+                      </View>
+                    </View>
+                  ))}
+              </View>
+              <View style={{ marginTop: 5 }}>
+                <Text style={{ color: colors.red }}>Wicket keeper</Text>
+                {wiketKepper &&
+                  wiketKepper.map((item) => (
+                    <View
+                      style={{
+                        marginTop: 10,
+                        width: "100%",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <View style={{ flex: 1, height: "100%", width: "100%" }}>
+                        <Image
+                          resizeMode="contain"
+                          style={{ width: 40, height: 40, borderRadius: 20 }}
+                          source={{ uri: "http://116.68.200.97:6044/images/players/" + item.player_image }}
+                        />
+                      </View>
+                      <View style={{ flex: 5 }}>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 16,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {item.player_name && item.player_name}
+                        </Text>
+                        <Text style={{ color: "white" }}>
+                          {item.role && item.role}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Pressable onPress={() => onDelete(item.player_code, item.player_name, item.id)}>
+                          <Ionicons
+                            name="trash"
+                            style={{
+                              fontSize: 20,
+                              fontWeight: "bold",
+                              color: colors.red,
+                            }}
+                          />
+                        </Pressable>
+                      </View>
+                    </View>
+                  ))}
+              </View>
+            </ScrollView>
 
-            <View style={{paddingBottom:10}}>
+          ) : (
+            <ActivityIndicator size="large" color="#00ff00" />
+          )}
+
+          <View style={{ height:"15%" }}>
+            <View style={{ paddingBottom: 10 }}>
               <Text style={{ color: colors.yellow, marginTop: 10, textAlign: "center", fontSize: 18 }}>
                 You've Selected{" "}
                 {(selectedPlayres && selectedPlayres.filter((r) => { return r.is_delete === 0; }).length) || 0} players
@@ -421,7 +423,7 @@ export const EditMyTeamScreen = (props) => {
                   style={{
                     flexDirection: "row",
                     width: "100%",
-                    backgroundColor:"white",
+                    backgroundColor: "white",
                     justifyContent: "center",
                     alignItems: "center",
                     paddingVertical: 6,
@@ -443,6 +445,9 @@ export const EditMyTeamScreen = (props) => {
             }
           </View>
 
+
+        </View>
+
       </ImageBackground>
     </Provider >
   );
@@ -459,10 +464,12 @@ const styles = StyleSheet.create({
   // },
   container: {
     // flex: 1,
-    height:"91%",
-    alignSelf:"center",
+    // height: window.height-10,
+    maxHeight: "90%",
+    alignSelf: "center",
     width: "90%",
     alignSelf: "center",
+    
   },
   HeadStyle: {},
   TableText: {},

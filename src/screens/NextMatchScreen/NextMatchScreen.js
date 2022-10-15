@@ -57,25 +57,21 @@ export const NextMatchScreen = (props) => {
   return (
     <Provider>
       <Header navigation={props.navigation} />
-      <View style={{backgroundColor:colors.primary, justifyContent:"center", alignItems:"center", padding:10}}>
-          <Text style={{color:colors.red, fontWeight:"bold",fontSize:16}}>Upcoming Match</Text>
 
-        </View>
-      <View style={styles.container}>
       <WebView
             style={{margin: 5}}
             originWhitelist={['*']}
-            source={{ uri: "http://116.68.200.97:6044/mobile_view/next_match" }}
+            source={{ uri: "http://192.168.1.108:6044/mobile_view/next_match" }}
+            // source={{ uri: "http://116.68.200.97:6044/mobile_view/next_match" }}
         />
-      </View>
     </Provider>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    width:"90%",
-    alignSelf:"center"
-  },
+  // container: {
+  //   // flex: 1,
+  //   width:"90%",
+  //   alignSelf:"center"
+  // },
 });

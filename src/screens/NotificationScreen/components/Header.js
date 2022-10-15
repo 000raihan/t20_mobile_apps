@@ -13,7 +13,7 @@ export const Header = ({navigation}) => {
     return (
         <View style={styles.topBar}>
             <TouchableOpacity
-                onPress={() => navigation.goBack()}
+                onPress={() =>  navigation.goBack()}
                 style={{flex:1}}
             >
                 <Ionicons

@@ -37,6 +37,7 @@ import { PreviousMatchScreen } from "../screens/PreviousMatchScreen/PreviousMatc
 import { NextMatchScreen } from "../screens/NextMatchScreen/NextMatchScreen";
 import { ViewSelectedTeamScreen } from "../screens/ViewMyTeamScreen/ViewSelectedTeamScreen";
 import SplashTwoScreen from "../screens/splash2/SplashTwoScreen";
+import { ViewDetailsScreen } from "../screens/VeiwDetailsScreen/ViewDetailsScreen";
 
 const icons = {
   ic_home: require(`../../assets/Images/ic_home.png`),
@@ -71,6 +72,7 @@ export const HomeStackScreen = () => (
 
     <HomeStack.Screen name="PreviousMatchScreen" component={PreviousMatchScreen} />
     <HomeStack.Screen name="NextMatchScreen" component={NextMatchScreen} />
+    <HomeStack.Screen name="ViewDetailsScreen" component={ViewDetailsScreen} />
 
   </HomeStack.Navigator>
 );

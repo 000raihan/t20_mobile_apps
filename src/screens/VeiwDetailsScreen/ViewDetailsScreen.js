@@ -21,7 +21,7 @@ import { CallApi } from "../HomeScreen/api/Api";
 import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 
-export const PreviousMatchScreen = (props) => {
+export const ViewDetailsScreen = (props) => {
   const isFocused = useIsFocused();
 
   useEffect( ()=>{
@@ -57,20 +57,21 @@ export const PreviousMatchScreen = (props) => {
   return (
     <Provider>
       <Header navigation={props.navigation} />
+
       <WebView
             style={{margin: 5}}
             originWhitelist={['*']}
-            source={{ uri: "http://192.168.1.108:6044/mobile_view/previous_match" }}
-            // source={{ uri: "http://116.68.200.97:6044/mobile_view/previous_match" }}
+            source={{ uri: "http://192.168.1.108:6044/mobile_view/view_details" }}
+            // source={{ uri: "http://116.68.200.97:6044/mobile_view/next_match" }}
         />
     </Provider>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    width:"90%",
-    alignSelf:"center"
-  },
+  // container: {
+  //   // flex: 1,
+  //   width:"90%",
+  //   alignSelf:"center"
+  // },
 });

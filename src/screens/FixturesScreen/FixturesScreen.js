@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Portal, Provider } from "react-native-paper";
 import {
   View,
@@ -11,7 +11,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import Colors from "../../utils/Colors";
-import { Header } from "../NotificationScreen/components/Header";
+import { Header } from "./components/Header";
 import { Table, Row, Rows } from "react-native-table-component";
 import { WebView } from 'react-native-webview';
 import FixtureView from "../../components/Fixtures/FixtureView";
@@ -23,6 +23,7 @@ import * as SecureStore from "expo-secure-store";
 
 export const FixturesScreen = (props) => {
   const isFocused = useIsFocused();
+  const [key, setKey] = useState(1);
 
   useEffect(() => {
     if (isFocused) {
@@ -60,17 +61,95 @@ export const FixturesScreen = (props) => {
   //   document.getElementByClassName(".global-navigation").style.display = none;;
   // })();
 
+  const runFirst = `
+  var appBanners = document.getElementsByClassName('global-navigation__fixed-container');
+
+    for (var i = 0; i < appBanners.length; i ++) {
+        appBanners[i].style.height = 0;
+        appBanners[i].style.display = 'none';
+    }
+    ;
+  var appBanners2 = document.getElementsByClassName('partners__top-level');
+
+    for (var i = 0; i < appBanners2.length; i ++) {
+        appBanners2[i].style.display = 'none';
+        appBanners2[i].style.height = 0;
+    }
+
+    var appBanners3 = document.getElementsByClassName('partners__block');
+    for (var i = 0; i < appBanners3.length; i ++) {
+        appBanners3[i].style.display = 'none';
+    }
+
+    
+  var appBanners6 = document.getElementsByClassName('btn--tickets');
+  if(appBanners6){
+    for (var i = 0; i < appBanners6.length; i ++) {
+      appBanners6[i].style.display = 'none';
+  }
+}
+
+    var appBanners5 = document.getElementsByClassName('global-footer__branding-container');
+    if(appBanners5){
+      for (var i = 0; i < appBanners5.length; i ++) {
+        appBanners5[i].style.display = 'none';
+     }
+    }
+   
+
+
+
+
+    var appBanners4 = document.getElementsByClassName('match-centre-page__section--right');
+    if(appBanners4){
+      for (var i = 0; i < appBanners4.length; i ++) {
+        appBanners4[i].style.display = 'none';
+    }
+    }
+
+    var appBanners7 = document.getElementsByClassName('mc-tab');
+    if(appBanners7){
+      for (var i = 0; i < appBanners7.length; i ++) {
+        appBanners7[i].style.display = 'none';
+    }
+    }
+
+    var appBanners8 = document.getElementsByClassName('mc-team-comparison');
+    if(appBanners8){
+      for (var i = 0; i < appBanners8.length; i ++) {
+        appBanners8[i].style.display = 'none';
+    }
+    }
+
+    var appBanners9 = document.getElementsByClassName('mc-scorebox__divider-header');
+    if(appBanners9){
+      for (var i = 0; i < appBanners9.length; i ++) {
+        appBanners9[i].style.display = 'none';
+    }
+    }
+
+
+
+
+  var appBanners10 = document.getElementsByClassName('global-footer');
+    for (var i = 0; i < appBanners10.length; i ++) {
+        appBanners10[i].style.display = 'none';
+    }
+    `;
+
 
   return (
     <Provider>
-      <Header navigation={props.navigation} />
+      <Header navigation={props.navigation} page={true} setKey={setKey} />
       <WebView
-        style={{ margin: 5 }}
+        style={{ marginTop: -95 }}
         source={{
-          uri: 'http://192.168.1.108:6044/mobile_view/fixtures',
+          uri: 'https://www.t20worldcup.com/fixtures',
         }}
-        // onMessage={(event) => { }}
-        // injectedJavaScriptBeforeContentLoaded={runFirst}
+        onMessage={(event) => { }}
+        injectedJavaScript={runFirst}
+        injectedJavaScriptBeforeContentLoaded={runFirst}
+        key={key}
 
       />
     </Provider>

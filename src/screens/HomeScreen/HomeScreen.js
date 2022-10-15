@@ -50,6 +50,7 @@ export const HomeScreen = (props) => {
   const isFocused = useIsFocused();
   const [select_players, setSelectedPlayers] = useState([]);
   const [animation, setAnimation] = useState(new Animated.Value(0));
+  const [match_url, setMatch_url] = useState(null)
   // const [animationCall, setAnimationCall] = useState(1)
 
   // const handleAnimation = () => {
@@ -76,8 +77,14 @@ export const HomeScreen = (props) => {
 
 
   useEffect(() => {
+    
+
     if (isFocused) {
-      (async () => {
+      (async () => {    
+        const match = await CallApi.getMatch();
+        setMatch_url(match.url)
+        // console.log("MATCH : ",match)
+
         const userDetailsString = await SecureStore.getItemAsync("userDetails");
         if (userDetailsString === null) {
           props.navigation.navigate("LoginScreen");
@@ -87,7 +94,8 @@ export const HomeScreen = (props) => {
         }
       })();
     }
-  
+
+
   }, [props, isFocused]);
 
 
@@ -104,7 +112,7 @@ export const HomeScreen = (props) => {
         e.preventDefault();
 
       }),
-      
+
     [props.navigation]
   );
 
@@ -122,18 +130,6 @@ export const HomeScreen = (props) => {
         }
       });
   }, []);
-
-  const handleNotification = () => {
-    Notification.scheduleNotificationAsync({
-      content: {
-        title: "অভিনন্দন",
-        body: "আপনি আপনার সেরা 11 জন নির্বাচন করেছেন৷ আপনি সর্বোচ্চ আর 5 জন খেলোয়াড় আপডেট করতে পারবেন ৷"
-      },
-      trigger: {
-        seconds: 10,
-      },
-    });
-  };
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result) => {
@@ -164,6 +160,17 @@ export const HomeScreen = (props) => {
     );
   }
 
+  // useEffect(() => {
+   
+  // }, [])
+
+  // const getMatch = async ()=>{
+  //   const match = await CallApi.getMatch();
+  //   console.log(match)
+  // }
+
+
+
   const onPress = async () => {
     await Storage.setItem({
       key: "select_player_list",
@@ -180,8 +187,7 @@ export const HomeScreen = (props) => {
       <View style={styles.container}>
         <Header navigation={props.navigation} />
         {/* <View style={{backgroundColor:colors.primary}}> */}
-        <ScrollView>
-          <View style={styles.pointBg}>
+        <View style={styles.pointBg}>
             <View
               style={{
                 width: "100%",
@@ -247,7 +253,10 @@ export const HomeScreen = (props) => {
               {/* </View> */}
             </View>
           </View>
-          <LiveSection onPress={handleNotification} />
+        <LiveSection match_url={match_url} navigation={props.navigation} />
+        <ScrollView>
+          
+
           <MatchButtons navigation={props.navigation} />
 
           <View style={{ width: "90%", alignSelf: "center" }}>
@@ -297,7 +306,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: "bold",
     // margin: -10,
-    
+
   },
 
 });

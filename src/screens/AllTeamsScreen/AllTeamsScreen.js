@@ -21,48 +21,51 @@ import { Header } from "./components/Header";
 import colors from "../../../constants/colors";
 import { addTeam } from "../../store/features/teamSlice";
 import { Storage } from 'expo-storage';
-import {CallApi} from "./api/Api";
+import { CallApi } from "./api/Api";
 
 export const AllTeamsScreen = (props) => {
-// <<<<<<< HEAD
+  // <<<<<<< HEAD
 
-//   const {navigation, route} = props
-//   // console.log("0000000000000000000000000000",route);
-//   const [isEdit, setIsEdit] = useState(false)
-// =======
+  //   const {navigation, route} = props
+  //   // console.log("0000000000000000000000000000",route);
+  //   const [isEdit, setIsEdit] = useState(false)
+  // =======
 
-    const {isEdit} = props.route.params === undefined ? false : props.route.params;
-// >>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
-  const [countryList,setCountryList] = useState([]);
+  const { isEdit } = props.route.params === undefined ? false : props.route.params;
+  // >>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
+  const [countryList, setCountryList] = useState([]);
 
-  useEffect( ()=>{
-    (async() => {
+  useEffect(() => {
+    (async () => {
 
-        await getCountryList();
-    }) ();
-  },[]);
+      await getCountryList();
+    })();
+  }, []);
 
   const getCountryList = async () => {
-    CallApi.country_list().then(async (result)  => {
-          if(result.success){
-            setCountryList(result.result);
-          }else{
-            Alert.alert('Error', result.message, [
-              { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ]);
-            // console.log("error", result.error);
-          }
-        },(error) => {
-          console.log("=====",error)
-          alert("Invalid data.");
-        }
+    CallApi.country_list().then(async (result) => {
+      if (result.success) {
+        setCountryList(result.result);
+      } else {
+        Alert.alert('Error', result.message, [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ]);
+        // console.log("error", result.error);
+      }
+    }, (error) => {
+      console.log("=====", error)
+      alert("Invalid data.");
+    }
     );
   }
 
-  const onPress = async (id) => {
-      const country = countryList[id];
-      props.navigation.navigate("ViewPlayersScreen",{country_id: country.country_id, country_name:country.country_name,isEdit: isEdit});
+  const onPress = (country) => {
+    console.log("country is : ", country)
+    props.navigation.navigate("ViewPlayersScreen", { country_id: country.country_id, country_name: country.country_name, isEdit: isEdit });
   };
+
+  console.log(countryList);
+
   return (
     <Provider>
       <Header navigation={props.navigation} isEdit={isEdit} />
@@ -96,7 +99,36 @@ export const AllTeamsScreen = (props) => {
             </Text>
 
             <View style={{ marginTop: 20, width: "100%", alignSelf: "center" }}>
-              <View style={styles.flagRow}>
+              <ScrollView>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", width: "100%", justifyContent: "space-between" }}>
+
+                  {countryList && countryList.map(country => {
+                  
+                    return( <Pressable onPress={() => onPress(country)} style={{ width: "48%", alignItems: "center", marginTop: 20 }}>
+                      <Image
+                        resizeMode="contain"
+                        style={{ width: "100%", height: 70 }}
+                        // source={require(`../../../assets/flags/${country.country_name}.png`)}
+                      />
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: 15,
+                          fontWeight: "bold",
+                          marginTop: 7,
+                        }}
+                      >
+                        {country.country_name}
+                      </Text>
+                    </Pressable>)
+                  })}
+
+                </View>
+              </ScrollView>
+
+
+
+              {/* <View style={styles.flagRow}>
                 <Pressable onPress={() => onPress(5)} style={styles.flagSec}>
                   <Image
                     resizeMode="contain"
@@ -241,7 +273,7 @@ export const AllTeamsScreen = (props) => {
                   </Text>
                 </Pressable>
                 <Pressable
-                  onPress={() =>onPress(3)}
+                  onPress={() => onPress(3)}
                   style={styles.flagSec}
                 >
                   <Image
@@ -260,7 +292,7 @@ export const AllTeamsScreen = (props) => {
                     South Africa
                   </Text>
                 </Pressable>
-              </View>
+              </View> */}
             </View>
           </View>
         </SafeAreaView>
@@ -294,10 +326,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     // alignItems:"center"
     marginTop: 15,
-  },
-  flagSec: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
   },
 });

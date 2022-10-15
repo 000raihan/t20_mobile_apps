@@ -152,7 +152,7 @@ export const RegisterScreen = ({ navigation }) => {
                             </MainButton>
 
                             <Text style={{ marginTop: 20, color: "white", fontSize: 12 }}>
-                                Do you'be an account?
+                             Do you already have an account?
                             </Text>
                             <Pressable
                                 onPress={() => navigation.navigate("LoginScreen")}
