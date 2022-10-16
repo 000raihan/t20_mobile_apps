@@ -22,6 +22,7 @@ import colors from "../../../constants/colors";
 import { addTeam } from "../../store/features/teamSlice";
 import { Storage } from 'expo-storage';
 import { CallApi } from "./api/Api";
+import {FLAG_IMAGE_URL} from "../../utils/BaseUrl";
 
 export const AllTeamsScreen = (props) => {
   // <<<<<<< HEAD
@@ -45,6 +46,7 @@ export const AllTeamsScreen = (props) => {
   const getCountryList = async () => {
     CallApi.country_list().then(async (result) => {
       if (result.success) {
+        // console.log(result.result)
         setCountryList(result.result);
       } else {
         Alert.alert('Error', result.message, [
@@ -103,12 +105,12 @@ export const AllTeamsScreen = (props) => {
                 <View style={{ flexDirection: "row", flexWrap: "wrap", width: "100%", justifyContent: "space-between" }}>
 
                   {countryList && countryList.map(country => {
-                  
+
                     return( <Pressable onPress={() => onPress(country)} style={{ width: "48%", alignItems: "center", marginTop: 20 }}>
                       <Image
                         resizeMode="contain"
                         style={{ width: "100%", height: 70 }}
-                        // source={require(`../../../assets/flags/${country.country_name}.png`)}
+                        source={{uri: `${FLAG_IMAGE_URL}/${country.country_image}`}}
                       />
                       <Text
                         style={{

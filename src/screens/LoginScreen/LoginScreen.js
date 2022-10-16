@@ -23,7 +23,7 @@ export const LoginScreen = ({ navigation }) => {
     const checkLogin = (mobileNumber) => {
         CallApi.login(mobileNumber).then(async (result)  => {
                 if(result.success){
-                    console.log(result.result)
+                    // console.log(result.result)
                     await save("userDetails", JSON.stringify(result.result));
                     // props.navigation.navigate("DrawerNavigator", {result: userDetails});
                     navigation.navigate("SplashTwoNavigator",{result: result.result});

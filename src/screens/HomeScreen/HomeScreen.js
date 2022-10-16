@@ -24,6 +24,7 @@ import MainButton from "../../components/MainButton";
 import LiveSection from "../../components/Home/LiveSection";
 import MatchButtons from "../../components/Home/MatchButtons";
 import { useDispatch, useSelector } from "react-redux";
+import * as ImagePicker from 'expo-image-picker';
 
 import { CallApi } from "./api/Api";
 import { Storage } from "expo-storage";
@@ -52,6 +53,7 @@ export const HomeScreen = (props) => {
   const [animation, setAnimation] = useState(new Animated.Value(0));
   const [match_url, setMatch_url] = useState(null)
   // const [animationCall, setAnimationCall] = useState(1)
+  const [pickedImagePath, setPickedImagePath] = useState(null);
 
   // const handleAnimation = () => {
   //   Animated.timing(animation, {
@@ -75,15 +77,42 @@ export const HomeScreen = (props) => {
   //   color: boxInterpolation
   // }
 
+  const showImagePicker = async () => {
+    // Ask the user for the permission to access the media library
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("You've refused to allow this appp to access your photos!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync();
+
+    // Explore the result
+    // console.log(result);
+
+    if (!result.cancelled) {
+      await Storage.setItem({
+        key: "user_image",
+        value: result.uri
+      });
+      setPickedImagePath(result.uri);
+      // console.log(result.uri);
+    }
+  };
+
 
   useEffect(() => {
-    
+
 
     if (isFocused) {
-      (async () => {    
+      (async () => {
         const match = await CallApi.getMatch();
         setMatch_url(match.url)
         // console.log("MATCH : ",match)
+
+        const userImage = await Storage.getItem({ key: 'user_image' });
+        setPickedImagePath(userImage);
 
         const userDetailsString = await SecureStore.getItemAsync("userDetails");
         if (userDetailsString === null) {
@@ -161,7 +190,7 @@ export const HomeScreen = (props) => {
   }
 
   // useEffect(() => {
-   
+
   // }, [])
 
   // const getMatch = async ()=>{
@@ -217,11 +246,22 @@ export const HomeScreen = (props) => {
                     marginRight: 8,
                   }}
                 >
-                  <Image
-                    resizeMode="cover"
-                    style={{ height: "100%", width: "100%" }}
-                    source={require("../../../assets/team_logo.png")}
-                  />
+                  <Pressable onPress={() => showImagePicker() }>
+                    {
+                      pickedImagePath === null ?
+                          <Image
+                              resizeMode="cover"
+                              style={{ height: "100%", width: "100%" }}
+                              source={require("../../../assets/team_logo.png")}
+                          />
+                          :
+                          <Image
+                              resizeMode="cover"
+                              style={{ height: "100%", width: "100%" }}
+                              source={{uri: pickedImagePath}}
+                          />
+                    }
+                  </Pressable>
                 </View>
 
                 <View>
@@ -247,7 +287,7 @@ export const HomeScreen = (props) => {
 
                   }}
                 >
-             
+
                 </Text> */}
               </View>
               {/* </View> */}
@@ -255,7 +295,7 @@ export const HomeScreen = (props) => {
           </View>
         <LiveSection match_url={match_url} navigation={props.navigation} />
         <ScrollView>
-          
+
 
           <MatchButtons navigation={props.navigation} />
 
