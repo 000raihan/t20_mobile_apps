@@ -1,10 +1,11 @@
 import React, {useEffect, useRef} from "react";
-import { TextInput, StyleSheet, Text, Image, Pressable, Animated } from "react-native";
+import { TextInput, StyleSheet, Text, Image, Pressable, Animated, Dimensions } from "react-native";
 import { View } from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
 import WebView from 'react-native-webview'
 
 import colors from "../../../constants/colors";
+const { width, height } = Dimensions.get("window");
 
 const LiveSection = (props) => {
 
@@ -41,6 +42,14 @@ const LiveSection = (props) => {
     for (var i = 0; i < appBanners2.length; i ++) {
         appBanners2[i].style.display = 'none';
     }
+    var appBanners3 = document.getElementsByClassName('mc-nav');
+    for (var i = 0; i < appBanners3.length; i ++) {
+        appBanners3[i].style.display = 'none';
+    }
+    var appBanners4 = document.getElementsByClassName('js-scorebox-content');
+    for (var i = 0; i < appBanners4.length; i ++) {
+        appBanners4[i].style.marginTop = "-55px";
+    }
     `;
   return (
     <View style={{
@@ -54,14 +63,15 @@ const LiveSection = (props) => {
       marginVertical: 10,
     }}>
         <WebView
-            style={{ margin: 5, height: 280, width: 400, backgroundColor: "black" }}
+            style={{ margin: 5, height: 280, width: width, backgroundColor: "black" }}
             originWhitelist={['*']}
-            source={{ uri: props.match_url }}
+            // source={{ uri: props.match_url }}
             onMessage={(event) => { }}
             injectedJavaScript={runFirst}
             injectedJavaScriptBeforeContentLoaded={runFirst}
             containerStyle={{ padding: 8, backgroundColor: 'white' }}
             // source={{ uri: "https://www.google.com/search?q=t20+world+cup+2022+live+score&rlz=1C5CHFA_enBD980BD980&ei=io1LY_6dCsmcseMP-bG0IA&ved=0ahUKEwj-iubD-eP6AhVJTmwGHfkYDQQQ4dUDCA4&uact=5&oq=t20+world+cup+2022+live+score&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoIABBHENYEELADOgcIABCwAxBDOgwILhDIAxCwAxBDGAE6CggAELEDEIMBEEM6BwgAELEDEEM6BAgAEEM6BwgAEMkDEEM6CAgAELEDEIMBSgQIQRgASgQIRhgBUMECWJxHYIZOaAFwAXgAgAGpAYgBlAKSAQMwLjKYAQCgAQGgAQLIARHAAQHaAQYIARABGAg&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
+            source={{ uri: "https://www.t20worldcup.com/match/100467#overview" }}
             scrollEnabled={false}
         />
         <Animated.View style={{
@@ -72,7 +82,7 @@ const LiveSection = (props) => {
           left: 0,
           right: 0,
           opacity: fadeAnim,
-          width: 400,
+          width: '100%',
           height: 240,
           backgroundColor:'white',
         }}>
