@@ -58,54 +58,46 @@ export const ViewDetailsScreen = (props) => {
   }
 
   const runFirst = `
-  // var appBanners = document.getElementsByClassName('global-navigation__fixed-container');
+  var appBanners = document.getElementsByClassName('global-navigation__fixed-container');
 
-  // for (var i = 0; i < appBanners.length; i ++) {
-  //     appBanners[i].style.height = 0;
-  //     appBanners[i].style.display = 'none';
-  // }
-  // ;
-  // var appBanners2 = document.getElementsByClassName('partners__top-level');
+  for (var i = 0; i < appBanners.length; i ++) {
+      appBanners[i].style.height = 0;
+      appBanners[i].style.display = 'none';
+  }
+  ;
+  var appBanners2 = document.getElementsByClassName('partners__top-level');
   
-  // for (var i = 0; i < appBanners2.length; i ++) {
-  //     appBanners2[i].style.display = 'none';
-  //     appBanners2[i].style.height = 0;
-  // }
+  for (var i = 0; i < appBanners2.length; i ++) {
+      appBanners2[i].style.display = 'none';
+      appBanners2[i].style.height = 0;
+  }
   
-  // var appBanners3 = document.getElementsByClassName('partners__block');
-  // for (var i = 0; i < appBanners3.length; i ++) {
-  //     appBanners3[i].style.display = 'none';
-  // }
+  var appBanners3 = document.getElementsByClassName('partners__block');
+  for (var i = 0; i < appBanners3.length; i ++) {
+      appBanners3[i].style.display = 'none';
+  }
   
-  // var appBanners5 = document.getElementsByClassName('global-footer__branding-container');
-  //   if(appBanners5){
-  //     for (var i = 0; i < appBanners5.length; i ++) {
-  //       appBanners5[i].style.display = 'none';
-  //   }
-  // }
+  var appBanners5 = document.getElementsByClassName('global-footer__branding-container');
+    if(appBanners5){
+      for (var i = 0; i < appBanners5.length; i ++) {
+        appBanners5[i].style.display = 'none';
+    }
+  }
+  var appBanners6 = document.getElementsByClassName('mc-video');
+    if(appBanners6){
+      for (var i = 0; i < appBanners6.length; i ++) {
+        appBanners5[i].style.display = 'none';
+    }
+  }
+
+
   
+
   
-  // var appBanners6 = document.getElementsByClassName('gam-ad-embed');
-  // for (var i = 0; i < appBanners6.length; i ++) {
-  //     appBanners6[i].style.display = 'none';
-  // }
-  // var appBanners7 = document.getElementsByClassName('promo-tournament');
-  // for (var i = 0; i < appBanners7.length; i ++) {
-  //     appBanners7[i].style.display = 'none';
-  // }
-  // var appBanners8 = document.getElementsByClassName('video-carousel');
-  // for (var i = 0; i < appBanners8.length; i ++) {
-  //     appBanners8[i].style.display = 'none';
-  // }
-  // var appBanners9 = document.getElementsByClassName('article-hero-list');
-  // for (var i = 0; i < appBanners9.length; i ++) {
-  //     appBanners9[i].style.display = 'none';
-  // }
-  
-  // var appBanners10 = document.getElementsByClassName('global-footer');
-  // for (var i = 0; i < appBanners10.length; i ++) {
-  //     appBanners10[i].style.display = 'none';
-  // }
+  var appBanners10 = document.getElementsByClassName('global-footer');
+  for (var i = 0; i < appBanners10.length; i ++) {
+      appBanners10[i].style.display = 'none';
+  }
 
     `;
 

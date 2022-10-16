@@ -1,10 +1,11 @@
 import React, {useEffect, useRef} from "react";
-import { TextInput, StyleSheet, Text, Image, Pressable, Animated } from "react-native";
+import { TextInput, StyleSheet, Text, Image, Pressable, Animated, Dimensions } from "react-native";
 import { View } from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
 import WebView from 'react-native-webview'
 
 import colors from "../../../constants/colors";
+const { width, height } = Dimensions.get("window");
 
 const LiveSection = (props) => {
 
@@ -29,45 +30,52 @@ const LiveSection = (props) => {
   }
   // console.log("SOURCE : ", props.match_url);
   const runFirst = `
-    var appBanners = document.getElementsByClassName('lr-imso-fix');
-    for (var i = 0; i < appBanners.length; i ++) {
-        appBanners[i].style.display = 'none';
-    }
-    // var appBanners1 = document.getElementsByClassName('imso_mh__score-sum');
-    // for (var i = 0; i < appBanners1.length; i ++) {
-    //     appBanners1[i].style.display = 'none';
-    // }
-    // var appBanners2 = document.getElementsByClassName('imso_mh__mh-wp');
-    // for (var i = 0; i < appBanners2.length; i ++) {
-    //     appBanners2[i].style.display = 'none';
-    }
-    var appBanners2 = document.getElementsByClassName('mc-nav');
-    for (var i = 0; i < appBanners2.length; i ++) {
-        appBanners2[i].style.display = 'none';
-    }
-    `;
+  var appBanners = document.getElementsByClassName('lr-imso-fix');
+  for (var i = 0; i < appBanners.length; i ++) {
+      appBanners[i].style.display = 'none';
+  }
+  var appBanners1 = document.getElementsByClassName('imso_mh__score-sum');
+  for (var i = 0; i < appBanners1.length; i ++) {
+      appBanners1[i].style.display = 'none';
+  }
+  var appBanners2 = document.getElementsByClassName('imso_mh__mh-wp');
+  for (var i = 0; i < appBanners2.length; i ++) {
+      appBanners2[i].style.display = 'none';
+  }
+  var appBanners3 = document.getElementsByClassName('mc-nav');
+  for (var i = 0; i < appBanners3.length; i ++) {
+      appBanners3[i].style.display = 'none';
+  }
+  var appBanners4 = document.getElementsByClassName('js-scorebox-content');
+  for (var i = 0; i < appBanners4.length; i ++) {
+      appBanners4[i].style.marginTop = "-55px";
+  }
+  `;
   return (
     <View style={{
       width: "100%",
-      alignSelf: "center",
+      // alignSelf: "center",
       alignItems: "center",
-      justifyContent:"space-between",
+
       backgroundColor: "white",
       height: 280,
-      paddingVertical: 5,
+      justifyContent:"space-between",
+      // height:"auto",
+      // paddingVertical: 5,
       // borderBottomWidth: 1,
-      marginVertical: 10,
-      width:"100%"
+      // marginVertical: 10,
+      marginBottom:10
     }}>
         <WebView
-            style={{ marginBottom: 5, height: 280, width: "100%", backgroundColor: "black" }}
+            style={{ height: 200, width:width, backgroundColor: "black" }}
             originWhitelist={['*']}
-            source={{ uri: props.match_url }}
+            // source={{ uri: props.match_url }}
             onMessage={(event) => { }}
             injectedJavaScript={runFirst}
             injectedJavaScriptBeforeContentLoaded={runFirst}
-            containerStyle={{ padding: 8, backgroundColor: 'white' }}
+            containerStyle={{ backgroundColor: 'white' }}
             // source={{ uri: "https://www.google.com/search?q=t20+world+cup+2022+live+score&rlz=1C5CHFA_enBD980BD980&ei=io1LY_6dCsmcseMP-bG0IA&ved=0ahUKEwj-iubD-eP6AhVJTmwGHfkYDQQQ4dUDCA4&uact=5&oq=t20+world+cup+2022+live+score&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoIABBHENYEELADOgcIABCwAxBDOgwILhDIAxCwAxBDGAE6CggAELEDEIMBEEM6BwgAELEDEEM6BAgAEEM6BwgAEMkDEEM6CAgAELEDEIMBSgQIQRgASgQIRhgBUMECWJxHYIZOaAFwAXgAgAGpAYgBlAKSAQMwLjKYAQCgAQGgAQLIARHAAQHaAQYIARABGAg&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
+            source={{ uri: "https://www.t20worldcup.com/match/100467#overview" }}
             scrollEnabled={false}
         />
         <Animated.View style={{
@@ -78,7 +86,7 @@ const LiveSection = (props) => {
           left: 0,
           right: 0,
           opacity: fadeAnim,
-          width: 400,
+          width: '100%',
           height: 240,
           backgroundColor:'white',
         }}>
@@ -197,8 +205,8 @@ const LiveSection = (props) => {
          Ban WON by 3 Runs
         </Text>
       </View> */}
-      <Pressable onPress={() => onClickView()} style={{width:"100%", marginHorizontal:10, paddingVertical: 5, paddingHorizontal: 10, backgroundColor: colors.primary }}>
-        <Text style={{ color: "white", textAlign:"center" }}>View Details</Text>
+      <Pressable onPress={() => onClickView()} style={{width:"100%",marginBottom:0, paddingVertical:6, flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+        <Text style={{color: colors.primary,fontWeight:"bold", textAlign:"center" }}>View Details</Text>
       </Pressable>
     </View>
   );
