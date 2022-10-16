@@ -1,5 +1,5 @@
-import React from "react";
-import { TextInput, StyleSheet, Text, Image, Pressable } from "react-native";
+import React, {useEffect, useRef} from "react";
+import { TextInput, StyleSheet, Text, Image, Pressable, Animated } from "react-native";
 import { View } from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
 import WebView from 'react-native-webview'
@@ -7,6 +7,22 @@ import WebView from 'react-native-webview'
 import colors from "../../../constants/colors";
 
 const LiveSection = (props) => {
+
+
+  const fadeAnim = useRef(new Animated.Value(1)).current  // Initial value for opacity: 0
+
+  useEffect(() => {
+    Animated.timing(
+        fadeAnim,
+        {
+          toValue: 0,
+          duration: 25000,
+        }
+    ).start();
+  }, [fadeAnim])
+
+
+
   const onClickView = () => {
     console.log("Im clicked")
     props.navigation.navigate("ViewDetailsScreen")
@@ -27,31 +43,43 @@ const LiveSection = (props) => {
     }
     `;
   return (
-    <View style={styles.container}>
-      <WebView
-        style={{ margin: 5, height: 280, width: 400, backgroundColor: "black" }}
-        originWhitelist={['*']}
-        // source={{ uri: props.match_url }}
-        onMessage={(event) => { }}
-        injectedJavaScript={runFirst}
-        injectedJavaScriptBeforeContentLoaded={runFirst}
-        containerStyle={{ padding: 8, backgroundColor: 'white' }}
-        source={{ uri: "https://www.google.com/search?q=t20+world+cup+2022+live+score&rlz=1C5CHFA_enBD980BD980&ei=io1LY_6dCsmcseMP-bG0IA&ved=0ahUKEwj-iubD-eP6AhVJTmwGHfkYDQQQ4dUDCA4&uact=5&oq=t20+world+cup+2022+live+score&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoIABBHENYEELADOgcIABCwAxBDOgwILhDIAxCwAxBDGAE6CggAELEDEIMBEEM6BwgAELEDEEM6BAgAEEM6BwgAEMkDEEM6CAgAELEDEIMBSgQIQRgASgQIRhgBUMECWJxHYIZOaAFwAXgAgAGpAYgBlAKSAQMwLjKYAQCgAQGgAQLIARHAAQHaAQYIARABGAg&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
-        scrollEnabled={false}
-      />
-      <View style={{
-        position: 'absolute',
-        marginTop: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        opacity: 0.5,
-        width: 400,
-        height: 240
-      }}>
+    <View style={{
+      width: "100%",
+      alignSelf: "center",
+      alignItems: "center",
+      backgroundColor: "white",
+      minHeight: 280,
+      paddingVertical: 5,
+      // borderBottomWidth: 1,
+      marginVertical: 10,
+    }}>
+        <WebView
+            style={{ margin: 5, height: 280, width: 400, backgroundColor: "black" }}
+            originWhitelist={['*']}
+            source={{ uri: props.match_url }}
+            onMessage={(event) => { }}
+            injectedJavaScript={runFirst}
+            injectedJavaScriptBeforeContentLoaded={runFirst}
+            containerStyle={{ padding: 8, backgroundColor: 'white' }}
+            // source={{ uri: "https://www.google.com/search?q=t20+world+cup+2022+live+score&rlz=1C5CHFA_enBD980BD980&ei=io1LY_6dCsmcseMP-bG0IA&ved=0ahUKEwj-iubD-eP6AhVJTmwGHfkYDQQQ4dUDCA4&uact=5&oq=t20+world+cup+2022+live+score&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoIABBHENYEELADOgcIABCwAxBDOgwILhDIAxCwAxBDGAE6CggAELEDEIMBEEM6BwgAELEDEEM6BAgAEEM6BwgAEMkDEEM6CAgAELEDEIMBSgQIQRgASgQIRhgBUMECWJxHYIZOaAFwAXgAgAGpAYgBlAKSAQMwLjKYAQCgAQGgAQLIARHAAQHaAQYIARABGAg&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
+            scrollEnabled={false}
+        />
+        <Animated.View style={{
+          position: 'absolute',
+          marginTop: 0,
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          opacity: fadeAnim,
+          width: 400,
+          height: 240,
+          backgroundColor:'white',
+        }}>
 
-      </View>
+        </Animated.View>
+
+
       {/* <View style={styles.live}>
         <Text
           style={{
@@ -171,16 +199,6 @@ const LiveSection = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    alignSelf: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-    minHeight: 280,
-    paddingVertical: 5,
-    // borderBottomWidth: 1,
-    marginVertical: 10,
-  },
   live: {
     backgroundColor: colors.red,
     paddingHorizontal: 10,
