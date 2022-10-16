@@ -24,7 +24,7 @@ const LiveSection = (props) => {
       <WebView
         style={{ margin: 5, height: 400, width: 400, backgroundColor: "black" }}
         originWhitelist={['*']}
-        source={{ uri: props.match_url }}
+        source={{ uri: "https://www.google.com/search?q=cricket&sxsrf=ALiCzsbGXZdHKwen-b9C9Po289cxVi0CnA%3A1665893600200&source=hp&ei=4IRLY9exCcOaseMPwdeR4As&iflsig=AJiK0e8AAAAAY0uS8JMZu6axGyjzaA_3ntwnEKypeBQ7&oq=cric&gs_lcp=Cgdnd3Mtd2l6EAMYATIECAAQQzIKCAAQsQMQgwEQQzIECAAQQzIKCAAQsQMQgwEQQzIKCAAQsQMQgwEQQzIKCAAQsQMQgwEQQzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMg4ILhCABBCxAxCDARDUAjILCAAQgAQQsQMQgwE6BwgjEOoCECc6DQguEMcBENEDEOoCECc6BAgjECc6BAguECc6BQgAEIAEOhEILhCABBCxAxCDARDHARDRAzoKCC4QxwEQ0QMQQ1D7Jli0PGDxS2gBcAB4AIABuQGIAcoFkgEDMC40mAEAoAEBsAEK&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
         onMessage={(event) => { }}
         injectedJavaScript={runFirst}
         injectedJavaScriptBeforeContentLoaded={runFirst}

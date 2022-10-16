@@ -144,8 +144,9 @@ export const RegisterScreen = ({ navigation }) => {
                                 onChangeText={setPin}
                                 value={pin}
                                 style={styles.inputDesign}
-                                placeholder="Enter Pin Code"
+                                placeholder="Enter Territory Code "
                             />
+                            <Text style={{color:colors.yellow, alignSelf:"flex-start", marginTop:5, fontSize:13}}>(Please collect Territory code from Radiant Colleauge)</Text>
 
                             <MainButton onPress={onPress} style={{ marginTop: 10 }}>
                                 Registration

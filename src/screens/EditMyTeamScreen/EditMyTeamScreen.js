@@ -410,7 +410,7 @@ export const EditMyTeamScreen = (props) => {
           )}
 
           <View style={{ height:"15%" }}>
-            <View style={{ paddingBottom: 10 }}>
+            <View style={{ paddingBottom: 10, height:"40%" }}>
               <Text style={{ color: colors.yellow, marginTop: 10, textAlign: "center", fontSize: 18 }}>
                 You've Selected{" "}
                 {(selectedPlayres && selectedPlayres.filter((r) => { return r.is_delete === 0; }).length) || 0} players
@@ -427,6 +427,7 @@ export const EditMyTeamScreen = (props) => {
                     justifyContent: "center",
                     alignItems: "center",
                     paddingVertical: 6,
+                    height:"50%"
                   }}
                 >
                   <View>
