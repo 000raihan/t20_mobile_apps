@@ -50,6 +50,10 @@ const LiveSection = (props) => {
   for (var i = 0; i < appBanners4.length; i ++) {
       appBanners4[i].style.marginTop = "-55px";
   }
+  var appBanners5 = document.getElementsByClassName('content-slider__outer-wrapper');
+  for (var i = 0; i < appBanners5.length; i ++) {
+      appBanners5[i].style.marginTop = "50px";
+  }
   `;
   return (
     <View style={{
@@ -69,13 +73,13 @@ const LiveSection = (props) => {
         <WebView
             style={{ height: 200, width:width, backgroundColor: "black" }}
             originWhitelist={['*']}
-            // source={{ uri: props.match_url }}
+            source={{ uri: props.match_url }}
             onMessage={(event) => { }}
             injectedJavaScript={runFirst}
             injectedJavaScriptBeforeContentLoaded={runFirst}
             containerStyle={{ backgroundColor: 'white' }}
             // source={{ uri: "https://www.google.com/search?q=t20+world+cup+2022+live+score&rlz=1C5CHFA_enBD980BD980&ei=io1LY_6dCsmcseMP-bG0IA&ved=0ahUKEwj-iubD-eP6AhVJTmwGHfkYDQQQ4dUDCA4&uact=5&oq=t20+world+cup+2022+live+score&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoIABBHENYEELADOgcIABCwAxBDOgwILhDIAxCwAxBDGAE6CggAELEDEIMBEEM6BwgAELEDEEM6BAgAEEM6BwgAEMkDEEM6CAgAELEDEIMBSgQIQRgASgQIRhgBUMECWJxHYIZOaAFwAXgAgAGpAYgBlAKSAQMwLjKYAQCgAQGgAQLIARHAAQHaAQYIARABGAg&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
-            source={{ uri: "https://www.t20worldcup.com/match/100467#overview" }}
+            // source={{ uri: "https://www.t20worldcup.com/match/100467#overview" }}
             scrollEnabled={false}
         />
         <Animated.View style={{

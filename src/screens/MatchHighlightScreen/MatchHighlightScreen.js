@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Portal, Provider } from "react-native-paper";
 import {
-  View,
-  StyleSheet,
-  Text,
-  Dimensions,
-  Platform,
-  FlatList,
-  ScrollView,
-  useWindowDimensions,
+    View,
+    StyleSheet,
+    Text,
+    Dimensions,
+    Platform,
+    FlatList,
+    ScrollView,
+    useWindowDimensions,
 } from "react-native";
 import Colors from "../../utils/Colors";
 import { Header } from "./components/Header";
@@ -21,32 +21,32 @@ import { CallApi } from "../HomeScreen/api/Api";
 import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 
-export const NextMatchScreen = (props) => {
-  const [url, setUrl] = useState("")
-  const isFocused = useIsFocused();
+export const MatchHighlightScreen = (props) => {
+    const [url, setUrl] = useState("")
+    const isFocused = useIsFocused();
 
-  useEffect( ()=>{
-    if(isFocused){
-      (async() => {
-        await getNextMatch();
-      }) ();
+    useEffect( ()=>{
+        if(isFocused){
+            (async() => {
+                await getMatchHighlight();
+            }) ();
+        }
+
+    },[props, isFocused]);
+
+    const getMatchHighlight = async () => {
+        CallApi.fatchMatchHighligh().then(async (result)  => {
+                if(result.success){
+                    setUrl(result.url);
+                }
+            },(error) => {
+                console.log("=====",error)
+                alert("Invalid data.");
+            }
+        );
     }
 
-  },[props, isFocused]);
-
-  const getNextMatch = async () => {
-    CallApi.fatchNextMatch().then(async (result)  => {
-          if(result.success){
-            setUrl(result.url);
-          }
-        },(error) => {
-          console.log("=====",error)
-          alert("Invalid data.");
-        }
-    );
-  }
-
-  const runFirst = `
+    const runFirst = `
   var appBanners = document.getElementsByClassName('global-navigation__fixed-container');
 
     for (var i = 0; i < appBanners.length; i ++) {
@@ -118,26 +118,26 @@ export const NextMatchScreen = (props) => {
     }
     `;
 
-  return (
-      <Provider>
-        <Header navigation={props.navigation} />
-        <WebView
-            style={{marginTop: -95}}
-            originWhitelist={['*']}
-            source={{ uri: url }}
-            onMessage={(event) => { }}
-            injectedJavaScript={runFirst}
-            injectedJavaScriptBeforeContentLoaded={runFirst}
-            // source={{ uri: "http://116.68.200.97:6044/mobile_view/previous_match" }}
-        />
-      </Provider>
-  );
+    return (
+        <Provider>
+            <Header navigation={props.navigation} />
+            <WebView
+                style={{marginTop: -95}}
+                originWhitelist={['*']}
+                source={{ uri: url }}
+                onMessage={(event) => { }}
+                injectedJavaScript={runFirst}
+                injectedJavaScriptBeforeContentLoaded={runFirst}
+                // source={{ uri: "http://116.68.200.97:6044/mobile_view/previous_match" }}
+            />
+        </Provider>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    width:"90%",
-    alignSelf:"center"
-  },
+    container: {
+        // flex: 1,
+        width:"90%",
+        alignSelf:"center"
+    },
 });

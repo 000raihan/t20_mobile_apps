@@ -86,10 +86,13 @@ export const ViewDetailsScreen = (props) => {
   var appBanners6 = document.getElementsByClassName('mc-video');
     if(appBanners6){
       for (var i = 0; i < appBanners6.length; i ++) {
-        appBanners5[i].style.display = 'none';
+        appBanners6[i].style.display = 'none';
     }
   }
-
+  var appBanners7 = document.getElementsByClassName('content-slider__outer-wrapper');
+  for (var i = 0; i < appBanners7.length; i ++) {
+      appBanners7[i].style.marginTop = "50px";
+  }
 
   
 

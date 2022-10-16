@@ -25,15 +25,8 @@ import { CallApi } from "./api/Api";
 import {FLAG_IMAGE_URL} from "../../utils/BaseUrl";
 
 export const AllTeamsScreen = (props) => {
-  // <<<<<<< HEAD
-
-  //   const {navigation, route} = props
-  //   // console.log("0000000000000000000000000000",route);
-  //   const [isEdit, setIsEdit] = useState(false)
-  // =======
 
   const { isEdit } = props.route.params === undefined ? false : props.route.params;
-  // >>>>>>> 3e4822775fb227c99313d3cd55207f8ec23d2e14
   const [countryList, setCountryList] = useState([]);
 
   useEffect(() => {
@@ -92,21 +85,18 @@ export const AllTeamsScreen = (props) => {
             opacity: 0.4,
           }}
         ></View>
-        <SafeAreaView
-        // style={{flex:1, width: "100%", height: "100%" }}
-        >
+
+        <ScrollView>
           <View style={styles.container}>
             <Text style={{ color: "white", fontSize: 18 }}>
               SELECT COUNTRY
             </Text>
 
-            <View style={{ marginTop: 20, width: "100%", alignSelf: "center" }}>
-              <ScrollView>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", width: "100%", justifyContent: "space-between" }}>
+              <View style={{ flexDirection: "row", flexWrap: "wrap", width: "100%", justifyContent: "space-between" }}>
 
-                  {countryList && countryList.map(country => {
-
-                    return( <Pressable onPress={() => onPress(country)} style={{ width: "48%", alignItems: "center", marginTop: 20 }}>
+                {
+                  countryList.map((country) => (
+                    <Pressable onPress={() => onPress(country)} style={{ width: "48%", alignItems: "center", marginTop: 20 }}>
                       <Image
                         resizeMode="contain"
                         style={{ width: "100%", height: 70 }}
@@ -122,182 +112,15 @@ export const AllTeamsScreen = (props) => {
                       >
                         {country.country_name}
                       </Text>
-                    </Pressable>)
-                  })}
+                    </Pressable>
+                  ))
+                }
 
-                </View>
-              </ScrollView>
-
-
-
-              {/* <View style={styles.flagRow}>
-                <Pressable onPress={() => onPress(5)} style={styles.flagSec}>
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/aus_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    Australia
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => onPress(6)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/eng_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    England
-                  </Text>
-                </Pressable>
               </View>
-              <View style={styles.flagRow}>
-                <Pressable
-                  onPress={() => onPress(0)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/bd-flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    Bangladesh
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => onPress(7)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/newz_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    New Zealand
-                  </Text>
-                </Pressable>
-              </View>
-              <View style={styles.flagRow}>
-                <Pressable
-                  onPress={() => onPress(2)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/pak_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    Pakistan
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => onPress(4)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/afg_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    Afghanistan
-                  </Text>
-                </Pressable>
-              </View>
-              <View style={styles.flagRow}>
-                <Pressable
-                  onPress={() => onPress(1)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/ind_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    India
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => onPress(3)}
-                  style={styles.flagSec}
-                >
-                  <Image
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 70 }}
-                    source={require("../../../assets/sou_flag.png")}
-                  />
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      marginTop: 7,
-                    }}
-                  >
-                    South Africa
-                  </Text>
-                </Pressable>
-              </View> */}
-            </View>
+
+
           </View>
-        </SafeAreaView>
+        </ScrollView>
       </ImageBackground>
     </Provider>
   );
@@ -311,6 +134,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 10,
+    marginBottom: 10
   },
   inputDesign: {
     color: "white",

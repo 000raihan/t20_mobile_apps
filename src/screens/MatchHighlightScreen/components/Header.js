@@ -1,22 +1,20 @@
 import React from "react";
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity, Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "react-native-paper";
+import {View, StyleSheet, Text, Dimensions, TouchableOpacity, Image} from "react-native";
+import {Ionicons} from "@expo/vector-icons";
+import {Colors} from "react-native-paper";
 import { useSelector } from 'react-redux';
 import colors from "../../../../constants/colors";
 
 const { height } = Dimensions.get("window");
 const HEADER_MIN_HEIGHT = Platform.OS === "android" ? 70 : height > 667 ? 80 : 70;
-export const Header = ({ navigation, setKey, page }) => {
+export const Header = ({navigation}) => {
 
 
     return (
         <View style={styles.topBar}>
             <TouchableOpacity
-                onPress={() =>  navigation.goBack()}
-                // onPress={() =>  navigation.navigate("Fixture")}
-                // onPress={() => setKey((key) => key + 1)}
-                style={{ flex: 1 }}
+                onPress={() => navigation.goBack()}
+                style={{flex:1}}
             >
                 <Ionicons
                     name='ios-arrow-back'
@@ -24,7 +22,7 @@ export const Header = ({ navigation, setKey, page }) => {
                     color={Colors.white}
                 />
             </TouchableOpacity>
-            <View style={{ flex: 1 }}>
+            <View style={{flex:1}}>
                 <Image
                     source={require('../../../../assets/icon.png')}
                     style={{
@@ -34,9 +32,9 @@ export const Header = ({ navigation, setKey, page }) => {
                     }}
                 />
             </View>
-            <View style={{ flex: 1 }}>
-
-            </View>
+           <View style={{flex:1}}>
+           
+           </View>
         </View>
     );
 }

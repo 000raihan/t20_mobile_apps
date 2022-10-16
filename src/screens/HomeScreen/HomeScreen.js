@@ -216,7 +216,8 @@ export const HomeScreen = (props) => {
       <View style={styles.container}>
         <Header navigation={props.navigation} />
         {/* <View style={{backgroundColor:colors.primary}}> */}
-        <View style={styles.pointBg}>
+        <ScrollView overScrollMode="never">
+          <View style={styles.pointBg}>
             <View
               style={{
                 width: "100%",
@@ -293,9 +294,8 @@ export const HomeScreen = (props) => {
               {/* </View> */}
             </View>
           </View>
-        <LiveSection match_url={match_url} navigation={props.navigation} />
-        <ScrollView>
 
+          <LiveSection match_url={match_url} navigation={props.navigation} />
 
           <MatchButtons navigation={props.navigation} />
 

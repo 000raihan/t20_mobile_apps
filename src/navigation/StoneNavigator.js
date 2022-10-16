@@ -38,6 +38,7 @@ import { NextMatchScreen } from "../screens/NextMatchScreen/NextMatchScreen";
 import { ViewSelectedTeamScreen } from "../screens/ViewMyTeamScreen/ViewSelectedTeamScreen";
 import SplashTwoScreen from "../screens/splash2/SplashTwoScreen";
 import { ViewDetailsScreen } from "../screens/VeiwDetailsScreen/ViewDetailsScreen";
+import {MatchHighlightScreen} from "../screens/MatchHighlightScreen/MatchHighlightScreen";
 
 const icons = {
   ic_home: require(`../../assets/Images/ic_home.png`),
@@ -72,6 +73,7 @@ export const HomeStackScreen = () => (
 
     <HomeStack.Screen name="PreviousMatchScreen" component={PreviousMatchScreen} />
     <HomeStack.Screen name="NextMatchScreen" component={NextMatchScreen} />
+    <HomeStack.Screen name="MatchHighlightScreen" component={MatchHighlightScreen} />
     <HomeStack.Screen name="ViewDetailsScreen" component={ViewDetailsScreen} />
 
   </HomeStack.Navigator>
@@ -322,7 +324,7 @@ export const MainNavigatorScreen = () => {
       }}
     >
       {/* <AllTeamsStack.Screen name="MainNavigator" component={BottomTabScreenn} /> */}
-      <AllTeamsStack.Screen name="BottomScreen" component={isTeam ? BottomTabScreen : CreateTeamStackScreen} /> 
+      <AllTeamsStack.Screen name="BottomScreen" component={isTeam ? BottomTabScreen : CreateTeamStackScreen} />
 
 
     </MainNavigator.Navigator>

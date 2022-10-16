@@ -16,7 +16,7 @@ const MatchButtons = (props) => {
       <Pressable onPress={()=>navigation.navigate("NextMatchScreen")} style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
         <Text style={{color:"white", fontSize:10,}}>Upcoming Match</Text>
       </Pressable>
-      <Pressable  style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
+      <Pressable  onPress={()=>navigation.navigate("MatchHighlightScreen")} style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
         <Text style={{color:"white", fontSize:10,}}>Match highlight</Text>
       </Pressable>
     </View>

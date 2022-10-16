@@ -13,7 +13,7 @@ import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 
 export const StandingScreen = (props) => {
-
+  const [url, setUrl] = useState("")
   const isFocused = useIsFocused();
   const [loaded, setLoaded] = useState(false)
 
@@ -21,6 +21,7 @@ export const StandingScreen = (props) => {
   useEffect(() => {
     if (isFocused) {
       (async () => {
+        await getStandings();
         const userDetailsString = await SecureStore.getItemAsync("userDetails");
         if (userDetailsString === null) {
           props.navigation.navigate("LoginScreen");
@@ -33,15 +34,17 @@ export const StandingScreen = (props) => {
 
   }, [props, isFocused]);
 
-  useEffect(()=>{
-    setTimeout(function(){
-      setLoaded(true)
-   }, 2000);
-
-    // setTimeout(()=>{
-    //   setLoaded(true)
-    // },3000)
-  },[])
+  const getStandings = async () => {
+    CallApi.fatchStandings().then(async (result)  => {
+          if(result.success){
+            setUrl(result.url);
+          }
+        },(error) => {
+          console.log("=====",error)
+          alert("Invalid data.");
+        }
+    );
+  }
 
   const checkPlayerList = async (user_id) => {
     CallApi.player_list(user_id).then(async (result) => {
@@ -97,7 +100,7 @@ export const StandingScreen = (props) => {
       style={{ marginTop: -95 }}
       originWhitelist={['*']}
       injectedJavaScript={runFirst}
-      source={{ uri: "https://www.t20worldcup.com/standings" }}
+      source={{ uri: url }}
     // source={{ uri: "http://116.68.200.97:6044/mobile_view/standing" }}
     />)
 
