@@ -33,11 +33,15 @@ const LiveSection = (props) => {
     for (var i = 0; i < appBanners.length; i ++) {
         appBanners[i].style.display = 'none';
     }
-    var appBanners1 = document.getElementsByClassName('imso_mh__score-sum');
-    for (var i = 0; i < appBanners1.length; i ++) {
-        appBanners1[i].style.display = 'none';
+    // var appBanners1 = document.getElementsByClassName('imso_mh__score-sum');
+    // for (var i = 0; i < appBanners1.length; i ++) {
+    //     appBanners1[i].style.display = 'none';
+    // }
+    // var appBanners2 = document.getElementsByClassName('imso_mh__mh-wp');
+    // for (var i = 0; i < appBanners2.length; i ++) {
+    //     appBanners2[i].style.display = 'none';
     }
-    var appBanners2 = document.getElementsByClassName('imso_mh__mh-wp');
+    var appBanners2 = document.getElementsByClassName('mc-nav');
     for (var i = 0; i < appBanners2.length; i ++) {
         appBanners2[i].style.display = 'none';
     }
@@ -47,14 +51,16 @@ const LiveSection = (props) => {
       width: "100%",
       alignSelf: "center",
       alignItems: "center",
+      justifyContent:"space-between",
       backgroundColor: "white",
-      minHeight: 280,
+      height: 280,
       paddingVertical: 5,
       // borderBottomWidth: 1,
       marginVertical: 10,
+      width:"100%"
     }}>
         <WebView
-            style={{ margin: 5, height: 280, width: 400, backgroundColor: "black" }}
+            style={{ marginBottom: 5, height: 280, width: "100%", backgroundColor: "black" }}
             originWhitelist={['*']}
             source={{ uri: props.match_url }}
             onMessage={(event) => { }}
@@ -191,8 +197,8 @@ const LiveSection = (props) => {
          Ban WON by 3 Runs
         </Text>
       </View> */}
-      <Pressable onPress={() => onClickView()} style={{ paddingVertical: 5, paddingHorizontal: 10, backgroundColor: colors.primary, marginTop: 5 }}>
-        <Text style={{ color: "white" }}>View Details</Text>
+      <Pressable onPress={() => onClickView()} style={{width:"100%", marginHorizontal:10, paddingVertical: 5, paddingHorizontal: 10, backgroundColor: colors.primary }}>
+        <Text style={{ color: "white", textAlign:"center" }}>View Details</Text>
       </Pressable>
     </View>
   );
