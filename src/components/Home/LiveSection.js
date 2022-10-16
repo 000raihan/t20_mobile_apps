@@ -13,23 +13,45 @@ const LiveSection = (props) => {
   }
   // console.log("SOURCE : ", props.match_url);
   const runFirst = `
-  var appBanners = document.getElementsByClassName('lr-imso-fix');
-
+    var appBanners = document.getElementsByClassName('lr-imso-fix');
     for (var i = 0; i < appBanners.length; i ++) {
         appBanners[i].style.display = 'none';
+    }
+    var appBanners1 = document.getElementsByClassName('imso_mh__score-sum');
+    for (var i = 0; i < appBanners1.length; i ++) {
+        appBanners1[i].style.display = 'none';
+    }
+    var appBanners2 = document.getElementsByClassName('imso_mh__mh-wp');
+    for (var i = 0; i < appBanners2.length; i ++) {
+        appBanners2[i].style.display = 'none';
     }
     `;
   return (
     <View style={styles.container}>
       <WebView
-        style={{ margin: 5, height: 400, width: 400, backgroundColor: "black" }}
+        style={{ margin: 5, height: 280, width: 400, backgroundColor: "black" }}
         originWhitelist={['*']}
-        source={{ uri: props.match_url }}
+        // source={{ uri: props.match_url }}
         onMessage={(event) => { }}
         injectedJavaScript={runFirst}
         injectedJavaScriptBeforeContentLoaded={runFirst}
-      // source={{ uri: "http://116.68.200.97:6044/mobile_view/previous_match" }}
+        containerStyle={{ padding: 8, backgroundColor: 'white' }}
+        source={{ uri: "https://www.google.com/search?q=t20+world+cup+2022+live+score&rlz=1C5CHFA_enBD980BD980&ei=io1LY_6dCsmcseMP-bG0IA&ved=0ahUKEwj-iubD-eP6AhVJTmwGHfkYDQQQ4dUDCA4&uact=5&oq=t20+world+cup+2022+live+score&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoIABBHENYEELADOgcIABCwAxBDOgwILhDIAxCwAxBDGAE6CggAELEDEIMBEEM6BwgAELEDEEM6BAgAEEM6BwgAEMkDEEM6CAgAELEDEIMBSgQIQRgASgQIRhgBUMECWJxHYIZOaAFwAXgAgAGpAYgBlAKSAQMwLjKYAQCgAQGgAQLIARHAAQHaAQYIARABGAg&sclient=gws-wiz#sie=m;/g/11rndps6wp;5;/m/026y268;dt;fp;1;;;" }}
+        scrollEnabled={false}
       />
+      <View style={{
+        position: 'absolute',
+        marginTop: 0,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        opacity: 0.5,
+        width: 400,
+        height: 240
+      }}>
+
+      </View>
       {/* <View style={styles.live}>
         <Text
           style={{
@@ -138,7 +160,7 @@ const LiveSection = (props) => {
             fontSize:12,
             color: colors.red,
             overflow: "hidden",
-        
+
           }}
         >
          Ban WON by 3 Runs
@@ -157,7 +179,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     backgroundColor: "white",
-    minHeight: 130,
+    minHeight: 280,
     paddingVertical: 5,
     // borderBottomWidth: 1,
     marginVertical: 10,
