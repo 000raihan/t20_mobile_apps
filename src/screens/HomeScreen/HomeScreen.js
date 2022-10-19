@@ -103,8 +103,6 @@ export const HomeScreen = (props) => {
 
 
   useEffect(() => {
-
-
     if (isFocused) {
       (async () => {
         const match = await CallApi.getMatch();
@@ -123,27 +121,21 @@ export const HomeScreen = (props) => {
         }
       })();
     }
-
-
   }, [props, isFocused]);
 
 
-  useEffect(
-    () =>
-      props.navigation.addListener('beforeRemove', (e) => {
-
-        // If we don't have unsaved changes, then we don't need to do anything
-        // return;
-
-        BackHandler.exitApp();
-
-        // Prevent default behavior of leaving the screen
-        e.preventDefault();
-
-      }),
-
-    [props.navigation]
-  );
+  // useEffect(
+  //   () =>
+  //     props.navigation.addListener('beforeRemove', (e) => {
+  //       // If we don't have unsaved changes, then we don't need to do anything
+  //       // return;
+  //       BackHandler.exitApp();
+  //       // Prevent default behavior of leaving the screen
+  //       e.preventDefault();
+  //
+  //     }),
+  //   [props.navigation]
+  // );
 
   useEffect(() => {
     Permission.getAsync(Permission.NOTIFICATIONS)
@@ -168,6 +160,21 @@ export const HomeScreen = (props) => {
           props.navigation.navigate("CreateTeamStackScreen");
 
         } else {
+
+          const getNotification = await Storage.getItem({ key: 'Notification' });
+          if(getNotification === null){
+            await Storage.setItem({key: "Notification", value: "1"});
+            await Notification.scheduleNotificationAsync({
+              content: {
+                title: "অভিনন্দন",
+                body: `আপনি আপনার সেরা ১১ জন খেলোয়াড় নির্বাচন করেছেন ৷ সেমিফাইনালের আগের দিন পর্যন্ত আপনি সর্বোচ্চ আর ৫ জন খেলোয়াড় আপডেট করতে পারবেন ৷`
+              },
+              trigger: {
+                seconds: 6,
+              },
+            });
+          }
+
           await Storage.setItem({
             key: "select_player",
             value: JSON.stringify({ team_name: result.result[0].team_name })
@@ -280,9 +287,11 @@ export const HomeScreen = (props) => {
                   // height: "100%",
                 }}
               >
-                <Text style={styles.pointStyle}>
-                  {(totalPoint && totalPoint[0].point) || 0}
-                </Text>
+                <View style={{display: 'flex',flexDirection: "row",backgroundColor: 'red',width: 54,height: 54,borderRadius: 54/2,alignItems: 'center',justifyContent:'center'}}>
+                  <Text style={{fontSize:35, fontWeight: 'bold',color: "#ffffff"}}>
+                    {(totalPoint && totalPoint[0].point) || 0}
+                  </Text>
+                </View>
                 {/* <Text
                   style={{
 
@@ -341,12 +350,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  pointStyle: {
-    color: colors.primary,
-    fontSize: 35,
-    fontWeight: "bold",
-    // margin: -10,
 
-  },
 
 });

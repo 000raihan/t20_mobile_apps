@@ -8,7 +8,7 @@ import {
   Platform,
   FlatList,
   ScrollView,
-  useWindowDimensions,
+  useWindowDimensions, TouchableOpacity, Image,
 } from "react-native";
 import Colors from "../../utils/Colors";
 import { Header } from "./components/Header";
@@ -20,15 +20,28 @@ import colors from "../../../constants/colors";
 import { CallApi } from "../HomeScreen/api/Api";
 import { useIsFocused } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
+import {Ionicons} from "@expo/vector-icons";
+
+const { height } = Dimensions.get("window");
+const HEADER_MIN_HEIGHT = Platform.OS === "android" ? 70 : height > 667 ? 80 : 70;
 
 export const FixturesScreen = (props) => {
   const [url, setUrl] = useState("")
   const isFocused = useIsFocused();
   const [key, setKey] = useState(1);
+  const [conut, setCount] = useState(0)
+
+  useEffect( ()=>{
+    (async() => {
+      if(conut>1)
+        props.navigation.goBack()
+    }) ();
+  },[conut]);
 
   useEffect(() => {
     if (isFocused) {
       (async () => {
+        setCount(0);
         await getFixtures()
         const userDetailsString = await SecureStore.getItemAsync("userDetails");
         if (userDetailsString === null) {
@@ -143,14 +156,56 @@ export const FixturesScreen = (props) => {
     for (var i = 0; i < appBanners13.length; i ++) {
       appBanners13[i].style.display = 'none';
     }
-    
+    var appBanners14 = document.getElementsByClassName('mc-video');
+    for (var i = 0; i < appBanners14.length; i ++) {
+      appBanners14[i].style.display = 'none';
+    }
+    document.getElementById("modalWrapPlaylist").style.marginTop = "100px";
+    document.getElementById("modalContent").style.marginTop = "100px";
+    document.getElementById("playlistPlayer_html5_api").style.marginTop = "100px";
   `;
+
+
+  const onNavigationStateChange = (webViewState) => {
+    console.log(webViewState.url);
+  };
 
 
   return (
     <Provider>
-      <Header navigation={props.navigation} page={true} setKey={setKey} />
+      <View style={styles.topBar}>
+        <TouchableOpacity
+            // onPress={() =>  navigation.goBack()}
+            // onPress={() =>  navigation.navigate("Fixture")}
+            onPress={() => {
+              setCount(conut+1)
+              setKey((key) => key + 1)
+            }}
+            style={{ flex: 1 }}
+        >
+          <Ionicons
+              name='ios-arrow-back'
+              size={30}
+              color={Colors.white}
+          />
+        </TouchableOpacity>
+        <View style={{ flex: 1 }}>
+          <Image
+              source={require('.././../../assets/icon.png')}
+              style={{
+                width: height < 668 ? 130 : 120,
+                resizeMode: 'contain',
+                height: 32,
+              }}
+          />
+        </View>
+        <View style={{ flex: 1 }}>
+
+        </View>
+      </View>
+
       <WebView
+          onNavigationStateChange={onNavigationStateChange}
           style={{ marginTop: -95 }}
         source={{
           uri: url,
@@ -170,5 +225,24 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: "90%",
     alignSelf: "center"
+  },
+  topBar: {
+    paddingTop: Platform.OS === "android" ? 28 : 25,
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    alignItems: "center",
+    height: HEADER_MIN_HEIGHT,
+    zIndex: 1000,
+    backgroundColor: colors.primary
+  },
+  goBackIcon: {
+    width: 40,
+  },
+  shareIcon: {
+    width: 40,
+    alignItems: "flex-end",
   },
 });

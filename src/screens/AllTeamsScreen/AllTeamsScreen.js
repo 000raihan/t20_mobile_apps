@@ -89,7 +89,7 @@ export const AllTeamsScreen = (props) => {
         <ScrollView>
           <View style={styles.container}>
             <Text style={{ color: "white", fontSize: 18 }}>
-              SELECT COUNTRY
+              Select your best 11 from below countries
             </Text>
 
               <View style={{ flexDirection: "row", flexWrap: "wrap", width: "100%", justifyContent: "space-between" }}>

@@ -106,7 +106,7 @@ export const LoginScreen = ({ navigation }) => {
               </MainButton>
 
               <Text style={{ marginTop: 20, color: "white", fontSize: 12 }}>
-                  Don't have account ?
+                  Don't have an account?
               </Text>
               <Pressable
                 onPress={() => navigation.navigate("RegisterScreen")}

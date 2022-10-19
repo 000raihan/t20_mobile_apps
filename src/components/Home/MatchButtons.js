@@ -9,15 +9,15 @@ const MatchButtons = (props) => {
   const {navigation} = props;
   return (
     <View style={styles.container}>
-    <View style={{flexDirection:"row",width:"100%",overflow:"hidden", flexWrap:"wrap", alignItems:"center", justifyContent:"center", justifyContent:"space-between"}}>
-      <Pressable onPress={()=>navigation.navigate("PreviousMatchScreen")} style={{backgroundColor:colors.red, paddingVertical:10, paddingHorizontal:8}}>
-        <Text style={{color:"white", fontSize:10,}}>Previous Match</Text>
+    <View style={{display: "flex", flexDirection:"row",width:"100%",overflow:"hidden", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between"}}>
+      <Pressable onPress={()=>navigation.navigate("PreviousMatchScreen")} style={{ backgroundColor:colors.red, paddingVertical:10, paddingHorizontal:8}}>
+        <Text style={{color:"white", fontSize:10,}}>Previous and Upcoming Match</Text>
       </Pressable>
-      <Pressable onPress={()=>navigation.navigate("NextMatchScreen")} style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
-        <Text style={{color:"white", fontSize:10,}}>Upcoming Match</Text>
-      </Pressable>
-      <Pressable  onPress={()=>navigation.navigate("MatchHighlightScreen")} style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
-        <Text style={{color:"white", fontSize:10,}}>Match highlight</Text>
+      {/*<Pressable onPress={()=>navigation.navigate("NextMatchScreen")} style={{backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>*/}
+      {/*  <Text style={{color:"white", fontSize:10,}}>Upcoming Match</Text>*/}
+      {/*</Pressable>*/}
+      <Pressable  onPress={()=>navigation.navigate("MatchHighlightScreen")} style={{width:160, backgroundColor:colors.red, marginLeft:5, paddingVertical:10, paddingHorizontal:8}}>
+        <Text style={{color:"white", fontSize:10,textAlign: "center"}}>Match highlight</Text>
       </Pressable>
     </View>
     </View>

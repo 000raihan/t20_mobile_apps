@@ -75,6 +75,19 @@ export const ViewPlayersScreen = (props) => {
     }
   },[props, isFocused]);
 
+
+  // const handleNotification = () => {
+  //   Notification.scheduleNotificationAsync({
+  //     content: {
+  //       title: "অভিনন্দন",
+  //       body: `আপনি আপনার সেরা ১১ জন খেলোয়াড় নির্বাচন করেছেন ৷ সেমিফাইনালের আগের দিন পর্যন্ত আপনি সর্বোচ্চ আর ৫ জন খেলোয়াড় আপডেট করতে পারবেন ৷`
+  //     },
+  //     trigger: {
+  //       seconds: 6,
+  //     },
+  //   });
+  // };
+
   const getPlayerList = async (country_id) => {
     CallApi.player_list(country_id).then(async (result)  => {
           if(result.success){
@@ -92,17 +105,7 @@ export const ViewPlayersScreen = (props) => {
     );
   };
 
-  const handleNotification = () => {
-    Notification.scheduleNotificationAsync({
-      content: {
-        title: "অভিনন্দন",
-        body: `আপনি আপনার সেরা ১১ জন খেলোয়াড় নির্বাচন করেছেন ৷ সেমিফাইনালের আগের দিন পর্যন্ত আপনি সর্বোচ্চ আর ৫ জন খেলোয়াড় আপডেট করতে পারবেন ৷`
-      },
-      trigger: {
-        seconds: 6,
-      },
-    });
-  };
+
 
   const getSelectPlayerList = async (country_id) => {
     CallApi.player_select_list(country_id).then(async (result)  => {
@@ -209,7 +212,6 @@ export const ViewPlayersScreen = (props) => {
     }else{
       const userDetailsString = await SecureStore.getItemAsync("userDetails");
       const userDetails = JSON.parse(userDetailsString);
-      handleNotification();
       props.navigation.navigate("BottomTabScreen", {result: userDetails});
 
     }
@@ -584,7 +586,7 @@ export const ViewPlayersScreen = (props) => {
       }
     </ImageBackground>
 
-      
+
     </Provider>
   );
 };

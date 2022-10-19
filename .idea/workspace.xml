@@ -6,7 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="5f9d6040-ca1a-48ae-8826-a72ef2236e7a" name="Default Changelist" comment="tareq BottomTab problem solve">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home/MatchButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/MatchButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AllTeamsScreen/AllTeamsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AllTeamsScreen/AllTeamsScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/FixturesScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FixturesScreen/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/MatchHighlightScreen/MatchHighlightScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MatchHighlightScreen/MatchHighlightScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/NotificationScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NotificationScreen/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/PreviousMatchScreen/PreviousMatchScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/PreviousMatchScreen/PreviousMatchScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/StandingScreen/StandingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/StandingScreen/StandingScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +29,13 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -34,15 +53,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="com.android.tools.idea.emulator.frame.visible" value="false" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tareq/ReactNativeProjects/t20_mobile_apps/src/screens/MatchHighlightScreen&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/screens/MatchHighlightScreen" />
       <recent name="$PROJECT_DIR$/assets/Images" />
       <recent name="$PROJECT_DIR$/assets" />
     </key>
@@ -68,6 +91,15 @@
       <workItem from="1665195659785" duration="3514000" />
       <workItem from="1665241291251" duration="637000" />
       <workItem from="1665308719266" duration="4195000" />
+      <workItem from="1665915335618" duration="2812000" />
+      <workItem from="1665920660415" duration="3677000" />
+      <workItem from="1665927760626" duration="728000" />
+      <workItem from="1665933513296" duration="6411000" />
+      <workItem from="1665945419475" duration="613000" />
+      <workItem from="1665986927220" duration="9022000" />
+      <workItem from="1666007535091" duration="2784000" />
+      <workItem from="1666069522210" duration="4000" />
+      <workItem from="1666069530052" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="tareq">
       <created>1664860878758</created>
@@ -97,11 +129,28 @@
       <option name="project" value="LOCAL" />
       <updated>1665198633752</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="tareq BottomTab problem solve">
+      <created>1665945431886</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1665945431886</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

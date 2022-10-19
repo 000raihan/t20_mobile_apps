@@ -116,6 +116,8 @@ export const MatchHighlightScreen = (props) => {
     for (var i = 0; i < appBanners10.length; i ++) {
         appBanners10[i].style.display = 'none';
     }
+    
+    document.getElementById("modalWrapPlaylist").style.marginTop = "100px";
     `;
 
     return (

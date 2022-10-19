@@ -7,13 +7,14 @@ import colors from "../../../../constants/colors";
 
 const { height } = Dimensions.get("window");
 const HEADER_MIN_HEIGHT = Platform.OS === "android" ? 70 : height > 667 ? 80 : 70;
-export const Header = ({navigation}) => {
+export const Header = ({navigation, setKey, page}) => {
 
 
     return (
         <View style={styles.topBar}>
             <TouchableOpacity
-                onPress={() =>  navigation.goBack()}
+                // onPress={() =>  navigation.goBack()}
+                onPress={() => setKey((key) => key + 1)}
                 style={{flex:1}}
             >
                 <Ionicons

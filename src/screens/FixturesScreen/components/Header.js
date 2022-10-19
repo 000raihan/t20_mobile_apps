@@ -1,21 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "react-native-paper";
 import { useSelector } from 'react-redux';
 import colors from "../../../../constants/colors";
 
+
 const { height } = Dimensions.get("window");
 const HEADER_MIN_HEIGHT = Platform.OS === "android" ? 70 : height > 667 ? 80 : 70;
-export const Header = ({ navigation, setKey, page }) => {
+export const Header = ({ navigation, setKey, page, conutClick }) => {
+    const [conut, setCount] = useState(conutClick)
 
+    useEffect( ()=>{
+            (async() => {
+                if(conut>1)
+                navigation.goBack()
+            }) ();
+    },[conut]);
 
     return (
         <View style={styles.topBar}>
             <TouchableOpacity
-                onPress={() =>  navigation.goBack()}
+                // onPress={() =>  navigation.goBack()}
                 // onPress={() =>  navigation.navigate("Fixture")}
-                // onPress={() => setKey((key) => key + 1)}
+                onPress={() => {
+                    setCount(conut+1)
+                    setKey((key) => key + 1)
+                }}
                 style={{ flex: 1 }}
             >
                 <Ionicons

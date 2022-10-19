@@ -16,7 +16,7 @@ export const StandingScreen = (props) => {
   const [url, setUrl] = useState("")
   const isFocused = useIsFocused();
   const [loaded, setLoaded] = useState(false)
-
+  const [key, setKey] = useState(1);
 
   useEffect(() => {
     if (isFocused) {
@@ -36,6 +36,7 @@ export const StandingScreen = (props) => {
 
   const getStandings = async () => {
     CallApi.fatchStandings().then(async (result)  => {
+      console.log("=====", result);
           if(result.success){
             setUrl(result.url);
           }
@@ -93,21 +94,27 @@ export const StandingScreen = (props) => {
     for (var i = 0; i < appBanners10.length; i ++) {
         appBanners10[i].style.display = 'none';
     }
+    var appBanners11 = document.getElementsByClassName('promo-tournament');
+    for (var i = 0; i < appBanners11.length; i ++) {
+        appBanners11[i].style.display = 'none';
+    }
     `;
 
 
-    const Webview = (<WebView
-      style={{ marginTop: -95 }}
-      originWhitelist={['*']}
-      injectedJavaScript={runFirst}
-      source={{ uri: url }}
-    // source={{ uri: "http://116.68.200.97:6044/mobile_view/standing" }}
-    />)
-
     return (
       <Provider>
-        <Header navigation={props.navigation} />
-        {loaded && Webview}
+        <Header navigation={props.navigation} page={true} setKey={setKey}/>
+        <WebView
+            style={{ marginTop: -95 }}
+            source={{
+              uri: url,
+            }}
+            onMessage={(event) => { }}
+            injectedJavaScript={runFirst}
+            injectedJavaScriptBeforeContentLoaded={runFirst}
+            key={key}
+        />
+
       </Provider>
     );
 }
