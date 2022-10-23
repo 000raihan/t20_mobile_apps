@@ -287,11 +287,11 @@ export const HomeScreen = (props) => {
                   // height: "100%",
                 }}
               >
-                <View style={{display: 'flex',flexDirection: "row",backgroundColor: 'red',width: 54,height: 54,borderRadius: 54/2,alignItems: 'center',justifyContent:'center'}}>
-                  <Text style={{fontSize:35, fontWeight: 'bold',color: "#ffffff"}}>
+
+                  <Text style={{fontSize:35, fontWeight: 'bold',color: "#171717"}}>
                     {(totalPoint && totalPoint[0].point) || 0}
                   </Text>
-                </View>
+
                 {/* <Text
                   style={{
 

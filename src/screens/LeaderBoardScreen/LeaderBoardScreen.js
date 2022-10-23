@@ -10,7 +10,7 @@ import {
   ScrollView,
   useWindowDimensions,
 } from "react-native";
-import { Header } from "../NotificationScreen/components/Header";
+import { Header } from "./Header";
 import { WebView } from "react-native-webview";
 import { Table, Row, Rows } from 'react-native-table-component';
 import colors from "../../../constants/colors";
@@ -22,7 +22,7 @@ import * as SecureStore from "expo-secure-store";
 
 export const LeaderBoardScreen = (props) => {
   const isFocused = useIsFocused();
-
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect( ()=>{
     if(isFocused){
@@ -32,6 +32,7 @@ export const LeaderBoardScreen = (props) => {
           props.navigation.navigate("LoginScreen");
         }else{
           const userDetails = JSON.parse(userDetailsString);
+          setUserInfo(userDetails)
           await checkPlayerList(userDetails.id);
         }
       }) ();
@@ -57,11 +58,16 @@ export const LeaderBoardScreen = (props) => {
   return (
     <Provider>
       <Header navigation={props.navigation} />
-        <WebView
-            style={{margin: 5}}
-            originWhitelist={['*']}
-            source={{ uri: "http://116.68.200.97:6044/mobile_view/leader_board" }}
-        />
+      {
+        userInfo !== null ?
+            <WebView
+                style={{margin: 5}}
+                originWhitelist={['*']}
+                source={{ uri: "http://116.68.200.97:6044/mobile_view/leader_board?user_id="+userInfo.id }}
+            />
+            : null
+      }
+
     </Provider>
   );
 };

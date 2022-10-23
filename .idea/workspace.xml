@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f9d6040-ca1a-48ae-8826-a72ef2236e7a" name="Default Changelist" comment="tareq BottomTab problem solve">
+      <change afterPath="$PROJECT_DIR$/src/screens/LeaderBoardScreen/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/MatchButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/MatchButtons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/AllTeamsScreen/AllTeamsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AllTeamsScreen/AllTeamsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FixturesScreen/FixturesScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/FixturesScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FixturesScreen/components/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LeaderBoardScreen/LeaderBoardScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LeaderBoardScreen/LeaderBoardScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MatchHighlightScreen/MatchHighlightScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MatchHighlightScreen/MatchHighlightScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/NotificationScreen/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NotificationScreen/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/PreviousMatchScreen/PreviousMatchScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/PreviousMatchScreen/PreviousMatchScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/StandingScreen/StandingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/StandingScreen/StandingScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ViewPlayersScreen/ViewPlayersScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +91,14 @@
       <workItem from="1666007535091" duration="2784000" />
       <workItem from="1666069522210" duration="4000" />
       <workItem from="1666069530052" duration="14000" />
+      <workItem from="1666153244182" duration="24000" />
+      <workItem from="1666269931600" duration="168000" />
+      <workItem from="1666270561478" duration="1317000" />
+      <workItem from="1666321266484" duration="319000" />
+      <workItem from="1666326954800" duration="842000" />
+      <workItem from="1666409415892" duration="1545000" />
+      <workItem from="1666416315885" duration="105000" />
+      <workItem from="1666447066167" duration="2667000" />
     </task>
     <task id="LOCAL-00001" summary="tareq">
       <created>1664860878758</created>
@@ -136,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665945431886</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="tareq BottomTab problem solve">
+      <created>1666153259309</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666153259309</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
