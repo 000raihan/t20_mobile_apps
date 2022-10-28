@@ -105,8 +105,8 @@ export const EditMyTeamScreen = (props) => {
   const onDelete = async (code, name, id) => {
     console.log("ID IS : ", id);
 
-    if (selectedPlayres.length === 16) {
-      Alert.alert("Delete Player", "You can't delete & add player anymore. Alreay selected 16 players", [
+    if (selectedPlayres.length === 21) {
+      Alert.alert("Delete Player", "You can't delete & add player anymore. Alreay selected 21 players", [
         {
           text: "Cancel",
           onPress: () => {
@@ -469,8 +469,7 @@ const styles = StyleSheet.create({
     maxHeight: "90%",
     alignSelf: "center",
     width: "90%",
-    alignSelf: "center",
-    
+
   },
   HeadStyle: {},
   TableText: {},
